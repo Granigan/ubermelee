@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 2fa140cdb5b2e5d4f84c4ac0bb902d7d
-timeCreated: 1494769523
+guid: a7b348b5c14bdb946ae39d0d059433a5
+timeCreated: 1494770006
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: space_frigate_6
+    4300000: space_frig
   materials:
     importMaterials: 1
     materialName: 0
