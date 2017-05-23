@@ -24,6 +24,7 @@ public class MoveShip : MonoBehaviour {
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
 
     
