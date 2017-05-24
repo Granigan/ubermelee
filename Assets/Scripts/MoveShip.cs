@@ -8,6 +8,10 @@ public class MoveShip : MonoBehaviour {
     public float rotationSpeed = 100.0f;
     public float thrustForce = 15f;
     public Rigidbody rb;
+
+    public GameObject thruster;
+    public TrailRenderer trail;
+
     public float maxSpeed = 200f;//Replace with your max speed
 
     public Vector3 eulerAngleVelocity;
@@ -25,6 +29,7 @@ public class MoveShip : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        trail = GetComponentInChildren<TrailRenderer>();
     }
 
     
@@ -49,7 +54,26 @@ public class MoveShip : MonoBehaviour {
         if (Input.GetAxis("Horizontal") == 0)
         {
             //rb.freezeRotation = true;
+            //thruster.GetComponent<TrailRenderer>().enabled = false;
+            //trail.time = 0;
         }
+
+        if (Input.GetAxis("Vertical") <= 0.1)
+        {
+            //rb.freezeRotation = true;
+            {
+                trail.time = 0.5f;
+            }
+            
+        }
+        if (Input.GetAxis("Vertical") == 0)
+        {
+            //rb.freezeRotation = true;
+            {
+                trail.time = 0.0f;
+            }
+        }
+
 
         if (rb.velocity.magnitude > maxSpeed)
         {
