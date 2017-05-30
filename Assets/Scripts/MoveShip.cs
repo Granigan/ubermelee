@@ -97,7 +97,7 @@ public class MoveShip : MonoBehaviour {
         }
         prevMagnitude = currVelocity;
         //Debug.Log(CameraZoom);
-        Debug.Log(currVelocity);
+        //Debug.Log(currVelocity);
 
         //Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, CameraZoom, CameraZoomSpeed * Time.deltaTime);
 
@@ -141,10 +141,10 @@ public class MoveShip : MonoBehaviour {
             bulletSpawn.rotation);
 
         // Add velocity to the bullet
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20;
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 15;
 
         // Destroy the bullet after 5 seconds
-        Destroy(bullet, 5.0f);
+        Destroy(bullet, 2.0f);
 
 
         
