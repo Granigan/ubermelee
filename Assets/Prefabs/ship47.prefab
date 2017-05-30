@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 114264440053956428}
   m_Layer: 0
   m_Name: ship47
-  m_TagString: Untagged
+  m_TagString: CameraObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -320,7 +320,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   thruster: {fileID: 1023717758279912}
   trail: {fileID: 96450006850638158}
-  maxSpeed: 5
+  maxSpeed: 7
   eulerAngleVelocity: {x: 0, y: 0, z: -100}
   bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
     type: 2}
