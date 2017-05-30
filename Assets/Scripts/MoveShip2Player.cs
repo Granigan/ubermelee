@@ -116,7 +116,7 @@ public class MoveShip2Player : MonoBehaviour {
             Camera.main.orthographicSize = CameraMinZoom;
         }
         */
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             Fire();
         }

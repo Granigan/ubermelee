@@ -100,12 +100,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1157309483095700}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0.007, y: 0.822, z: 0}
+  m_LocalPosition: {x: 0, y: 1.29, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 4172833887354144}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 180, z: -90}
 --- !u!4 &4941542604179022
 Transform:
   m_ObjectHideFlags: 1
@@ -113,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1653138632890234}
   m_LocalRotation: {x: -0.7071068, y: 0.7071068, z: -0, w: 0}
-  m_LocalPosition: {x: 0.026000123, y: -0.91400015, z: 0}
+  m_LocalPosition: {x: 0.15, y: -1, z: 0}
   m_LocalScale: {x: 0.20000006, y: 0.20000006, z: 0.20000005}
   m_Children: []
   m_Father: {fileID: 4172833887354144}
@@ -126,7 +126,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1674874104540812}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 2.05, y: 0, z: -3}
+  m_LocalPosition: {x: 7.24, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4172833887354144}
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 2
   thrustForce: 25
-  rb: {fileID: 0}
+  rb: {fileID: 54936197940310530}
   thruster: {fileID: 1653138632890234}
   trail: {fileID: 96883825718695760}
   maxSpeed: 5
