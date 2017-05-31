@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveShip : MonoBehaviour {
+public class MoveShip : MonoBehaviour
+{
 
 
     public float rotationSpeed = 100.0f;
@@ -32,18 +33,18 @@ public class MoveShip : MonoBehaviour {
         trail = GetComponentInChildren<TrailRenderer>();
     }
 
-    
+
     void Update()
     {
 
         // Rotate the ship if necessary
         // This works kind a ok...
         //transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
-        
+
         Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -Input.GetAxis("Horizontal") * rotationSpeed);
         eulerAngleVelocity.y = 0;
         rb.MoveRotation(rb.rotation * deltaRotation);
-        
+
 
         // Thrust the ship if necessary
         rb.AddForce(transform.right * thrustForce *
@@ -64,7 +65,7 @@ public class MoveShip : MonoBehaviour {
             {
                 trail.time = 0.5f;
             }
-            
+
         }
         if (Input.GetAxis("Vertical") == 0)
         {
@@ -84,12 +85,13 @@ public class MoveShip : MonoBehaviour {
 
         if (currVelocity != 0.0f)
         {
-            if(currVelocity < prevMagnitude)
+            if (currVelocity < prevMagnitude)
             {
                 CameraZoom -= currVelocity * CameraZoomSpeed;
-               
 
-            } else
+
+            }
+            else
             {
                 CameraZoom += currVelocity * CameraZoomSpeed;
             }
@@ -147,25 +149,25 @@ public class MoveShip : MonoBehaviour {
         Destroy(bullet, 2.0f);
 
 
-        
+
     }
 
     void FixedUpdate()
     {
 
-       
+
 
         if (Input.GetButtonDown("Jump"))
-    {
-        //rb.velocity = new Vector3(10, 0, 0);
-        //rb.AddForce(new Vector3(10, 0, 0));
-        //Debug.Log("Jump!!");
+        {
+            //rb.velocity = new Vector3(10, 0, 0);
+            //rb.AddForce(new Vector3(10, 0, 0));
+            //Debug.Log("Jump!!");
+        }
+
+
+        //rb.WakeUp();
+
     }
-
-
-    //rb.WakeUp();
-    
-}
 
 
 
