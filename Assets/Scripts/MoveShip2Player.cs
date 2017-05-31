@@ -63,7 +63,7 @@ public class MoveShip2Player : MonoBehaviour {
             //trail.time = 0;
         }
 
-        if (Input.GetAxis(ThrustControl) <= 0.1)
+        if (Input.GetAxis(TurnControl) <= 0.1)
         {
             //rb.freezeRotation = true;
             {
@@ -71,7 +71,7 @@ public class MoveShip2Player : MonoBehaviour {
             }
             
         }
-        if (Input.GetAxis(ThrustControl) == 0)
+        if (Input.GetAxis(TurnControl) == 0)
         {
             //rb.freezeRotation = true;
             {

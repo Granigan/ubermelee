@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4789817069049304}
   - component: {fileID: 54624074082288768}
-  - component: {fileID: 114264440053956428}
+  - component: {fileID: 114781265412280912}
   m_Layer: 0
   m_Name: ship47
   m_TagString: CameraObject
@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1432044061169668}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.606, y: 0, z: 0}
+  m_LocalPosition: {x: 0.923, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4789817069049304}
@@ -111,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745512433016608}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalPosition: {x: -2.89, y: 2.17, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4581946234325456}
@@ -304,7 +304,7 @@ TrailRenderer:
     textureMode: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!114 &114264440053956428
+--- !u!114 &114781265412280912
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -312,12 +312,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1745512433016608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 632bc32cb302df3428c9f93576b074a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cfb437cb0711bb4184075695133b904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 1
+  rotationSpeed: 2
   thrustForce: 25
-  rb: {fileID: 0}
+  rb: {fileID: 54624074082288768}
   thruster: {fileID: 1023717758279912}
   trail: {fileID: 96450006850638158}
   maxSpeed: 7
@@ -325,7 +325,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
     type: 2}
   bulletSpawn: {fileID: 4031505048163136}
-  CameraMaxZoom: 8
-  CameraMinZoom: 3
+  CameraMaxZoom: 6
+  CameraMinZoom: 4
   CameraZoomSpeed: 3
   CameraZoom: 5
+  TurnControl: Vertical2
+  ThrustControl: Horizontal2
+  shoot: Fire2
