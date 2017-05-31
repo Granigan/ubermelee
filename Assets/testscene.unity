@@ -861,9 +861,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114685024107386788, guid: 2965573077ca23448b8c631d377e9404, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 2965573077ca23448b8c631d377e9404, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1249829308 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1653138632890234, guid: 2965573077ca23448b8c631d377e9404,
+    type: 2}
+  m_PrefabInternal: {fileID: 1234449957}
+--- !u!96 &1249829310 stripped
+TrailRenderer:
+  m_PrefabParentObject: {fileID: 96883825718695760, guid: 2965573077ca23448b8c631d377e9404,
+    type: 2}
+  m_PrefabInternal: {fileID: 1234449957}
 --- !u!1 &1289438255 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1745512433016608, guid: 8270c47871974bc498a5983a6e42a4bc,
@@ -885,7 +896,7 @@ MonoBehaviour:
   rb: {fileID: 1289438257}
   thruster: {fileID: 397448504}
   trail: {fileID: 397448505}
-  maxSpeed: 5
+  maxSpeed: 7
   eulerAngleVelocity: {x: 0, y: 0, z: -100}
   bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
     type: 2}
@@ -894,6 +905,9 @@ MonoBehaviour:
   CameraMinZoom: 4
   CameraZoomSpeed: 3
   CameraZoom: 5
+  TurnControl: Vertical2
+  ThrustControl: Horizontal2
+  shoot: Fire2
 --- !u!54 &1289438257 stripped
 Rigidbody:
   m_PrefabParentObject: {fileID: 54624074082288768, guid: 8270c47871974bc498a5983a6e42a4bc,
@@ -1091,3 +1105,46 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 1.0000001, z: 6.1232336e-17}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1923389940 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1674874104540812, guid: 2965573077ca23448b8c631d377e9404,
+    type: 2}
+  m_PrefabInternal: {fileID: 1234449957}
+--- !u!114 &1923389941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1923389940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cfb437cb0711bb4184075695133b904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 2
+  thrustForce: 15
+  rb: {fileID: 1923389942}
+  thruster: {fileID: 1249829308}
+  trail: {fileID: 1249829310}
+  maxSpeed: 5
+  eulerAngleVelocity: {x: 0, y: 0, z: -100}
+  bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
+    type: 2}
+  bulletSpawn: {fileID: 2131947707}
+  CameraMaxZoom: 6
+  CameraMinZoom: 4
+  CameraZoomSpeed: 3
+  CameraZoom: 5
+  TurnControl: Vertical1
+  ThrustControl: Horizontal1
+  shoot: Fire1
+--- !u!54 &1923389942 stripped
+Rigidbody:
+  m_PrefabParentObject: {fileID: 54936197940310530, guid: 2965573077ca23448b8c631d377e9404,
+    type: 2}
+  m_PrefabInternal: {fileID: 1234449957}
+--- !u!4 &2131947707 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4300947970216012, guid: 2965573077ca23448b8c631d377e9404,
+    type: 2}
+  m_PrefabInternal: {fileID: 1234449957}

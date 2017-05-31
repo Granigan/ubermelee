@@ -25,6 +25,11 @@ public class MoveShip2Player : MonoBehaviour {
     public float CameraZoom = 5;
     float prevMagnitude = 0;
 
+    //input controls
+    public string TurnControl = "Vertical1";
+    public string ThrustControl = "Horizontal1";
+    public string shoot = "Fire1";
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -40,25 +45,25 @@ public class MoveShip2Player : MonoBehaviour {
         // This works kind a ok...
         //transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
         
-        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -Input.GetAxis("Horizontal2") * rotationSpeed);
+        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -Input.GetAxis(ThrustControl) * rotationSpeed);
         eulerAngleVelocity.y = 0;
         rb.MoveRotation(rb.rotation * deltaRotation);
         
 
         // Thrust the ship if necessary
         rb.AddForce(transform.right * thrustForce *
-                Input.GetAxis("Vertical2"));
+                Input.GetAxis(TurnControl));
 
         //Debug.Log(Input.GetAxis("Horizontal"));
 
-        if (Input.GetAxis("Horizontal2") == 0)
+        if (Input.GetAxis(ThrustControl) == 0)
         {
             //rb.freezeRotation = true;
             //thruster.GetComponent<TrailRenderer>().enabled = false;
             //trail.time = 0;
         }
 
-        if (Input.GetAxis("Vertical2") <= 0.1)
+        if (Input.GetAxis(ThrustControl) <= 0.1)
         {
             //rb.freezeRotation = true;
             {
@@ -66,7 +71,7 @@ public class MoveShip2Player : MonoBehaviour {
             }
             
         }
-        if (Input.GetAxis("Vertical2") == 0)
+        if (Input.GetAxis(ThrustControl) == 0)
         {
             //rb.freezeRotation = true;
             {
@@ -116,7 +121,7 @@ public class MoveShip2Player : MonoBehaviour {
             Camera.main.orthographicSize = CameraMinZoom;
         }
         */
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetButtonDown(shoot))
         {
             Fire();
         }
