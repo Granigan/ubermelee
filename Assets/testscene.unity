@@ -900,7 +900,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1289438255}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cfb437cb0711bb4184075695133b904, type: 3}
   m_Name: 
@@ -919,6 +919,9 @@ MonoBehaviour:
   CameraMinZoom: 4
   CameraZoomSpeed: 3
   CameraZoom: 5
+  TurnControl: Vertical1
+  ThrustControl: Horizontal1
+  shoot: Fire1
 --- !u!54 &1289438257 stripped
 Rigidbody:
   m_PrefabParentObject: {fileID: 54624074082288768, guid: 8270c47871974bc498a5983a6e42a4bc,
