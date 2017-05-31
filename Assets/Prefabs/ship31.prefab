@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4964572875610246}
   - component: {fileID: 54936197940310530}
-  - component: {fileID: 114685024107386788}
+  - component: {fileID: 114629640242640958}
   m_Layer: 0
   m_Name: ship31
   m_TagString: CameraObject
@@ -126,7 +126,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1674874104540812}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 7.24, y: 0, z: -3}
+  m_LocalPosition: {x: -3.08, y: -2.33, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4172833887354144}
@@ -308,7 +308,7 @@ TrailRenderer:
     textureMode: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!114 &114685024107386788
+--- !u!114 &114629640242640958
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -316,11 +316,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1674874104540812}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 632bc32cb302df3428c9f93576b074a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cfb437cb0711bb4184075695133b904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  thrustForce: 25
+  thrustForce: 15
   rb: {fileID: 54936197940310530}
   thruster: {fileID: 1653138632890234}
   trail: {fileID: 96883825718695760}
@@ -329,7 +329,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
     type: 2}
   bulletSpawn: {fileID: 4300947970216012}
-  CameraMaxZoom: 8
-  CameraMinZoom: 3
+  CameraMaxZoom: 6
+  CameraMinZoom: 4
   CameraZoomSpeed: 3
   CameraZoom: 5
+  TurnControl: Vertical1
+  ThrustControl: Horizontal1
+  shoot: Fire1
