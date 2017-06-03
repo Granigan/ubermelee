@@ -255,16 +255,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 59.052002, y: -340.617, z: 44.359}
---- !u!1 &397448504 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1023717758279912, guid: 8270c47871974bc498a5983a6e42a4bc,
-    type: 2}
-  m_PrefabInternal: {fileID: 1075004791}
---- !u!96 &397448505 stripped
-TrailRenderer:
-  m_PrefabParentObject: {fileID: 96450006850638158, guid: 8270c47871974bc498a5983a6e42a4bc,
-    type: 2}
-  m_PrefabInternal: {fileID: 1075004791}
 --- !u!1 &433617684
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,11 +457,6 @@ Transform:
   m_Father: {fileID: 1190754363}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &645812476 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4031505048163136, guid: 8270c47871974bc498a5983a6e42a4bc,
-    type: 2}
-  m_PrefabInternal: {fileID: 1075004791}
 --- !u!1 &734094529 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1674874104540812, guid: 2965573077ca23448b8c631d377e9404,
@@ -823,11 +808,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DampTime: 0.1
-  m_ScreenEdgeBuffer: 0.01
-  m_MinSize: 1
+  m_ScreenEdgeBuffer: 0.1
+  m_MinSize: 1.5
   m_Targets: []
-  maxDistanceX: 50
-  maxDistanceY: 40
+  maxDistanceX: 28
+  maxDistanceY: 24
+  moveOffset: 2
 --- !u!4 &1190754363
 Transform:
   m_ObjectHideFlags: 0
@@ -894,34 +880,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1745512433016608, guid: 8270c47871974bc498a5983a6e42a4bc,
     type: 2}
   m_PrefabInternal: {fileID: 1075004791}
---- !u!114 &1289438256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1289438255}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cfb437cb0711bb4184075695133b904, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 2
-  thrustForce: 25
-  rb: {fileID: 1289438257}
-  thruster: {fileID: 397448504}
-  trail: {fileID: 397448505}
-  maxSpeed: 5
-  eulerAngleVelocity: {x: 0, y: 0, z: -100}
-  bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
-    type: 2}
-  bulletSpawn: {fileID: 645812476}
-  CameraMaxZoom: 6
-  CameraMinZoom: 4
-  CameraZoomSpeed: 3
-  CameraZoom: 5
-  TurnControl: Vertical1
-  ThrustControl: Horizontal1
-  shoot: Fire1
 --- !u!54 &1289438257 stripped
 Rigidbody:
   m_PrefabParentObject: {fileID: 54624074082288768, guid: 8270c47871974bc498a5983a6e42a4bc,

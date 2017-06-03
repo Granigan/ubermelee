@@ -30,6 +30,7 @@ public class CollisionAction : MonoBehaviour
 
             Destroy(col.gameObject);
             var explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion, 3.0f);
         }
     }
 

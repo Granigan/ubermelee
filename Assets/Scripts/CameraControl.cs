@@ -10,6 +10,7 @@ public class CameraControl : MonoBehaviour
 
     public float maxDistanceX = 16f;
     public float maxDistanceY = 9f;
+    public float moveOffset = 5f;
 
     private Camera m_Camera;                        // Used for referencing the camera.
     private float m_ZoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
@@ -83,7 +84,7 @@ public class CameraControl : MonoBehaviour
         float requiredSize = FindRequiredSize();
 
         //if (requiredSize > 5) {
-        requiredSize = requiredSize * 1.8f;
+        requiredSize = requiredSize * 1.5f;
         //}
 
         m_Camera.orthographicSize = Mathf.SmoothDamp(m_Camera.orthographicSize, requiredSize, ref m_ZoomSpeed, m_DampTime);
@@ -142,55 +143,77 @@ public class CameraControl : MonoBehaviour
         m_Camera.orthographicSize = FindRequiredSize();
     }
 
-    public void CheckPlayAreaBoundaries()
+    public bool CheckPlayAreaBoundaries()
     {
         foreach (GameObject currObject in m_Targets)
         {
             foreach (GameObject otherObject in m_Targets)
             {
-                var xDistCurrObj = currObject.transform.position.x < 0 ? currObject.transform.position.x * -1 : currObject.transform.position.x;
-                var yDistCurrObj = currObject.transform.position.y < 0 ? currObject.transform.position.y * -1 : currObject.transform.position.y;
-                var xDistOtherObj = otherObject.transform.position.x < 0 ? otherObject.transform.position.x * -1 : otherObject.transform.position.x;
-                var yDistOtherObj = otherObject.transform.position.y < 0 ? otherObject.transform.position.y * -1 : otherObject.transform.position.y;
-
-                if (xDistCurrObj + xDistOtherObj > maxDistanceX)
+                if(otherObject == currObject)
                 {
-                    float newPositionX = currObject.transform.position.x + maxDistanceX;
+                    continue;
+                }
 
-                    if (otherObject.transform.position.x < 0)
+                Vector3 pos1 = currObject.transform.position;
+                Vector3 pos2 = otherObject.transform.position;
+                pos1.y = 0;
+                pos2.y = 0;
+
+                float distanceX = Vector3.Distance(pos1, pos2);
+
+                if (distanceX > maxDistanceX)
+                {
+                    float newPositionX; // = currObject.transform.position.x + (maxDistanceX * 1) - moveOffset;
+
+                    if (otherObject.transform.position.x > currObject.transform.position.x)
                     {
-                        newPositionX = otherObject.transform.position.x + (maxDistanceX * 1);
+                        newPositionX = currObject.transform.position.x + (maxDistanceX * 2) - moveOffset;
                     }
                     else
                     {
-                        newPositionX = otherObject.transform.position.x + (maxDistanceX * -1);
+                        newPositionX = currObject.transform.position.x + ((maxDistanceX * 2 - moveOffset) * -1);
                     }
-                    Debug.Log("X length exceeded " + (xDistCurrObj + xDistOtherObj));
-                    otherObject.transform.position = new Vector3(newPositionX, otherObject.transform.position.y, otherObject.transform.position.z);
+                    //Debug.Log("Before X: "+ currObject.transform.position);
+                    currObject.transform.position = new Vector3(newPositionX, currObject.transform.position.y, currObject.transform.position.z);
+                    //Debug.Log("After X: " + currObject.transform.position);
+                    return true;
                 }
 
-                if (yDistCurrObj + yDistOtherObj > maxDistanceY)
-                {
-                    float newPositionY = otherObject.transform.position.y + maxDistanceY;
 
-                    if (otherObject.transform.position.y < 0)
+
+
+
+                Vector3 pos1y = currObject.transform.position;
+                Vector3 pos2y = otherObject.transform.position;
+                pos1y.x = 0;
+                pos2y.x = 0;
+
+                float distanceY = Vector3.Distance(pos1y, pos2y);
+
+                if (distanceY > maxDistanceY)
+                {
+                    float newPositionY; 
+
+                    if (otherObject.transform.position.y > currObject.transform.position.y)
                     {
-                        newPositionY = otherObject.transform.position.y + (maxDistanceY * 1);
+                        newPositionY = currObject.transform.position.y + (maxDistanceY * 2) - moveOffset;
                     }
                     else
                     {
-                        newPositionY = otherObject.transform.position.y + (maxDistanceY * -1);
+                        newPositionY = currObject.transform.position.y + ((maxDistanceY * 2 - moveOffset) * -1);
                     }
-                    Debug.Log("Y length exceeded " + (yDistCurrObj + yDistOtherObj));
-                    otherObject.transform.position = new Vector3(otherObject.transform.position.x, newPositionY, otherObject.transform.position.z);
-
+                    //Debug.Log("Before Y: " + currObject.transform.position);
+                    currObject.transform.position = new Vector3(currObject.transform.position.x, newPositionY, currObject.transform.position.z);
+                    //Debug.Log("After Y: " + currObject.transform.position);
+                    return true;
                 }
+
 
 
             }
 
 
         }
-
+        return false;
     }
 }
