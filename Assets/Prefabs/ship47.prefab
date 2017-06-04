@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 4789817069049304}
   - component: {fileID: 54624074082288768}
   - component: {fileID: 114781265412280912}
+  - component: {fileID: 114268791728323432}
   m_Layer: 0
   m_Name: ship47
   m_TagString: CameraObject
@@ -304,6 +305,20 @@ TrailRenderer:
     textureMode: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
+--- !u!114 &114268791728323432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1745512433016608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382cd5747c63da040b4c7b13e258f6a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 10
+  explosionPrefab: {fileID: 1132007625944278, guid: 63533b19cffe05141b4e8d6ff19580e7,
+    type: 2}
 --- !u!114 &114781265412280912
 MonoBehaviour:
   m_ObjectHideFlags: 1

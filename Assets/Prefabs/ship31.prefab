@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 4964572875610246}
   - component: {fileID: 54936197940310530}
   - component: {fileID: 114629640242640958}
+  - component: {fileID: 114841289045363360}
   m_Layer: 0
   m_Name: ship31
   m_TagString: CameraObject
@@ -336,3 +337,17 @@ MonoBehaviour:
   TurnControl: Vertical1
   ThrustControl: Horizontal1
   shoot: Fire1
+--- !u!114 &114841289045363360
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1674874104540812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382cd5747c63da040b4c7b13e258f6a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitPoints: 5
+  explosionPrefab: {fileID: 1132007625944278, guid: 63533b19cffe05141b4e8d6ff19580e7,
+    type: 2}
