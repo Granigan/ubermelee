@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rewired;
 
 public class MoveShip2Player : MonoBehaviour {
 
@@ -23,12 +24,17 @@ public class MoveShip2Player : MonoBehaviour {
     public float CameraMinZoom = 4;
     public float CameraZoomSpeed = 3;
     public float CameraZoom = 5;
+    public int playerId = 0; // The Rewired player id of this character
+
     float prevMagnitude = 0;
+
 
     //input controls
     public string TurnControl = "Vertical1";
     public string ThrustControl = "Horizontal1";
     public string shoot = "Fire1";
+
+    private Player player; // The Rewired Player
 
     void Start()
     {
@@ -37,7 +43,14 @@ public class MoveShip2Player : MonoBehaviour {
         trail = GetComponentInChildren<TrailRenderer>();
     }
 
-    
+    private void Awake()
+    {
+        // Get the Rewired Player object for this player and keep it for the duration of the character's lifetime
+        player = ReInput.players.GetPlayer(playerId);
+        
+
+    }
+
     void Update()
     {
 
@@ -45,14 +58,19 @@ public class MoveShip2Player : MonoBehaviour {
         // This works kind a ok...
         //transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
         
-        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -Input.GetAxis(ThrustControl) * rotationSpeed);
+        //Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -Input.GetAxis(ThrustControl) * rotationSpeed);
+
+        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -player.GetAxis("Turn Ship") * rotationSpeed);
+
         eulerAngleVelocity.y = 0;
         rb.MoveRotation(rb.rotation * deltaRotation);
-        
+
+        //Debug.Log("This is player " + playerId);
 
         // Thrust the ship if necessary
-        rb.AddForce(transform.right * thrustForce *
-                Input.GetAxis(TurnControl));
+        //rb.AddForce(transform.right * thrustForce * Input.GetAxis(TurnControl));
+
+        rb.AddForce(transform.right * thrustForce * player.GetAxis("Move"));
 
         //Debug.Log(Input.GetAxis("Horizontal"));
 
@@ -121,7 +139,7 @@ public class MoveShip2Player : MonoBehaviour {
             Camera.main.orthographicSize = CameraMinZoom;
         }
         */
-        if (Input.GetButtonDown(shoot))
+        if (/*Input.GetButtonDown(shoot) ||*/ player.GetButtonDown("Shoot Weapon"))
         {
             Fire();
         }
@@ -155,22 +173,6 @@ public class MoveShip2Player : MonoBehaviour {
         
     }
 
-    void FixedUpdate()
-    {
-
-       
-
-        if (Input.GetButtonDown("Jump"))
-    {
-        //rb.velocity = new Vector3(10, 0, 0);
-        //rb.AddForce(new Vector3(10, 0, 0));
-        //Debug.Log("Jump!!");
-    }
-
-
-    //rb.WakeUp();
-    
-}
 
 
 
