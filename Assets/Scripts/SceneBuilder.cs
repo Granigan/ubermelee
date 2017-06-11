@@ -39,11 +39,13 @@ public class SceneBuilder : MonoBehaviour {
             Ship1.transform.Rotate(Vector3.forward, Random.Range(-180, 180));
             {
                 Collider[] hitColliders = Physics.OverlapSphere(Ship1.transform.position, 1);
-                while (hitColliders.Length > 1)
+            Debug.Log("ship1colliders" + hitColliders.Length);
+                while (hitColliders.Length > 0)
                 {
                     Ship1.transform.position = new Vector3(Random.Range(-15, 15), Random.Range(-15, 15), -3);
                     hitColliders = Physics.OverlapSphere(Ship1.transform.position, 1);
-                }
+                Debug.Log("ship1colliders2" + hitColliders.Length);
+            }
                 
             }
             {
@@ -52,7 +54,8 @@ public class SceneBuilder : MonoBehaviour {
                 Ship2.transform.Rotate(Vector3.forward, Random.Range(-180, 180));
                 {
                     Collider[] hitColliders2 = Physics.OverlapSphere(Ship2.transform.position, 1);
-                    while (hitColliders2.Length > 1)
+                Debug.Log("ship2colliders" + hitColliders2.Length);
+                while (hitColliders2.Length > 1)
                     {
                         Ship2.transform.position = new Vector3(Random.Range(-15, 15), Random.Range(-15, 15), -3);
                     hitColliders2 = Physics.OverlapSphere(Ship2.transform.position, 1);
