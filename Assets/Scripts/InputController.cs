@@ -42,7 +42,7 @@ public class InputController : MonoBehaviour
     {
         foreach(InputDevice currDevice in InputManager.Devices)
         {
-            Debug.Log("Device type is " + currDevice.ToString());
+            //Debug.Log("Device type is " + currDevice.ToString());
         }
 
         if(InputManager.Devices.Count > playerNumber)
@@ -66,7 +66,7 @@ public class InputController : MonoBehaviour
         else
         {
             if(joystick != null)
-                shipTurn = joystick.LeftStickX;
+                shipTurn = joystick.LeftStickX + (-1*joystick.DPadLeft) + joystick.DPadRight;
         }
         Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -1 * shipTurn * rotationSpeed);
 
@@ -76,7 +76,7 @@ public class InputController : MonoBehaviour
 
         float speedValue = 0;
         if (joystick != null)
-            speedValue = joystick.LeftStickY;
+            speedValue = joystick.RightTrigger + (-1* joystick.LeftTrigger);
 
         if (Input.GetAxis(ThrustControl) > 0)
         {

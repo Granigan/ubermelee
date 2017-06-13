@@ -11,17 +11,18 @@ public class CameraControl : MonoBehaviour
     public float maxDistanceX = 16f;
     public float maxDistanceY = 9f;
     public float moveOffset = 5f;
+    public float maxZoomLevel = 16f;
 
-    private Camera m_Camera;                        // Used for referencing the camera.
-    private float m_ZoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
-    private Vector3 m_MoveVelocity;                 // Reference velocity for the smooth damping of the position.
-    private Vector3 m_DesiredPosition;              // The position the camera is moving towards.
+    private Camera mainCamera;                        // Used for referencing the camera.
+    private float zoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
+    private Vector3 moveVelocity;                 // Reference velocity for the smooth damping of the position.
+    private Vector3 desiredPosition;              // The position the camera is moving towards.
 
 
 
     private void Awake()
     {
-        m_Camera = GetComponentInChildren<Camera>();
+        mainCamera = GetComponentInChildren<Camera>();
     }
 
 
@@ -45,7 +46,7 @@ public class CameraControl : MonoBehaviour
         FindAveragePosition();
 
         // Smoothly transition to that position.
-        transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
+        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref moveVelocity, m_DampTime);
     }
 
 
@@ -74,7 +75,7 @@ public class CameraControl : MonoBehaviour
         //averagePos.y = transform.position.y;
 
         // The desired position is the average position;
-        m_DesiredPosition = averagePos;
+        desiredPosition = averagePos;
     }
 
 
@@ -87,15 +88,20 @@ public class CameraControl : MonoBehaviour
         requiredSize = requiredSize * 1.5f;
         //}
 
-        m_Camera.orthographicSize = Mathf.SmoothDamp(m_Camera.orthographicSize, requiredSize, ref m_ZoomSpeed, m_DampTime);
-        //Debug.Log(m_Camera.orthographicSize);
+        if(requiredSize > maxZoomLevel )
+        {
+            requiredSize = maxZoomLevel;
+        }
+
+        mainCamera.orthographicSize = Mathf.SmoothDamp(mainCamera.orthographicSize, requiredSize, ref zoomSpeed, m_DampTime);
+        //Debug.Log(mainCamera.orthographicSize);
     }
 
 
     private float FindRequiredSize()
     {
         // Find the position the camera rig is moving towards in its local space.
-        Vector3 desiredLocalPos = transform.InverseTransformPoint(m_DesiredPosition);
+        Vector3 desiredLocalPos = transform.InverseTransformPoint(desiredPosition);
 
         // Start the camera's size calculation at zero.
         float size = 0f;
@@ -117,7 +123,7 @@ public class CameraControl : MonoBehaviour
             size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.y));
 
             // Choose the largest out of the current size and the calculated size based on the tank being to the left or right of the camera.
-            size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.x) / m_Camera.aspect);
+            size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.x) / mainCamera.aspect);
             //size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.x));
         }
 
@@ -137,10 +143,10 @@ public class CameraControl : MonoBehaviour
         FindAveragePosition();
 
         // Set the camera's position to the desired position without damping.
-        transform.position = m_DesiredPosition;
+        transform.position = desiredPosition;
 
         // Find and set the required size of the camera.
-        m_Camera.orthographicSize = FindRequiredSize();
+        mainCamera.orthographicSize = FindRequiredSize();
     }
 
     public bool CheckPlayAreaBoundaries()
@@ -173,9 +179,9 @@ public class CameraControl : MonoBehaviour
                     {
                         newPositionX = currObject.transform.position.x + ((maxDistanceX * 2 - moveOffset) * -1);
                     }
-                    //Debug.Log("Before X: "+ currObject.transform.position);
+                    Debug.Log("Before X: "+ currObject.transform.position);
                     currObject.transform.position = new Vector3(newPositionX, currObject.transform.position.y, currObject.transform.position.z);
-                    //Debug.Log("After X: " + currObject.transform.position);
+                    Debug.Log("After X: " + currObject.transform.position);
                     return true;
                 }
 
@@ -212,8 +218,53 @@ public class CameraControl : MonoBehaviour
 
             }
 
+            Vector3 viewPos = mainCamera.WorldToViewportPoint(currObject.GetComponentInChildren<Transform>().position);
+
+            //Debug.Log("viewPos = " + viewPos);
+            
+            if (viewPos.x <= 0.0f)
+            {
+                float newPositionX;
+                newPositionX = currObject.transform.position.x + ((maxDistanceX * 1.5f - moveOffset) * 1);
+                currObject.transform.position = new Vector3(newPositionX, currObject.transform.position.y, currObject.transform.position.z);
+                if (currObject.name == "ship31") Debug.Log("viewPosX <= 0.0f = " + viewPos);
+                SetStartPositionAndSize();
+                return true;
+            }
+            else if (viewPos.x >= 1.0f)
+            {
+                float newPositionX;
+                newPositionX = currObject.transform.position.x + ((maxDistanceX * 1.5f - moveOffset) * -1);
+                currObject.transform.position = new Vector3(newPositionX, currObject.transform.position.y, currObject.transform.position.z);
+                if (currObject.name == "ship31") Debug.Log("viewPosX >= 1.0f = " + viewPos);
+                SetStartPositionAndSize();
+                return true;
+            }
+
+
+            if (viewPos.y <= 0.0f)
+            {
+                float newPositionY;
+                newPositionY = currObject.transform.position.y + ((maxDistanceY * 1.5f - moveOffset) * 1);
+                currObject.transform.position = new Vector3(currObject.transform.position.x, newPositionY, currObject.transform.position.z);
+                if(currObject.name == "ship31") Debug.Log("viewPosY <= 0.0f = " + viewPos);
+                SetStartPositionAndSize();
+                return true;
+            } else if (viewPos.y >= 1.0f)
+            {
+                float newPositionY;
+                newPositionY = currObject.transform.position.y + ((maxDistanceY * 1.5f - moveOffset) * -1);
+                currObject.transform.position = new Vector3(currObject.transform.position.x, newPositionY, currObject.transform.position.z);
+                if (currObject.name == "ship31") Debug.Log("viewPosY >= 1.0f = " + viewPos);
+                SetStartPositionAndSize();
+                return true;
+            }
+
 
         }
         return false;
     }
+
+
+   
 }

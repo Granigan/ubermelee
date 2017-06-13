@@ -111,8 +111,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745512433016608}
-  m_LocalRotation: {x: 0.41469282, y: -0.9099615, z: -0, w: 0}
-  m_LocalPosition: {x: 1, y: -4, z: -3}
+  m_LocalRotation: {x: 0.04362006, y: 0.99904823, z: -0, w: 0}
+  m_LocalPosition: {x: 6, y: -4, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4581946234325456}
@@ -341,7 +341,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
     type: 2}
   bulletSpawn: {fileID: 4031505048163136}
-  playerNumber: 1
+  playerNumber: 2
   TurnControl: Horizontal2
   ThrustControl: Vertical2
   shoot: Fire2
