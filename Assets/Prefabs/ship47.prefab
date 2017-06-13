@@ -111,8 +111,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745512433016608}
-  m_LocalRotation: {x: 0.04362006, y: 0.99904823, z: -0, w: 0}
-  m_LocalPosition: {x: 6, y: -4, z: -3}
+  m_LocalRotation: {x: 0.9063075, y: -0.42261896, z: -0, w: 0}
+  m_LocalPosition: {x: -8, y: 7, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4581946234325456}
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382cd5747c63da040b4c7b13e258f6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 10
+  shipDetails: {fileID: 11400000, guid: e4b77c04ebb10ab4e891aa6f83a95ee9, type: 2}
   explosionPrefab: {fileID: 1132007625944278, guid: 63533b19cffe05141b4e8d6ff19580e7,
     type: 2}
   respawnVariance: 30
@@ -331,12 +331,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9730ebf7806b0479b3e7c223aa076c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 15
-  thrustForce: 25
+  shipDetails: {fileID: 11400000, guid: e4b77c04ebb10ab4e891aa6f83a95ee9, type: 2}
   rb: {fileID: 54624074082288768}
   thruster: {fileID: 1023717758279912}
   trail: {fileID: 96450006850638158}
-  maxSpeed: 8
   eulerAngleVelocity: {x: 0, y: 0, z: -10}
   bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
     type: 2}

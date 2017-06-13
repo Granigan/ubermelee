@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class ShipHandling : MonoBehaviour {
 
-    public float hitPoints = 20;
+    public ShipDetails shipDetails;
+
+    //public float hitPoints = 20;
     public GameObject explosionPrefab;
     public float respawnVariance = 30f;
+    private new Transform transform;
 
     private IEnumerator coroutine;
-    private float currHitPoints = 20;
+    private float currCrew = 20;
 
     // Use this for initialization
     void Start () {
-        currHitPoints = hitPoints;
+        currCrew = shipDetails.Crew;
+        transform = GetComponentInChildren<Transform>();
+        transform.localScale = new Vector3( shipDetails.Scale, shipDetails.Scale, transform.localScale.z);
     }
 	
 	// Update is called once per frame
@@ -23,12 +28,12 @@ public class ShipHandling : MonoBehaviour {
 
     public void DoDamage(float Damage)
     {
-        this.currHitPoints = this.currHitPoints - Damage;
-        Debug.Log("Hitpoints left " + this.currHitPoints);
-        if(this.currHitPoints <= 0)
+        this.currCrew = this.currCrew - Damage;
+        Debug.Log("Hitpoints left " + this.currCrew);
+        if(this.currCrew <= 0)
         {
             explodeShip();
-            currHitPoints = hitPoints;
+            currCrew = shipDetails.Crew;
         }
 
     }

@@ -5,16 +5,15 @@ using InControl;
 
 public class InputController : MonoBehaviour
 {
-
-
-    public float rotationSpeed = 100.0f;
-    public float thrustForce = 15f;
+    public ShipDetails shipDetails;
+    
+    //public float thrustForce = 15f;
     public Rigidbody rb;
 
     public GameObject thruster;
     public TrailRenderer trail;
 
-    public float maxSpeed = 200f;//Replace with your max speed
+    //public float maxSpeed = 200f;//Replace with your max speed
 
     public Vector3 eulerAngleVelocity;
 
@@ -33,8 +32,12 @@ public class InputController : MonoBehaviour
 
     void Start()
     {
+        //shipDetails = GetComponent<ShipDetails>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        rb.mass = shipDetails.Mass;
+        rb.drag = shipDetails.Drag;
+        rb.angularDrag = shipDetails.AngularDrag;
         trail = GetComponentInChildren<TrailRenderer>();
     }
 
@@ -68,7 +71,7 @@ public class InputController : MonoBehaviour
             if(joystick != null)
                 shipTurn = joystick.LeftStickX + (-1*joystick.DPadLeft) + joystick.DPadRight;
         }
-        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -1 * shipTurn * rotationSpeed);
+        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -1 * shipTurn * shipDetails.RotationRate);
 
         eulerAngleVelocity.y = 0;
         rb.MoveRotation(rb.rotation * deltaRotation);
@@ -84,7 +87,7 @@ public class InputController : MonoBehaviour
         }
         //Debug.Log("shipTurn = " + shipTurn + " speedvalue = " + speedValue);
 
-        rb.AddForce(transform.right * thrustForce * speedValue);
+        rb.AddForce(transform.right * shipDetails.Acceleration * speedValue);
 
         if (speedValue == 0)
         {
@@ -110,9 +113,9 @@ public class InputController : MonoBehaviour
         }
 
 
-        if (rb.velocity.magnitude > maxSpeed)
+        if (rb.velocity.magnitude > shipDetails.MaxSpeed)
         {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
+            rb.velocity = rb.velocity.normalized * shipDetails.MaxSpeed;
         }
 
         //float currVelocity = rb.velocity.x;
