@@ -12,11 +12,12 @@ public class ShipHandling : MonoBehaviour {
     private new Transform transform;
 
     private IEnumerator coroutine;
-    private float currCrew = 20;
+    public float currentCrew = 20;
+    public float currentBattery = 20;
 
     // Use this for initialization
     void Start () {
-        currCrew = shipDetails.Crew;
+        currentCrew = shipDetails.Crew;
         transform = GetComponentInChildren<Transform>();
         transform.localScale = new Vector3( shipDetails.Scale, shipDetails.Scale, transform.localScale.z);
     }
@@ -28,12 +29,12 @@ public class ShipHandling : MonoBehaviour {
 
     public void DoDamage(float Damage)
     {
-        this.currCrew = this.currCrew - Damage;
-        Debug.Log("Hitpoints left " + this.currCrew);
-        if(this.currCrew <= 0)
+        this.currentCrew = this.currentCrew - Damage;
+        //Debug.Log("Hitpoints left " + this.currCrew);
+        if(this.currentCrew <= 0)
         {
             explodeShip();
-            currCrew = shipDetails.Crew;
+            currentCrew = shipDetails.Crew;
         }
 
     }

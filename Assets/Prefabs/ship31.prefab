@@ -126,8 +126,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1674874104540812}
-  m_LocalRotation: {x: -0.4617479, y: -0.88701123, z: -0, w: 0}
-  m_LocalPosition: {x: 12, y: 11, z: -3}
+  m_LocalRotation: {x: 0.9969174, y: -0.07845848, z: -0, w: 0}
+  m_LocalPosition: {x: -2, y: 10, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4172833887354144}
@@ -321,7 +321,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipDetails: {fileID: 11400000, guid: c01673ac57fac2c4e93bf9da3b09e29b, type: 2}
-  rb: {fileID: 54936197940310530}
   thruster: {fileID: 1653138632890234}
   trail: {fileID: 96883825718695760}
   eulerAngleVelocity: {x: 0, y: 0, z: -100}
@@ -347,3 +346,5 @@ MonoBehaviour:
   explosionPrefab: {fileID: 1132007625944278, guid: 63533b19cffe05141b4e8d6ff19580e7,
     type: 2}
   respawnVariance: 30
+  currentCrew: 20
+  currentBattery: 20

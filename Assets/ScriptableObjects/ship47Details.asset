@@ -17,7 +17,8 @@ MonoBehaviour:
   RotationRate: 10
   Crew: 60
   Battery: 40
-  BatteryRechargeRate: 2
+  BatteryRechargeRate: 5
   AngularDrag: 5
   Drag: 0
   Scale: 1
+  WeaponMain: {fileID: 11400000, guid: 2e4fab950ad8e8b43bf8d9a89322505f, type: 2}

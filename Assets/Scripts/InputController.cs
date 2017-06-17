@@ -6,9 +6,10 @@ using InControl;
 public class InputController : MonoBehaviour
 {
     public ShipDetails shipDetails;
+    private WeaponDetails weaponDetails;
     
     //public float thrustForce = 15f;
-    public Rigidbody rb;
+    private Rigidbody rb;
 
     public GameObject thruster;
     public TrailRenderer trail;
@@ -30,8 +31,16 @@ public class InputController : MonoBehaviour
 
     InputDevice joystick;
 
+    private float lastShot = 0.0f;
+    private float currBattery = 0;
+    private float lastFrameTime = 0;
+
+    
+
     void Start()
     {
+        weaponDetails = shipDetails.WeaponMain;
+        currBattery = shipDetails.Battery;
         //shipDetails = GetComponent<ShipDetails>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -119,15 +128,24 @@ public class InputController : MonoBehaviour
         }
 
         //float currVelocity = rb.velocity.x;
-       
+
+        currBattery = currBattery + ((Time.time - lastFrameTime) * shipDetails.BatteryRechargeRate);
+        lastFrameTime = Time.time;
+        if (currBattery > shipDetails.Battery)
+        {
+            currBattery = shipDetails.Battery;
+        }
+        //Debug.Log("currBattery=" + currBattery);
+
+
         bool fireButton = false;
         if (joystick != null)
             fireButton = joystick.Action1;
 
    
-        if (Input.GetButtonDown(shoot) == true)
+        if (Input.GetButton(shoot) == true)
         {
-            fireButton = Input.GetButtonDown(shoot);
+            fireButton = Input.GetButton(shoot);
         }
 
         if ( fireButton == true)
@@ -135,22 +153,45 @@ public class InputController : MonoBehaviour
             Fire();
         }
 
- 
+      
+       
+
     }
 
+    
+
     void Fire()
-    {      
-        // Create the Bullet from the Bullet Prefab
-        var bullet = (GameObject)Instantiate(
-            bulletPrefab,
-            bulletSpawn.position,
-            bulletSpawn.rotation);
+    {
+        if (Time.time > weaponDetails.FireRate + lastShot)
+        {
+            if (currBattery >= weaponDetails.BatteryCharge)
+            {
+                GameObject bullet = (GameObject)Instantiate(
+                    weaponDetails.bulletPrefab,
+                    bulletSpawn.position,
+                    bulletSpawn.rotation); // TODO: Maybe add bulletspawnpoint to WeaponDetails?
 
-        // Add velocity to the bullet
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 15;
+                Transform transform = bullet.GetComponentInChildren<Transform>();
+                transform.localScale = new Vector3(weaponDetails.Scale, weaponDetails.Scale, weaponDetails.Scale);
 
-        // Destroy the bullet after 5 seconds
-        Destroy(bullet, 2.0f);
+                               
+                // Add velocity to the bullet
+                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * weaponDetails.Speed;
+
+                BulletCollision bulletCol = bullet.GetComponentInChildren<BulletCollision>(); //transform.Find("BulletCollision");
+                //ScriptB other = (ScriptB)go.GetComponent(typeof(ScriptB));
+                bulletCol.setDamage(weaponDetails.Damage);
+
+                // Destroy the bullet after X seconds
+                Destroy(bullet, weaponDetails.TimeToLive);
+
+                
+                currBattery = currBattery - weaponDetails.BatteryCharge;
+                lastShot = Time.time;
+            }
+
+
+        }
         
     }
     

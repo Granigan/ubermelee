@@ -33,4 +33,10 @@ public class BulletCollision : MonoBehaviour {
         }
     }
 
+
+    public void setDamage( float newDamage)
+    {
+        damage = newDamage;
+    }
+
 }

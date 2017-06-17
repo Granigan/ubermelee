@@ -5,15 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Ship/Ship Details")]
 public class ShipDetails : ShipSO {
 
-    public float Acceleration;
-    public float MaxSpeed;
-    public float Mass;
-    public float RotationRate;
-    public float Crew;
-    public float Battery;
-    public float BatteryRechargeRate;
-    public float AngularDrag;
-    public float Drag;
-    public float Scale = 1;
+    public float Acceleration = 1f;
+    public float MaxSpeed = 1f;
+    public float Mass = 1f;
+    public float RotationRate = 1f;
+    public float Crew = 1f;
+    public float Battery = 1f;
+    public float BatteryRechargeRate = 1f;
+    public float AngularDrag = 1f;
+    public float Drag = 1f;
+    public float Scale = 1f;
+    public WeaponDetails WeaponMain;
 
 }
