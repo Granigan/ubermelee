@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: dd12942e277a60445baf31dfa08db57c
-timeCreated: 1497195342
+timeCreated: 1497696297
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Planet: {fileID: 1978114634358552, guid: 1be3c26dd226be84a82857266943cea4, type: 2}
+  - Ship1: {fileID: 1065157009348514, guid: 22f6a3d4c34fc354baa0cc54401abff7, type: 2}
+  - Ship2: {fileID: 1745512433016608, guid: 8270c47871974bc498a5983a6e42a4bc, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

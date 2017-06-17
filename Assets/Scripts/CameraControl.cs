@@ -179,9 +179,9 @@ public class CameraControl : MonoBehaviour
                     {
                         newPositionX = currObject.transform.position.x + ((maxDistanceX * 2 - moveOffset) * -1);
                     }
-                    Debug.Log("Before X: "+ currObject.transform.position);
+                    //Debug.Log("Before X: "+ currObject.transform.position);
                     currObject.transform.position = new Vector3(newPositionX, currObject.transform.position.y, currObject.transform.position.z);
-                    Debug.Log("After X: " + currObject.transform.position);
+                    //Debug.Log("After X: " + currObject.transform.position);
                     return true;
                 }
 

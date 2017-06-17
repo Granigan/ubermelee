@@ -16,25 +16,26 @@ public class UpdatePlayerStats : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //Debug.Log("In UpdatePlayerStats");
 		foreach(GameObject currPlayer in players) {
-            if(playerNumber == 1)
+            if (playerNumber == 1)
             {
                 GameObject textGO = GameObject.Find("Player" + playerNumber + "Stats");
                 UnityEngine.UI.Text text = textGO.GetComponentInChildren<UnityEngine.UI.Text>();
-                text.text = "PLAYER" + playerNumber + "\n";
-                text.text += "Crew: " + currPlayer.GetComponent<ShipHandling>().currentCrew + "\n";
-                //text.text += "Battery: " + currPlayer.GetComponent<ShipDetails>().Battery + "\n";
-
+                text.text = "PLAYER" + Mathf.Round(playerNumber).ToString() + "\n";
+                text.text += "Crew: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentCrew()).ToString() + "\n";
+                text.text += "Battery: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentBattery()).ToString() + "\n";
                 playerNumber = 2;
-            } else {
+            }
+            else
+            {
                 GameObject textGO = GameObject.Find("Player" + playerNumber + "Stats");
                 UnityEngine.UI.Text text = textGO.GetComponentInChildren<UnityEngine.UI.Text>();
-                text.text = "PLAYER" + playerNumber + "\n";
-                text.text += "Crew: " + currPlayer.GetComponent<ShipHandling>().currentCrew + "\n";
-                //text.text += "Battery: " + currPlayer.GetComponent<ShipDetails>().Battery + "\n";
+                text.text = "PLAYER" + Mathf.Round(playerNumber).ToString() + "\n";
+                text.text += "Crew: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentCrew()).ToString() + "\n";
+                text.text += "Battery: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentBattery()).ToString() + "\n";
                 playerNumber = 1;
             }
-
         }
 	}
 }

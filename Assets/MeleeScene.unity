@@ -138,10 +138,10 @@ RectTransform:
   m_Father: {fileID: 907619347}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 399.3, y: 216.3}
-  m_SizeDelta: {x: 80, y: 62.1}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -85.20001, y: -50}
+  m_SizeDelta: {x: 81, y: 62.100006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &126370005
 MonoBehaviour:
@@ -251,6 +251,12 @@ Prefab:
       propertyPath: maxDistanceX
       value: 36
       objectReference: {fileID: 0}
+    - target: {fileID: 114599262295883474, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: Ship1
+      value: 
+      objectReference: {fileID: 1065157009348514, guid: 22f6a3d4c34fc354baa0cc54401abff7,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
   m_IsPrefabParent: 0
@@ -300,10 +306,10 @@ RectTransform:
   m_Father: {fileID: 907619347}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -396, y: 214}
-  m_SizeDelta: {x: 87, y: 66}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -413.75, y: -50}
+  m_SizeDelta: {x: -847.5, y: 66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1082144286
 MonoBehaviour:
@@ -589,7 +595,7 @@ MonoBehaviour:
   logDebugInfo: 1
   invertYAxis: 0
   enableXInput: 0
-  useFixedUpdate: 0
+  useFixedUpdate: 1
   dontDestroyOnLoad: 0
   customProfiles: []
 --- !u!4 &1992581622

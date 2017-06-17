@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15587025a15a214f98fcf7b4c444b4d, type: 3}
   m_Name: ship47Details
   m_EditorClassIdentifier: 
-  Acceleration: 35
-  MaxSpeed: 6
+  Acceleration: 45
+  MaxSpeed: 12
   Mass: 6
-  RotationRate: 10
+  RotationRate: 1.3
   Crew: 60
   Battery: 40
   BatteryRechargeRate: 5
