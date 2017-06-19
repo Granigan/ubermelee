@@ -11,14 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8f2ded8c0fcb0c45ac3335939e88c9b, type: 3}
   m_Name: ship47WeaponMain
   m_EditorClassIdentifier: 
-  Damage: 10
-  Scale: 0.1
-  Speed: 30
+  Damage: 6
+  Scale: 0.4
+  Speed: 26
   TimeToLive: 1
   Mass: 0.1
   Drag: 0
   AngularDrag: 0.05
-  BatteryCharge: 5
+  BatteryCharge: 15
   FireRate: 0.3
   bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
     type: 2}
