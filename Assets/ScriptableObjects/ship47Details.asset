@@ -22,3 +22,4 @@ MonoBehaviour:
   Drag: 0
   Scale: 1
   WeaponMain: {fileID: 11400000, guid: 2e4fab950ad8e8b43bf8d9a89322505f, type: 2}
+  Special: {fileID: 11400000, guid: 7091ef5ff06d4e74cb2e7df9f309fc74, type: 2}

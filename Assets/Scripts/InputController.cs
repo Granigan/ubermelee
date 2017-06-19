@@ -74,6 +74,21 @@ public class InputController : MonoBehaviour
         shipHandling.MoveShip(speedValue);
 
 
+        bool specialButton = false;
+        if (joystick != null)
+            specialButton = joystick.Action3;
+
+
+        if (Input.GetButton(specialControl) == true)
+        {
+            specialButton = Input.GetButton(specialControl);
+        }
+
+        if (specialButton == true)
+        {
+            shipHandling.UseSpecial();
+        }
+
         bool fireButton = false;
         if (joystick != null)
             fireButton = joystick.Action1;
@@ -91,20 +106,7 @@ public class InputController : MonoBehaviour
 
 
 
-        bool specialButton = false;
-        if (joystick != null)
-            specialButton = joystick.Action3;
-
-
-        if (Input.GetButton(specialControl) == true)
-        {
-            specialButton = Input.GetButton(specialControl);
-        }
-
-        if (specialButton == true)
-        {
-            shipHandling.UseSpecial();
-        }
+       
 
     }
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CameraObject
   - Bullet
+  - BulletSpawn
   layers:
   - Default
   - TransparentFX

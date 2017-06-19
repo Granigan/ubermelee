@@ -10,12 +10,13 @@ public class ShipHandling : MonoBehaviour {
     public GameObject explosionPrefab;
     public float respawnVariance = 30f;
     private new Transform transform;
+    public float shipID = 0;
 
     private IEnumerator coroutine;
     private float currentCrew;
     private float currentBattery;
-    private Transform bulletSpawn;
-
+    private List<Transform> bulletSpawnPoints;
+    private ShipSpecials shipSpecials;
 
     public GameObject thruster;
     public TrailRenderer trail;
@@ -38,10 +39,28 @@ public class ShipHandling : MonoBehaviour {
         
         trail = GetComponentInChildren<TrailRenderer>();
 
+        bulletSpawnPoints = new List<Transform>();
+        int i = 0;
+        //bulletSpawnPoints = getChi getChildGameObject(transform.gameObject, "BulletSpawnPoint").transform;
+        foreach (Transform child in transform)
+        {
+            //Debug.Log("child.name = " + child.name);
+            if (child.CompareTag("BulletSpawn") && child.name.Contains("BulletSpawnPointMain"))
+            {
+                //Debug.Log("Selected child.name = " + child.name);
+                //bulletSpawnPoints[i] = child.transform;
+                bulletSpawnPoints.Add(child.transform);
+                i++;
+            }
+        }
 
-        bulletSpawn = getChildGameObject(transform.gameObject, "BulletSpawnPoint").transform;
+        //Debug.Log("bulletSpawnPoints length: " + bulletSpawnPoints.Count);
         //bulletSpawn = transform.Find("BulletSpawnPoint");
 
+
+        //shipSpecials = gameObject.AddComponent(ShipSpecials);
+        shipSpecials = gameObject.AddComponent<ShipSpecials>();
+        //shipSpecials = GameObject.FindObjectOfType(typeof(ShipSpecials)) as ShipSpecials;
     }
 	
 	// Update is called once per frame
@@ -147,33 +166,54 @@ public class ShipHandling : MonoBehaviour {
         }
     }
 
-    public void FireMainWeapon()
+    public void FireMainWeapon(List<Transform> paramSpawnPoints = null, float paramBatteryCharge = -1)
     {
         if (Time.time > shipDetails.WeaponMain.FireRate + lastShot)
         {
             if (currentBattery >= shipDetails.WeaponMain.BatteryCharge)
             {
-                GameObject bullet = (GameObject)Instantiate(
+                List<Transform> usedSpawnPoints = new List<Transform>();
+                if (paramSpawnPoints == null)
+                {
+                    usedSpawnPoints = bulletSpawnPoints;
+                } else
+                {
+                    usedSpawnPoints = paramSpawnPoints;
+                }
+
+
+                foreach(Transform currBulletSpawnPoint in usedSpawnPoints)
+                {
+                    GameObject bullet = (GameObject)Instantiate(
                     shipDetails.WeaponMain.bulletPrefab,
-                    bulletSpawn.position,
-                    bulletSpawn.rotation); // TODO: Maybe add bulletspawnpoint to WeaponDetails?
+                    currBulletSpawnPoint.position,
+                    currBulletSpawnPoint.rotation); 
 
-                Transform transform = bullet.GetComponentInChildren<Transform>();
-                transform.localScale = new Vector3(shipDetails.WeaponMain.Scale, shipDetails.WeaponMain.Scale, shipDetails.WeaponMain.Scale);
-
-
-                // Add velocity to the bullet
-                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.WeaponMain.Speed;
-
-                BulletCollision bulletCol = bullet.GetComponentInChildren<BulletCollision>(); //transform.Find("BulletCollision");
-                //ScriptB other = (ScriptB)go.GetComponent(typeof(ScriptB));
-                bulletCol.setDamage(shipDetails.WeaponMain.Damage);
-
-                // Destroy the bullet after X seconds
-                Destroy(bullet, shipDetails.WeaponMain.TimeToLive);
+                    Transform transform = bullet.GetComponentInChildren<Transform>();
+                    transform.localScale = new Vector3(shipDetails.WeaponMain.Scale, shipDetails.WeaponMain.Scale, shipDetails.WeaponMain.Scale);
 
 
-                currentBattery = currentBattery - shipDetails.WeaponMain.BatteryCharge;
+                    // Add velocity to the bullet
+                    bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.WeaponMain.Speed;
+
+                    BulletCollision bulletCol = bullet.GetComponentInChildren<BulletCollision>(); //transform.Find("BulletCollision");
+                                                                                                  //ScriptB other = (ScriptB)go.GetComponent(typeof(ScriptB));
+                    bulletCol.setDamage(shipDetails.WeaponMain.Damage);
+
+                    // Destroy the bullet after X seconds
+                    Destroy(bullet, shipDetails.WeaponMain.TimeToLive);
+
+                }
+
+                if(paramBatteryCharge == -1)
+                {
+                    currentBattery = currentBattery - shipDetails.WeaponMain.BatteryCharge;
+                } else
+                {
+                    currentBattery = currentBattery - paramBatteryCharge;
+                }
+
+                
                 lastShot = Time.time;
             }
 
@@ -184,7 +224,10 @@ public class ShipHandling : MonoBehaviour {
     public void UseSpecial()
     {
         // Just to test this special feature...
-        MoveShip(8f);
+        //MoveShip(8f);
+
+        shipSpecials.Invoke("Ship" + shipID + "Special", 0);
+        
     }
 
 
@@ -192,7 +235,6 @@ public class ShipHandling : MonoBehaviour {
 
     static public GameObject getChildGameObject(GameObject fromGameObject, string withName)
     {
-        //Author: Isaac Dart, June-13.
         Transform[] ts = fromGameObject.transform.GetComponentsInChildren<Transform>(true);
         foreach (Transform t in ts) if (t.gameObject.name == withName) return t.gameObject;
         return null;
@@ -218,3 +260,6 @@ public class ShipHandling : MonoBehaviour {
         currentBattery = newBattery;
     }
 }
+
+
+

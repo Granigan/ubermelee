@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2abc56e208e3b444b69ac99efa456c2, type: 3}
+  m_Name: ship47Special
+  m_EditorClassIdentifier: 
+  Damage: 10
+  Scale: 1
+  Speed: 1
+  TimeToLive: 1
+  Mass: 1
+  Drag: 1
+  AngularDrag: 1
+  BatteryCharge: 10
+  FireRate: 1
+  specialPrefab: {fileID: 0}

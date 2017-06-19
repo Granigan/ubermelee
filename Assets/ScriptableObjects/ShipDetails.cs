@@ -16,5 +16,5 @@ public class ShipDetails : ShipSO {
     public float Drag = 1f;
     public float Scale = 1f;
     public WeaponDetails WeaponMain;
-
+    public SpecialDetails Special;
 }
