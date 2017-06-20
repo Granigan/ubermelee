@@ -13,8 +13,10 @@ public class ShipHandling : MonoBehaviour {
     public float shipID = 0;
 
     private IEnumerator coroutine;
-    private float currentCrew;
-    private float currentBattery;
+    [HideInInspector]
+    public float currentCrew;
+    [HideInInspector]
+    public float currentBattery;
     private List<Transform> bulletSpawnPoints;
     private ShipSpecials shipSpecials;
 
@@ -23,7 +25,10 @@ public class ShipHandling : MonoBehaviour {
     public Vector3 eulerAngleVelocity;
     private Rigidbody rb;
     private float lastFrameTime = 0;
-    private float lastShot = 0.0f;
+    [HideInInspector]
+    public float lastShot = 0.0f;
+    public float lastSpecialUsed = 0.0f;
+
 
     // Use this for initialization
     void Start () {
@@ -166,9 +171,17 @@ public class ShipHandling : MonoBehaviour {
         }
     }
 
-    public void FireMainWeapon(List<Transform> paramSpawnPoints = null, float paramBatteryCharge = -1)
+    public void FireMainWeapon(List<Transform> paramSpawnPoints = null, float paramBatteryCharge = -1, float paramFireRate = -1)
     {
-        if (Time.time > shipDetails.WeaponMain.FireRate + lastShot)
+        float usedFireRate = 1f;
+        if(paramFireRate == -1)
+        {
+            usedFireRate = shipDetails.WeaponMain.FireRate; 
+        } else {
+            usedFireRate = paramFireRate;
+        }
+
+        if (Time.time > usedFireRate + lastShot)
         {
             if (currentBattery >= shipDetails.WeaponMain.BatteryCharge)
             {
@@ -225,9 +238,13 @@ public class ShipHandling : MonoBehaviour {
     {
         // Just to test this special feature...
         //MoveShip(8f);
+       
+        if (Time.time > shipDetails.Special.FireRate + lastSpecialUsed)
+        {
+            shipSpecials.Invoke("Ship" + shipID + "Special", 0);
+            lastSpecialUsed = Time.time;
+        }
 
-        shipSpecials.Invoke("Ship" + shipID + "Special", 0);
-        
     }
 
 

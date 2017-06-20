@@ -5,6 +5,7 @@ using UnityEngine;
 // All the ship Specials go here. They are invoked by shipID.
 public class ShipSpecials : MonoBehaviour
 {
+
     // Use this for initialization
     void Start()
     {
@@ -19,51 +20,85 @@ public class ShipSpecials : MonoBehaviour
     //Ship31 Special
     public void Ship31Special()
     {
-        //Debug.Log("Modelo 31 Especial!!!");
         List<Transform> bulletSpecialSpawnPoints = new List<Transform>();
-
-        //bulletSpawnPoints = new List<Transform>();
         int i = 0;
-        //bulletSpawnPoints = getChi getChildGameObject(transform.gameObject, "BulletSpawnPoint").transform;
         foreach (Transform child in transform)
         {
-            //Debug.Log("child.name = " + child.name);
             if (child.CompareTag("BulletSpawn") && child.name.Contains("BulletSpawnPointSpecial"))
             {
-                //Debug.Log("Selected child.name = " + child.name);
-                //bulletSpawnPoints[i] = child.transform;
                 bulletSpecialSpawnPoints.Add(child.transform);
                 i++;
             }
         }
 
-        //Debug.Log("bulletSpecialSpawnPoints length: " + bulletSpecialSpawnPoints.Count);
-
         ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
-        shipHandling.FireMainWeapon(bulletSpecialSpawnPoints);
+        ShipDetails shipDetails = shipHandling.shipDetails;
 
-}
+
+        if (shipHandling.currentBattery >= shipDetails.Special.BatteryCharge)
+        {
+            List<Transform> usedSpawnPoints = new List<Transform>();
+
+            usedSpawnPoints = bulletSpecialSpawnPoints;
+
+
+
+            foreach (Transform currBulletSpawnPoint in usedSpawnPoints)
+            {
+                GameObject bullet = (GameObject)Instantiate(
+                shipDetails.WeaponMain.bulletPrefab,
+                currBulletSpawnPoint.position,
+                currBulletSpawnPoint.rotation);
+
+                Transform transform = bullet.GetComponentInChildren<Transform>();
+                transform.localScale = new Vector3(shipDetails.Special.Scale, shipDetails.Special.Scale, shipDetails.Special.Scale);
+
+
+                // Add velocity to the bullet
+                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.Special.Speed;
+
+                BulletCollision bulletCol = bullet.GetComponentInChildren<BulletCollision>();
+
+                bulletCol.setDamage(shipDetails.Special.Damage);
+
+                // Destroy the bullet after X seconds
+                Destroy(bullet, shipDetails.Special.TimeToLive);
+
+            }
+
+
+            shipHandling.currentBattery = shipHandling.currentBattery - shipDetails.Special.BatteryCharge;
+
+
+
+            shipHandling.lastSpecialUsed = Time.time;
+        }
+
+
+
+    }
 
     //Ship47 Special
     public void Ship47Special()
     {
-        //Debug.Log("Modelo 47 Especial!!!");
-        RaycastHit hit;
-        float distance;
+        /*
+            //Debug.Log("Modelo 47 Especial!!!");
+            RaycastHit hit;
+            float distance;
 
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-        Debug.DrawRay(transform.position, forward, Color.green);
+            Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+            Debug.DrawRay(transform.position, forward, Color.green);
 
-        if(Physics.Raycast(transform.position, (forward), out hit))
-        {
-            distance = hit.distance;
-            //Debug.Log(distance + " " + hit.collider.gameObject.name);
-        }
+            if(Physics.Raycast(transform.position, (forward), out hit))
+            {
+                distance = hit.distance;
+                //Debug.Log(distance + " " + hit.collider.gameObject.name);
+            }
 
-   
-        //Debug.Log("transform " + transform.position.x + " " + transform.position.y);
 
+            //Debug.Log("transform " + transform.position.x + " " + transform.position.y);
+            */
     }
 
-   
+
 }
