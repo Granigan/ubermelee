@@ -6,9 +6,11 @@ public class UpdatePlayerStats : MonoBehaviour {
 
     GameObject[] players;
     private float playerNumber;
+    private float scorePlayer1 = 0f;
+    private float scorePlayer2 = 0f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 
         players = GameObject.FindGameObjectsWithTag("CameraObject"); // FindObjectsOfType(typeof(ShipDetails)) as ShipDetails[];
         playerNumber = 1f;
@@ -25,6 +27,7 @@ public class UpdatePlayerStats : MonoBehaviour {
                 text.text = "PLAYER" + Mathf.Round(playerNumber).ToString() + "\n";
                 text.text += "Crew: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentCrew()).ToString() + "\n";
                 text.text += "Battery: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentBattery()).ToString() + "\n";
+                text.text += "Score: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().shipDetails.score).ToString() + "\n";
                 playerNumber = 2;
             }
             else
@@ -34,8 +37,21 @@ public class UpdatePlayerStats : MonoBehaviour {
                 text.text = "PLAYER" + Mathf.Round(playerNumber).ToString() + "\n";
                 text.text += "Crew: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentCrew()).ToString() + "\n";
                 text.text += "Battery: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentBattery()).ToString() + "\n";
+                text.text += "Score: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().shipDetails.score).ToString() + "\n";
                 playerNumber = 1;
             }
         }
 	}
+
+    public void AddScore(float playerNumber)
+    {
+        if(playerNumber == 1f)
+        {
+            scorePlayer1++;
+        }
+        if (playerNumber == 2f)
+        {
+            scorePlayer2++;
+        }
+    }
 }

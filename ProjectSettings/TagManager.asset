@@ -7,6 +7,9 @@ TagManager:
   - CameraObject
   - Bullet
   - BulletSpawn
+  - Player1Stats
+  - Player2Stats
+  - FramerateCounter
   layers:
   - Default
   - TransparentFX

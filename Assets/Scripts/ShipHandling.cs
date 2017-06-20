@@ -83,7 +83,19 @@ public class ShipHandling : MonoBehaviour {
         if(this.currentCrew <= 0)
         {
             ExplodeShip();
-            
+            shipDetails.score++;
+            /*
+            if(shipID == 31)
+            {
+                //GameObject.FindGameObjectsWithTag("Player1Stats").;
+                transform.parent.GetComponent.GetComponent <"Player1Stats" > ();
+
+                GetComponentInParent<Frame>().GetComponent<UpdatePlayerStats>().AddScore(1f);
+            } else
+            {
+                GetComponent<UpdatePlayerStats>().AddScore(2f);
+            }
+            */
         }
 
     }
@@ -105,6 +117,7 @@ public class ShipHandling : MonoBehaviour {
         //GetComponent(Rigidbody).enabled = false;
         this.GetComponentInChildren<MeshRenderer>().enabled = false;
         this.GetComponentInChildren<Transform>().localScale = new Vector3(0, 0, 0);
+        this.GetComponentInChildren<BoxCollider>().enabled = false;
         yield return new WaitForSeconds(2.0f);
         Debug.Log("Player just respawned!!");
         //transform.position = new Vector3(0.04833326f, 3.980667f, 0.0f);
@@ -115,6 +128,7 @@ public class ShipHandling : MonoBehaviour {
         this.GetComponentInChildren<Transform>().position = respawnPoint;
         this.GetComponentInChildren<MeshRenderer>().enabled = true;
         this.GetComponentInChildren<Transform>().localScale = new Vector3(1, 1, 1);
+        this.GetComponentInChildren<BoxCollider>().enabled = enabled;
     }
 
     public void RotateShip(float shipTurn) {

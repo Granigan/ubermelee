@@ -17,4 +17,6 @@ public class ShipDetails : ShipSO {
     public float Scale = 1f;
     public WeaponDetails WeaponMain;
     public SpecialDetails Special;
+    [HideInInspector]
+    public float score = 0f;
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   Scale: 0.4
   Speed: 26
   TimeToLive: 1
-  Mass: 0.1
+  Mass: 1
   Drag: 0
   AngularDrag: 0.05
   BatteryCharge: 15

@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 126370005}
   m_Layer: 5
   m_Name: Player2Stats
-  m_TagString: Untagged
+  m_TagString: Player2Stats
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,7 +141,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -85.20001, y: -50}
-  m_SizeDelta: {x: 81, y: 62.100006}
+  m_SizeDelta: {x: 81, y: 78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &126370005
 MonoBehaviour:
@@ -244,12 +244,12 @@ Prefab:
     - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
       propertyPath: maxZoomLevel
-      value: 9
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
       propertyPath: maxDistanceX
-      value: 36
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 114599262295883474, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
@@ -257,6 +257,16 @@ Prefab:
       value: 
       objectReference: {fileID: 1065157009348514, guid: 22f6a3d4c34fc354baa0cc54401abff7,
         type: 2}
+    - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: maxDistanceY
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
   m_IsPrefabParent: 0
@@ -288,7 +298,7 @@ GameObject:
   - component: {fileID: 1082144288}
   m_Layer: 5
   m_Name: Player1Stats
-  m_TagString: Untagged
+  m_TagString: Player1Stats
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -308,8 +318,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -413.75, y: -50}
-  m_SizeDelta: {x: -847.5, y: 66}
+  m_AnchoredPosition: {x: -413.75, y: -56}
+  m_SizeDelta: {x: -847.5, y: 78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1082144286
 MonoBehaviour:
@@ -443,6 +453,10 @@ Prefab:
     - target: {fileID: 22409990, guid: 81154777d5417884981849c5243f6c01, type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 81154777d5417884981849c5243f6c01, type: 2}
+      propertyPath: m_TagString
+      value: FramerateCounter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 81154777d5417884981849c5243f6c01, type: 2}
