@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 6
   Scale: 0.4
-  Speed: 26
-  TimeToLive: 1
+  Speed: 30
+  TimeToLive: 1.2
   Mass: 1
   Drag: 0
   AngularDrag: 0.05

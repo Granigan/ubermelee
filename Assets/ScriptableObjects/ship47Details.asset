@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15587025a15a214f98fcf7b4c444b4d, type: 3}
   m_Name: ship47Details
   m_EditorClassIdentifier: 
-  Acceleration: 10
-  MaxSpeed: 5
-  Mass: 6
-  RotationRate: 1
+  Acceleration: 15
+  MaxSpeed: 6
+  Mass: 9
+  RotationRate: 0.6
   Crew: 16
   Battery: 40
   BatteryRechargeRate: 8
@@ -23,3 +23,4 @@ MonoBehaviour:
   Scale: 1
   WeaponMain: {fileID: 11400000, guid: 2e4fab950ad8e8b43bf8d9a89322505f, type: 2}
   Special: {fileID: 11400000, guid: 7091ef5ff06d4e74cb2e7df9f309fc74, type: 2}
+  score: 2
