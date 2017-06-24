@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4031505048163136}
   m_Layer: 0
-  m_Name: BulletSpawnPointMain1
+  m_Name: BulletSpawnPointPrimary1
   m_TagString: BulletSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,8 +111,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745512433016608}
-  m_LocalRotation: {x: 0.5591931, y: -0.82903755, z: -0, w: 0}
-  m_LocalPosition: {x: 3, y: -3, z: -3}
+  m_LocalRotation: {x: 0.48480958, y: 0.8746198, z: -0, w: 0}
+  m_LocalPosition: {x: -4, y: -1, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4581946234325456}

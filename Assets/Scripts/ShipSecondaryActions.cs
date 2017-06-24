@@ -24,7 +24,7 @@ public class ShipSecondaryActions : MonoBehaviour
         int i = 0;
         foreach (Transform child in transform)
         {
-            if (child.CompareTag("BulletSpawn") && child.name.Contains("BulletSpawnPointSpecial"))
+            if (child.CompareTag("BulletSpawn") && child.name.Contains("BulletSpawnPointSecondary"))
             {
                 bulletSpecialSpawnPoints.Add(child.transform);
                 i++;
@@ -86,6 +86,10 @@ public class ShipSecondaryActions : MonoBehaviour
         if(shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge)
         {
             transform.Rotate(0, 0, 180f, Space.Self);
+            //transform.Rotate(0, 0, Time.deltaTime * 30000, Space.Self);
+
+            //Quaternion.Slerp(transform.rotation, transform.rotation.z+, Time.time * 0.5f);
+
 
             shipHandling.currentBattery -= shipDetails.Secondary.BatteryCharge;
 

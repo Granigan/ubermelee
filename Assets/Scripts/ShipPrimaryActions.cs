@@ -16,7 +16,7 @@ public class ShipPrimaryActions : MonoBehaviour
         foreach (Transform child in transform)
         {
             //Debug.Log("child.name = " + child.name);
-            if (child.CompareTag("BulletSpawn") && child.name.Contains("BulletSpawnPointMain"))
+            if (child.CompareTag("BulletSpawn") && child.name.Contains("BulletSpawnPointPrimary"))
             {
                 //Debug.Log("Selected child.name = " + child.name);
                 //bulletSpawnPoints[i] = child.transform;
