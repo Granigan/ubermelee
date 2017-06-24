@@ -11,7 +11,7 @@ public class BulletCollision : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Destroy(this.gameObject, timeToLive);
+        //Destroy(this.gameObject, timeToLive);
 	}
 	
 	// Update is called once per frame

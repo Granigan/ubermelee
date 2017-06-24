@@ -116,7 +116,7 @@ public class ShipHandling : MonoBehaviour {
         //this.gameObject.SetActive(true);
         this.GetComponentInChildren<Transform>().position = respawnPoint;
         this.GetComponentInChildren<MeshRenderer>().enabled = true;
-        this.GetComponentInChildren<Transform>().localScale = new Vector3(1, 1, 1);
+        this.GetComponentInChildren<Transform>().localScale = new Vector3(shipDetails.Scale, shipDetails.Scale, shipDetails.Scale);
         this.GetComponentInChildren<BoxCollider>().enabled = enabled;
     }
 

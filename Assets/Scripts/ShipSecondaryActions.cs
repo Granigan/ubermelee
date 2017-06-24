@@ -112,7 +112,7 @@ public class ShipSecondaryActions : MonoBehaviour
     }
 
 
-        public void DeployMine()
+    public void DeployMine()
     {
         List<Transform> bulletSpecialSpawnPoints = new List<Transform>();
         int i = 0;
@@ -132,15 +132,13 @@ public class ShipSecondaryActions : MonoBehaviour
         foreach (Transform currBulletSpawnPoint in bulletSpecialSpawnPoints)
         {
             GameObject bullet = (GameObject)Instantiate(
-            shipDetails.Primary.bulletPrefab,
+            shipDetails.Secondary.SecondaryPrefab,
             currBulletSpawnPoint.position,
             currBulletSpawnPoint.rotation);
             bullet.GetComponent<BulletCollision>().bulletOwnerPlayerNumber = shipHandling.playerNumber;
             Transform transform = bullet.GetComponentInChildren<Transform>();
             transform.localScale = new Vector3(shipDetails.Secondary.Scale, shipDetails.Secondary.Scale, shipDetails.Secondary.Scale);
-
-            Debug.Log(shipDetails.Secondary.TimeToLive);
-
+            
             // Add velocity to the bullet
             //bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.Secondary.Speed;
 
@@ -148,10 +146,8 @@ public class ShipSecondaryActions : MonoBehaviour
 
             bulletCol.setDamage(shipDetails.Secondary.Damage);
 
-            // Destroy the bullet after X seconds
             Destroy(bullet, shipDetails.Secondary.TimeToLive);
-
-
+            
         }
 
 
