@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44300273, g: 0.49219579, b: 0.5719249, a: 1}
+  m_IndirectSpecularColor: {r: 0.44300318, g: 0.49219632, b: 0.57192606, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -306,19 +306,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4403442706768300, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
       propertyPath: m_LocalScale.x
-      value: 40
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4403442706768300, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
       propertyPath: m_LocalScale.y
-      value: 40
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4379317212810204, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
       propertyPath: m_LocalScale.x
-      value: 40
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4379317212810204, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
       propertyPath: m_LocalScale.y
-      value: 40
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
@@ -366,6 +366,14 @@ Prefab:
         type: 2}
       propertyPath: Players.Array.data[2]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978094787119110, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978094787119110, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
