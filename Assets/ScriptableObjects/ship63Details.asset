@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Name: ship63Details
   m_EditorClassIdentifier: 
   Acceleration: 50
-  MaxSpeed: 5
-  Mass: 3
-  RotationRate: 1.8
+  MaxSpeed: 4
+  Mass: 4
+  RotationRate: 1.6
   Crew: 8
   Battery: 10
-  BatteryRechargeRate: 10
-  AngularDrag: 0.6
+  BatteryRechargeRate: 5
+  AngularDrag: 0
   Drag: 0
-  Scale: 0.6
+  Scale: 0.4
   Primary: {fileID: 11400000, guid: 7cfee826f7d25a04bb36490eee0f80f8, type: 2}
   Secondary: {fileID: 11400000, guid: fa53ab5c5ced92c48b84bd04fc640da3, type: 2}
   ShipName: The Mouse

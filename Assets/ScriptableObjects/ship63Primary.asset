@@ -18,7 +18,7 @@ MonoBehaviour:
   Mass: 0.01
   Drag: 0
   AngularDrag: 0
-  BatteryCharge: 1
+  BatteryCharge: 2
   FireRate: 0.3
   HitPoints: 1
   bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
