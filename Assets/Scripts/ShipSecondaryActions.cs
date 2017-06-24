@@ -108,7 +108,12 @@ public class ShipSecondaryActions : MonoBehaviour
 
     public void Ship63Secondary()
     {
-        DeployMine();
+        ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
+        ShipDetails shipDetails = shipHandling.shipDetails;
+        if (shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge)
+        {
+            DeployMine();
+        }
     }
 
 

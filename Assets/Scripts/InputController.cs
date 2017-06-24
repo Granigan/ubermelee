@@ -5,7 +5,7 @@ using InControl;
 
 public class InputController : MonoBehaviour
 {
-    public int playerNumber = 1; // The order of the player regarding controller
+    private int playerNumber = 1; // The order of the player regarding controller
     private ShipHandling shipHandling;
     private ShipDetails shipDetails;
     //input controls
@@ -17,12 +17,14 @@ public class InputController : MonoBehaviour
 
     void Start()
     {
+        shipHandling = GetComponent<ShipHandling>();
+        playerNumber = (int)shipHandling.playerNumber; 
         turnControl = "Horizontal" + playerNumber;
         thrustControl = "Vertical" + playerNumber;
         shootControl = "Fire" + playerNumber;
         specialControl = "Special" + (playerNumber);
         
-        shipHandling = GetComponent<ShipHandling>();
+       
     }
 
     private void Awake()
@@ -50,8 +52,11 @@ public class InputController : MonoBehaviour
     void Update()
     {
         float shipTurn = 0;
+
+
         if (Input.GetAxis(turnControl) != 0)
         {
+            Debug.Log("turnControl = " + turnControl);
             shipTurn = Input.GetAxis(turnControl);
         }
         else
