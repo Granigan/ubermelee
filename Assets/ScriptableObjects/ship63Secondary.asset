@@ -9,15 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2abc56e208e3b444b69ac99efa456c2, type: 3}
-  m_Name: ship47Secondary
+  m_Name: ship63Secondary
   m_EditorClassIdentifier: 
-  Damage: 0
-  Scale: 1
-  Speed: 0.5
-  TimeToLive: 1
-  Mass: 1
+  Damage: 4
+  Scale: 0.3
+  Speed: 0
+  TimeToLive: 30
+  Mass: 0.5
   Drag: 1
   AngularDrag: 1
-  BatteryCharge: 10
-  FireRate: 0.1
+  BatteryCharge: 2
+  FireRate: 0.3
   specialPrefab: {fileID: 0}

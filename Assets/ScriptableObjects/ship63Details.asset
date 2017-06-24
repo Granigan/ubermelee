@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f15587025a15a214f98fcf7b4c444b4d, type: 3}
+  m_Name: ship63Details
+  m_EditorClassIdentifier: 
+  Acceleration: 50
+  MaxSpeed: 5
+  Mass: 3
+  RotationRate: 1.8
+  Crew: 8
+  Battery: 10
+  BatteryRechargeRate: 10
+  AngularDrag: 0.6
+  Drag: 0
+  Scale: 0
+  Primary: {fileID: 11400000, guid: 7cfee826f7d25a04bb36490eee0f80f8, type: 2}
+  Secondary: {fileID: 11400000, guid: fa53ab5c5ced92c48b84bd04fc640da3, type: 2}
+  ShipName: The Mouse

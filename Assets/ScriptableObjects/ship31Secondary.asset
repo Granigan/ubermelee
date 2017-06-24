@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2abc56e208e3b444b69ac99efa456c2, type: 3}
-  m_Name: ship31SecondaryDetails
+  m_Name: ship31Secondary
   m_EditorClassIdentifier: 
   Damage: 1
   Scale: 0.1
