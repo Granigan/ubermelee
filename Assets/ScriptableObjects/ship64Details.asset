@@ -9,18 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f15587025a15a214f98fcf7b4c444b4d, type: 3}
-  m_Name: ship47Details
+  m_Name: ship64Details
   m_EditorClassIdentifier: 
-  Acceleration: 15
+  Acceleration: 50
   MaxSpeed: 6
-  Mass: 9
-  RotationRate: 0.6
-  Crew: 16
-  Battery: 40
+  Mass: 12
+  RotationRate: 1.4
+  Crew: 20
+  Battery: 30
   BatteryRechargeRate: 8
-  AngularDrag: 5
+  AngularDrag: 0
   Drag: 0
-  Scale: 1
-  Primary: {fileID: 11400000, guid: f30b79eeedd80254394e890d585546e5, type: 2}
-  Secondary: {fileID: 11400000, guid: fceb7da3c36c9c048a6025f890db50c7, type: 2}
-  ShipName: Gunship
+  Scale: 1.1
+  Primary: {fileID: 11400000, guid: d46a5cc3239cda744ab17e91a7dea151, type: 2}
+  Secondary: {fileID: 11400000, guid: e021c665dee933e4390f7980cd2453dc, type: 2}
+  ShipName: Musketeer
