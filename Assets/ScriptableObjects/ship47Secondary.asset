@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2abc56e208e3b444b69ac99efa456c2, type: 3}
   m_Name: ship47Secondary
   m_EditorClassIdentifier: 
-  Damage: 0
-  Scale: 1
+  Damage: 10
+  Scale: 0.5
   Speed: 0.5
   TimeToLive: 1
   Mass: 1
