@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Acceleration: 60
   MaxSpeed: 8
-  Mass: 3
+  Mass: 1
   RotationRate: 2
   Crew: 12
   Battery: 12
@@ -23,3 +23,4 @@ MonoBehaviour:
   Scale: 0.8
   WeaponMain: {fileID: 11400000, guid: ab6b9edfb1f5b26439b57ac6655dcd42, type: 2}
   Special: {fileID: 11400000, guid: a5dc3ffdb5aa51d4783e5ce83928196e, type: 2}
+  score: 1
