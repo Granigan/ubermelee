@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// All the ship Specials go here. They are invoked by shipID.
-public class ShipSpecials : MonoBehaviour
+// All the ship secondary actions go here. They are invoked by shipID.
+public class ShipSecondaryActions : MonoBehaviour
 {
 
     // Use this for initialization
@@ -17,8 +17,8 @@ public class ShipSpecials : MonoBehaviour
     {
     }
 
-    //Ship31 Special
-    public void Ship31Special()
+    //Ship31 Secondary
+    public void Ship31Secondary()
     {
         List<Transform> bulletSpecialSpawnPoints = new List<Transform>();
         int i = 0;
@@ -79,25 +79,14 @@ public class ShipSpecials : MonoBehaviour
     }
 
     //Ship47 Special
-    public void Ship47Special()
+    public void Ship47Secondary()
     {
-        /*
-            //Debug.Log("Modelo 47 Especial!!!");
-            RaycastHit hit;
-            float distance;
+        //Transform currTransform = GetComponent<Transform>();
+        transform.Rotate(0, 0, 180f, Space.Self);
 
-            Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-            Debug.DrawRay(transform.position, forward, Color.green);
+        //transform.RotateAround(transform.position, transform.up, 180f);
+        //Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * 10f * Time.deltaTime * -1);
 
-            if(Physics.Raycast(transform.position, (forward), out hit))
-            {
-                distance = hit.distance;
-                //Debug.Log(distance + " " + hit.collider.gameObject.name);
-            }
-
-
-            //Debug.Log("transform " + transform.position.x + " " + transform.position.y);
-            */
     }
 
 

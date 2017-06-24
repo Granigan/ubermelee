@@ -18,7 +18,9 @@ public class ShipHandling : MonoBehaviour {
     [HideInInspector]
     public float currentBattery;
     private List<Transform> bulletSpawnPoints;
-    private ShipSpecials shipSpecials;
+    private ShipPrimaryActions shipPrimaryActions;
+    private ShipSecondaryActions shipSecondaryActions;
+    private GameObject primaryScript;
 
     public GameObject thruster;
     public TrailRenderer trail;
@@ -41,7 +43,8 @@ public class ShipHandling : MonoBehaviour {
         rb.mass = shipDetails.Mass;
         rb.drag = shipDetails.Drag;
         rb.angularDrag = shipDetails.AngularDrag;
-        
+        //primaryScript = getComponent
+
         trail = GetComponentInChildren<TrailRenderer>();
 
         bulletSpawnPoints = new List<Transform>();
@@ -59,13 +62,8 @@ public class ShipHandling : MonoBehaviour {
             }
         }
 
-        //Debug.Log("bulletSpawnPoints length: " + bulletSpawnPoints.Count);
-        //bulletSpawn = transform.Find("BulletSpawnPoint");
-
-
-        //shipSpecials = gameObject.AddComponent(ShipSpecials);
-        shipSpecials = gameObject.AddComponent<ShipSpecials>();
-        //shipSpecials = GameObject.FindObjectOfType(typeof(ShipSpecials)) as ShipSpecials;
+        shipPrimaryActions = gameObject.AddComponent<ShipPrimaryActions>();
+        shipSecondaryActions = gameObject.AddComponent<ShipSecondaryActions>();
     }
 	
 	// Update is called once per frame
@@ -185,77 +183,25 @@ public class ShipHandling : MonoBehaviour {
         }
     }
 
-    public void FireMainWeapon(List<Transform> paramSpawnPoints = null, float paramBatteryCharge = -1, float paramFireRate = -1)
+    public void UsePrimary(List<Transform> paramSpawnPoints = null, float paramBatteryCharge = -1, float paramFireRate = -1)
     {
-        float usedFireRate = 1f;
-        if(paramFireRate == -1)
+        if (Time.time > shipDetails.Special.FireRate + lastSpecialUsed)
         {
-            usedFireRate = shipDetails.WeaponMain.FireRate; 
-        } else {
-            usedFireRate = paramFireRate;
+            shipPrimaryActions.Invoke("Ship" + shipID + "Primary", 0);
+            lastSpecialUsed = Time.time;
         }
 
-        if (Time.time > usedFireRate + lastShot)
-        {
-            if (currentBattery >= shipDetails.WeaponMain.BatteryCharge)
-            {
-                List<Transform> usedSpawnPoints = new List<Transform>();
-                if (paramSpawnPoints == null)
-                {
-                    usedSpawnPoints = bulletSpawnPoints;
-                } else
-                {
-                    usedSpawnPoints = paramSpawnPoints;
-                }
-
-
-                foreach(Transform currBulletSpawnPoint in usedSpawnPoints)
-                {
-                    GameObject bullet = (GameObject)Instantiate(
-                    shipDetails.WeaponMain.bulletPrefab,
-                    currBulletSpawnPoint.position,
-                    currBulletSpawnPoint.rotation); 
-
-                    Transform transform = bullet.GetComponentInChildren<Transform>();
-                    transform.localScale = new Vector3(shipDetails.WeaponMain.Scale, shipDetails.WeaponMain.Scale, shipDetails.WeaponMain.Scale);
-
-
-                    // Add velocity to the bullet
-                    bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.WeaponMain.Speed;
-
-                    BulletCollision bulletCol = bullet.GetComponentInChildren<BulletCollision>(); //transform.Find("BulletCollision");
-                                                                                                  //ScriptB other = (ScriptB)go.GetComponent(typeof(ScriptB));
-                    bulletCol.setDamage(shipDetails.WeaponMain.Damage);
-
-                    // Destroy the bullet after X seconds
-                    Destroy(bullet, shipDetails.WeaponMain.TimeToLive);
-
-                }
-
-                if(paramBatteryCharge == -1)
-                {
-                    currentBattery = currentBattery - shipDetails.WeaponMain.BatteryCharge;
-                } else
-                {
-                    currentBattery = currentBattery - paramBatteryCharge;
-                }
-
-                
-                lastShot = Time.time;
-            }
-
-
-        }
+        
     }
 
-    public void UseSpecial()
+    public void UseSecondary()
     {
         // Just to test this special feature...
         //MoveShip(8f);
        
         if (Time.time > shipDetails.Special.FireRate + lastSpecialUsed)
         {
-            shipSpecials.Invoke("Ship" + shipID + "Special", 0);
+            shipSecondaryActions.Invoke("Ship" + shipID + "Secondary", 0);
             lastSpecialUsed = Time.time;
         }
 

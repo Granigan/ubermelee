@@ -87,7 +87,7 @@ public class InputController : MonoBehaviour
         if (specialButton == true)
         {
             //Debug.Log("specialButton!!");
-            shipHandling.UseSpecial();
+            shipHandling.UseSecondary();
         }
 
         bool fireButton = false;
@@ -103,7 +103,7 @@ public class InputController : MonoBehaviour
         if ( fireButton == true)
         {
             //Debug.Log("fireButton!!");
-            shipHandling.FireMainWeapon();
+            shipHandling.UsePrimary();
         }
 
 

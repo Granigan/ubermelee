@@ -7,8 +7,10 @@ public class SceneBuilder : MonoBehaviour {
     //public GameObject Light;
     //public GameObject Counter;
     public GameObject Planet;
-    public GameObject Ship1;
-    public GameObject Ship2;
+    public GameObject[] Players;
+    private List<GameObject> PlayerInstances = new List<GameObject>();
+    //public GameObject Ship1;
+    //public GameObject Ship2;
 
     //public int[] PosArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
     //public int[] NegArray = { -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15 };
@@ -24,6 +26,7 @@ public class SceneBuilder : MonoBehaviour {
         //Instantiate(Counter);
         Instantiate(Planet);
         BuildShips();
+        //AttachScripts();
         // random vector3 values x, y. z is allways same.
         //Vector3 RandoPos = new Vector3(Random.Range(-15, 15), Random.Range(-15, 15), -3);
         //Vector3 RandoPos2 = new Vector3(Random.Range(-15, 15), Random.Range(-15, 15), -3);
@@ -32,8 +35,25 @@ public class SceneBuilder : MonoBehaviour {
         //y = Random.Range(-15, 15);
     }
 
-    void BuildShips()
+    void BuildShips() {
+        foreach(GameObject currPlayer in Players )
         {
+            PlayerInstances.Add(Instantiate(currPlayer));
+            currPlayer.transform.position = new Vector3(Random.Range(-15, 15), Random.Range(-15, 15), -3);
+            currPlayer.transform.Rotate(Vector3.forward, Random.Range(-180, 180));
+            {
+                Collider[] hitColliders = Physics.OverlapSphere(currPlayer.transform.position, 1);
+                //Debug.Log("ship1colliders" + hitColliders.Length);
+                while (hitColliders.Length > 0)
+                {
+                    currPlayer.transform.position = new Vector3(Random.Range(-15, 15), Random.Range(-15, 15), -3);
+                    hitColliders = Physics.OverlapSphere(currPlayer.transform.position, 1);
+                    //Debug.Log("ship1colliders2" + hitColliders.Length);
+                }
+
+            }
+        }
+        /*
             Instantiate(Ship1);
             Ship1.transform.position = new Vector3(Random.Range(-15, 15), Random.Range(-15, 15), -3);
             Ship1.transform.Rotate(Vector3.forward, Random.Range(-180, 180));
@@ -64,6 +84,33 @@ public class SceneBuilder : MonoBehaviour {
                 }
                  
             }
-       
+       */
     }
+
+    /*
+    void AttachScripts()
+    {
+        foreach (GameObject currPlayerInstance in PlayerInstances)
+        {
+            float shipID = currPlayerInstance.GetComponent<ShipHandling>().shipID;
+            if(shipID == 31)
+            {
+                currPlayerInstance.gameObject.AddComponent<ship31Primary>();
+                currPlayerInstance.gameObject.AddComponent<ship31Secondary>();
+            } else if (shipID == 47)
+            {
+                currPlayerInstance.gameObject.AddComponent<ship47Primary>();
+                currPlayerInstance.gameObject.AddComponent<ship47Secondary>();
+
+            } else
+            {
+                currPlayerInstance.gameObject.AddComponent<defaultPrimary>();
+                currPlayerInstance.gameObject.AddComponent<defaultSecondary>();
+
+            }
+
+        }
+
+    }
+    */
 }
