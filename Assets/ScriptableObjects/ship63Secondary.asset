@@ -20,4 +20,5 @@ MonoBehaviour:
   AngularDrag: 1
   BatteryCharge: 2
   FireRate: 0.3
+  HitPoints: 3
   specialPrefab: {fileID: 0}
