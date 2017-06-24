@@ -8,19 +8,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f2ded8c0fcb0c45ac3335939e88c9b, type: 3}
-  m_Name: ship47WeaponMain
-  m_EditorClassIdentifier: 
+  m_Script: {fileID: 0}
+  m_Name: ship47Primary
+  m_EditorClassIdentifier: Assembly-CSharp::PrimaryDetails
   Damage: 6
   Scale: 0.4
   Speed: 30
   TimeToLive: 1.2
   Mass: 1
   Drag: 0
-  AngularDrag: 0.05
+  AngularDrag: 0
   BatteryCharge: 15
   FireRate: 0.3
   bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
     type: 2}
-  explosionPrefab: {fileID: 1132007625944278, guid: 63533b19cffe05141b4e8d6ff19580e7,
+  explosionPrefab: {fileID: 1701049221895126, guid: bf6c7abd5fb392a4c9d85ab72825d049,
     type: 2}

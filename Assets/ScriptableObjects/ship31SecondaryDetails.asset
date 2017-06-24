@@ -8,8 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f2ded8c0fcb0c45ac3335939e88c9b, type: 3}
-  m_Name: ship31WeaponMain
+  m_Script: {fileID: 11500000, guid: d2abc56e208e3b444b69ac99efa456c2, type: 3}
+  m_Name: ship31SecondaryDetails
   m_EditorClassIdentifier: 
   Damage: 1
   Scale: 0.1
@@ -17,10 +17,7 @@ MonoBehaviour:
   TimeToLive: 0.4
   Mass: 0.01
   Drag: 0
-  AngularDrag: 0.05
+  AngularDrag: 0
   BatteryCharge: 2
   FireRate: 0.1
-  bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
-    type: 2}
-  explosionPrefab: {fileID: 1132007625944278, guid: 63533b19cffe05141b4e8d6ff19580e7,
-    type: 2}
+  specialPrefab: {fileID: 0}

@@ -15,8 +15,7 @@ public class ShipDetails : ShipSO {
     public float AngularDrag = 1f;
     public float Drag = 1f;
     public float Scale = 1f;
-    public WeaponDetails WeaponMain;
-    public SpecialDetails Special;
-    [HideInInspector]
-    public float score = 0f;
+    public PrimaryDetails Primary;
+    public SecondaryDetails Secondary;
+    public string ShipName = ""; 
 }

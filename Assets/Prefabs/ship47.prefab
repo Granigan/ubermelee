@@ -111,8 +111,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745512433016608}
-  m_LocalRotation: {x: 0.9743702, y: 0.22495067, z: -0, w: 0}
-  m_LocalPosition: {x: 4, y: -6, z: -3}
+  m_LocalRotation: {x: 0.5591931, y: -0.82903755, z: -0, w: 0}
+  m_LocalPosition: {x: 3, y: -3, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4581946234325456}
@@ -327,7 +327,8 @@ MonoBehaviour:
   trail: {fileID: 96504683110038586, guid: c8767fa6b24a2ae498dd44a3bec5e1dd, type: 2}
   eulerAngleVelocity: {x: 0, y: 0, z: -180}
   lastShot: 0
-  lastSpecialUsed: 0
+  lastSecondaryUsed: 0
+  playerNumber: 2
 --- !u!114 &114672600483442856
 MonoBehaviour:
   m_ObjectHideFlags: 1

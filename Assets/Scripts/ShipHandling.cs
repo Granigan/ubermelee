@@ -29,7 +29,8 @@ public class ShipHandling : MonoBehaviour {
     private float lastFrameTime = 0;
     [HideInInspector]
     public float lastShot = 0.0f;
-    public float lastSpecialUsed = 0.0f;
+    public float lastSecondaryUsed = 0.0f;
+    public float playerNumber = 0f;
 
 
     // Use this for initialization
@@ -74,28 +75,18 @@ public class ShipHandling : MonoBehaviour {
 
 	}
 
-    public void DoDamage(float Damage)
+    public bool DoDamage(float Damage)
     {
         this.currentCrew = this.currentCrew - Damage;
         //Debug.Log("Hitpoints left " + this.currCrew);
         if(this.currentCrew <= 0)
         {
             ExplodeShip();
-            shipDetails.score++;
-            /*
-            if(shipID == 31)
-            {
-                //GameObject.FindGameObjectsWithTag("Player1Stats").;
-                transform.parent.GetComponent.GetComponent <"Player1Stats" > ();
-
-                GetComponentInParent<Frame>().GetComponent<UpdatePlayerStats>().AddScore(1f);
-            } else
-            {
-                GetComponent<UpdatePlayerStats>().AddScore(2f);
-            }
-            */
+            //shipDetails.score++;
+            return true;
         }
 
+        return false;
     }
 
     private void ExplodeShip() { 
@@ -185,10 +176,10 @@ public class ShipHandling : MonoBehaviour {
 
     public void UsePrimary(List<Transform> paramSpawnPoints = null, float paramBatteryCharge = -1, float paramFireRate = -1)
     {
-        if (Time.time > shipDetails.Special.FireRate + lastSpecialUsed)
+        if (Time.time > shipDetails.Secondary.FireRate + lastSecondaryUsed)
         {
             shipPrimaryActions.Invoke("Ship" + shipID + "Primary", 0);
-            lastSpecialUsed = Time.time;
+            lastSecondaryUsed = Time.time;
         }
 
         
@@ -199,10 +190,10 @@ public class ShipHandling : MonoBehaviour {
         // Just to test this special feature...
         //MoveShip(8f);
        
-        if (Time.time > shipDetails.Special.FireRate + lastSpecialUsed)
+        if (Time.time > shipDetails.Secondary.FireRate + lastSecondaryUsed)
         {
             shipSecondaryActions.Invoke("Ship" + shipID + "Secondary", 0);
-            lastSpecialUsed = Time.time;
+            lastSecondaryUsed = Time.time;
         }
 
     }

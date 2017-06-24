@@ -21,6 +21,6 @@ MonoBehaviour:
   AngularDrag: 5
   Drag: 0
   Scale: 0.8
-  WeaponMain: {fileID: 11400000, guid: ab6b9edfb1f5b26439b57ac6655dcd42, type: 2}
-  Special: {fileID: 11400000, guid: a5dc3ffdb5aa51d4783e5ce83928196e, type: 2}
-  score: 1
+  Primary: {fileID: 11400000, guid: ad7550024646930448d7aa545489fcaa, type: 2}
+  Secondary: {fileID: 11400000, guid: 4b88b722a665c9c42a13d674782e31a9, type: 2}
+  ShipName: Daredevil

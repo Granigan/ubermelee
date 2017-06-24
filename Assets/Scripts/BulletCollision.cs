@@ -7,6 +7,7 @@ public class BulletCollision : MonoBehaviour {
     public float timeToLive = 3.0f;
     public float damage = 2.0f;
     public GameObject explosionPrefab;
+    public float bulletOwnerPlayerNumber = 0f;
 
     // Use this for initialization
     void Start () {
@@ -25,10 +26,17 @@ public class BulletCollision : MonoBehaviour {
         {
 
             var damageFunction = col.gameObject.GetComponent<ShipHandling>();
-            damageFunction.DoDamage(damage);
+            bool shipDestroyed = damageFunction.DoDamage(damage);
             GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(explosion, 3.0f);
             Destroy(this.gameObject);
+
+            if(shipDestroyed == true)
+            {
+                GameObject playerStats = GameObject.FindGameObjectWithTag("Player1Stats");
+                playerStats.GetComponent<UpdatePlayerStats>().playerScores[(int)col.gameObject.GetComponent<ShipHandling>().playerNumber]++;
+                
+            }
 
         }
     }

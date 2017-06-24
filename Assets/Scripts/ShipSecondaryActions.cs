@@ -35,7 +35,7 @@ public class ShipSecondaryActions : MonoBehaviour
         ShipDetails shipDetails = shipHandling.shipDetails;
 
 
-        if (shipHandling.currentBattery >= shipDetails.Special.BatteryCharge)
+        if (shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge)
         {
             List<Transform> usedSpawnPoints = new List<Transform>();
 
@@ -46,32 +46,32 @@ public class ShipSecondaryActions : MonoBehaviour
             foreach (Transform currBulletSpawnPoint in usedSpawnPoints)
             {
                 GameObject bullet = (GameObject)Instantiate(
-                shipDetails.WeaponMain.bulletPrefab,
+                shipDetails.Primary.bulletPrefab,
                 currBulletSpawnPoint.position,
                 currBulletSpawnPoint.rotation);
-
+                bullet.GetComponent<BulletCollision>().bulletOwnerPlayerNumber = shipHandling.playerNumber;
                 Transform transform = bullet.GetComponentInChildren<Transform>();
-                transform.localScale = new Vector3(shipDetails.Special.Scale, shipDetails.Special.Scale, shipDetails.Special.Scale);
+                transform.localScale = new Vector3(shipDetails.Secondary.Scale, shipDetails.Secondary.Scale, shipDetails.Secondary.Scale);
 
 
                 // Add velocity to the bullet
-                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.Special.Speed;
+                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.Secondary.Speed;
 
                 BulletCollision bulletCol = bullet.GetComponentInChildren<BulletCollision>();
 
-                bulletCol.setDamage(shipDetails.Special.Damage);
+                bulletCol.setDamage(shipDetails.Secondary.Damage);
 
                 // Destroy the bullet after X seconds
-                Destroy(bullet, shipDetails.Special.TimeToLive);
+                Destroy(bullet, shipDetails.Secondary.TimeToLive);
 
             }
 
 
-            shipHandling.currentBattery = shipHandling.currentBattery - shipDetails.Special.BatteryCharge;
+            shipHandling.currentBattery = shipHandling.currentBattery - shipDetails.Secondary.BatteryCharge;
 
 
 
-            shipHandling.lastSpecialUsed = Time.time;
+            shipHandling.lastSecondaryUsed = Time.time;
         }
 
 
@@ -81,8 +81,17 @@ public class ShipSecondaryActions : MonoBehaviour
     //Ship47 Special
     public void Ship47Secondary()
     {
+        ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
+        ShipDetails shipDetails = shipHandling.shipDetails;
+        if(shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge)
+        {
+            transform.Rotate(0, 0, 180f, Space.Self);
+
+            shipHandling.currentBattery -= shipDetails.Secondary.BatteryCharge;
+
+        }
         //Transform currTransform = GetComponent<Transform>();
-        transform.Rotate(0, 0, 180f, Space.Self);
+
 
         //transform.RotateAround(transform.position, transform.up, 180f);
         //Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * 10f * Time.deltaTime * -1);

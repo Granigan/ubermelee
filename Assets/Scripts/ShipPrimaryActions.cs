@@ -49,12 +49,12 @@ public class ShipPrimaryActions : MonoBehaviour
     {
         ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
         ShipDetails shipDetails = shipHandling.shipDetails;
-        float usedFireRate = shipDetails.WeaponMain.FireRate;
+        float usedFireRate = shipDetails.Primary.FireRate;
 
 
         if (Time.time > usedFireRate + shipHandling.lastShot)
         {
-            if (shipHandling.currentBattery >= shipDetails.WeaponMain.BatteryCharge)
+            if (shipHandling.currentBattery >= shipDetails.Primary.BatteryCharge)
             {
                 List<Transform> usedSpawnPoints = new List<Transform>();
 
@@ -63,27 +63,28 @@ public class ShipPrimaryActions : MonoBehaviour
                 foreach (Transform currBulletSpawnPoint in usedSpawnPoints)
                 {
                     GameObject bullet = (GameObject)Instantiate(
-                    shipDetails.WeaponMain.bulletPrefab,
+                    shipDetails.Primary.bulletPrefab,
                     currBulletSpawnPoint.position,
                     currBulletSpawnPoint.rotation);
+                    bullet.GetComponent<BulletCollision>().bulletOwnerPlayerNumber = shipHandling.playerNumber;
 
                     Transform transform = bullet.GetComponentInChildren<Transform>();
-                    transform.localScale = new Vector3(shipDetails.WeaponMain.Scale, shipDetails.WeaponMain.Scale, shipDetails.WeaponMain.Scale);
+                    transform.localScale = new Vector3(shipDetails.Primary.Scale, shipDetails.Primary.Scale, shipDetails.Primary.Scale);
 
 
                     // Add velocity to the bullet
-                    bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.WeaponMain.Speed;
+                    bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.Primary.Speed;
 
                     BulletCollision bulletCol = bullet.GetComponentInChildren<BulletCollision>(); //transform.Find("BulletCollision");
                                                                                                   //ScriptB other = (ScriptB)go.GetComponent(typeof(ScriptB));
-                    bulletCol.setDamage(shipDetails.WeaponMain.Damage);
+                    bulletCol.setDamage(shipDetails.Primary.Damage);
 
                     // Destroy the bullet after X seconds
-                    Destroy(bullet, shipDetails.WeaponMain.TimeToLive);
+                    Destroy(bullet, shipDetails.Primary.TimeToLive);
 
                 }
 
-                shipHandling.currentBattery = shipHandling.currentBattery - shipDetails.WeaponMain.BatteryCharge;
+                shipHandling.currentBattery = shipHandling.currentBattery - shipDetails.Primary.BatteryCharge;
                 shipHandling.lastShot = Time.time;
             }
 

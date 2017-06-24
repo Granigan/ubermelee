@@ -41,10 +41,10 @@ Icon?
 ehthumbs.db
 [Tt]humbs.db
 [Dd]esktop.ini
-Corridor/Library/ShaderCache/
+Corridor/Library/ShaderCache/n
 Corridor/Library/metadata/
 
 # ============ #
 # Our Own ignore #
 # ============ #
-Assets/InControl/Source/VersionInfo.cs
+VersionInfo.cs

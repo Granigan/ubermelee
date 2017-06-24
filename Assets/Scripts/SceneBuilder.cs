@@ -26,6 +26,8 @@ public class SceneBuilder : MonoBehaviour {
         //Instantiate(Counter);
         Instantiate(Planet);
         BuildShips();
+        //InitShipValues();
+        
         //AttachScripts();
         // random vector3 values x, y. z is allways same.
         //Vector3 RandoPos = new Vector3(Random.Range(-15, 15), Random.Range(-15, 15), -3);
@@ -36,22 +38,28 @@ public class SceneBuilder : MonoBehaviour {
     }
 
     void BuildShips() {
+        int playerNumber = 1;
         foreach(GameObject currPlayer in Players )
         {
             PlayerInstances.Add(Instantiate(currPlayer));
-            currPlayer.transform.position = new Vector3(Random.Range(-15, 15), Random.Range(-15, 15), -3);
+            currPlayer.GetComponent<ShipHandling>().playerNumber = playerNumber;
+            playerNumber++;
+            currPlayer.transform.position = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), -3);
             currPlayer.transform.Rotate(Vector3.forward, Random.Range(-180, 180));
             {
                 Collider[] hitColliders = Physics.OverlapSphere(currPlayer.transform.position, 1);
                 //Debug.Log("ship1colliders" + hitColliders.Length);
                 while (hitColliders.Length > 0)
                 {
-                    currPlayer.transform.position = new Vector3(Random.Range(-15, 15), Random.Range(-15, 15), -3);
+                    currPlayer.transform.position = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), -3);
                     hitColliders = Physics.OverlapSphere(currPlayer.transform.position, 1);
                     //Debug.Log("ship1colliders2" + hitColliders.Length);
                 }
 
             }
+
+           // currPlayer.GetComponent<ShipDetails>().score = 0f;
+
         }
         /*
             Instantiate(Ship1);
@@ -113,4 +121,12 @@ public class SceneBuilder : MonoBehaviour {
 
     }
     */
+
+    private void InitShipValues()
+    {
+        foreach (GameObject currPlayer in PlayerInstances)
+        {
+            //currPlayer.GetComponent<ShipDetails>().score = 0;
+        }
+    }
 }
