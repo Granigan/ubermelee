@@ -222,19 +222,19 @@ public class CameraControl : MonoBehaviour
 
             //Debug.Log("viewPos = " + viewPos);
             
-            if (viewPos.x <= 0.0f)
+            if (viewPos.x < 0.0f)
             {
                 float newPositionX;
-                newPositionX = currObject.transform.position.x + ((maxDistanceX * 1.5f - moveOffset) * 1);
+                newPositionX = currObject.transform.position.x + ((maxDistanceX * 1f - moveOffset) * 1);
                 currObject.transform.position = new Vector3(newPositionX, currObject.transform.position.y, currObject.transform.position.z);
                 if (currObject.name == "ship31") Debug.Log("viewPosX <= 0.0f = " + viewPos);
                 SetStartPositionAndSize();
                 return true;
             }
-            else if (viewPos.x >= 1.0f)
+            else if (viewPos.x > 1.0f)
             {
                 float newPositionX;
-                newPositionX = currObject.transform.position.x + ((maxDistanceX * 1.5f - moveOffset) * -1);
+                newPositionX = currObject.transform.position.x + ((maxDistanceX * 1f - moveOffset) * -1);
                 currObject.transform.position = new Vector3(newPositionX, currObject.transform.position.y, currObject.transform.position.z);
                 if (currObject.name == "ship31") Debug.Log("viewPosX >= 1.0f = " + viewPos);
                 SetStartPositionAndSize();
@@ -242,18 +242,18 @@ public class CameraControl : MonoBehaviour
             }
 
 
-            if (viewPos.y <= 0.0f)
+            if (viewPos.y < 0.0f)
             {
                 float newPositionY;
-                newPositionY = currObject.transform.position.y + ((maxDistanceY * 1.5f - moveOffset) * 1);
+                newPositionY = currObject.transform.position.y + ((maxDistanceY * 1f - moveOffset) * 1);
                 currObject.transform.position = new Vector3(currObject.transform.position.x, newPositionY, currObject.transform.position.z);
                 if(currObject.name == "ship31") Debug.Log("viewPosY <= 0.0f = " + viewPos);
                 SetStartPositionAndSize();
                 return true;
-            } else if (viewPos.y >= 1.0f)
+            } else if (viewPos.y > 1.0f)
             {
                 float newPositionY;
-                newPositionY = currObject.transform.position.y + ((maxDistanceY * 1.5f - moveOffset) * -1);
+                newPositionY = currObject.transform.position.y + ((maxDistanceY * 1f - moveOffset) * -1);
                 currObject.transform.position = new Vector3(currObject.transform.position.x, newPositionY, currObject.transform.position.z);
                 if (currObject.name == "ship31") Debug.Log("viewPosY >= 1.0f = " + viewPos);
                 SetStartPositionAndSize();
