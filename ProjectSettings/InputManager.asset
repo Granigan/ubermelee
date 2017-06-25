@@ -3286,7 +3286,7 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
-    m_Name: Fire1
+    m_Name: Primary1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -3302,13 +3302,13 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
-    m_Name: Special1
+    m_Name: Secondary1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: right shift
     altNegativeButton: 
-    altPositiveButton: mouse 0
+    altPositiveButton: 
     gravity: 3
     dead: 0.001
     sensitivity: 3
@@ -3318,13 +3318,13 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
-    m_Name: Special2
+    m_Name: Secondary2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: left shift
     altNegativeButton: 
-    altPositiveButton: mouse 0
+    altPositiveButton: 
     gravity: 3
     dead: 0.001
     sensitivity: 3
@@ -3334,7 +3334,7 @@ InputManager:
     axis: 0
     joyNum: 2
   - serializedVersion: 3
-    m_Name: Special3
+    m_Name: Secondary3
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -3350,7 +3350,7 @@ InputManager:
     axis: 0
     joyNum: 3
   - serializedVersion: 3
-    m_Name: Special4
+    m_Name: Secondary4
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -3366,7 +3366,7 @@ InputManager:
     axis: 0
     joyNum: 4
   - serializedVersion: 3
-    m_Name: Fire2
+    m_Name: Primary2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -3542,7 +3542,7 @@ InputManager:
     axis: 1
     joyNum: 4
   - serializedVersion: 3
-    m_Name: Fire3
+    m_Name: Primary3
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -3558,16 +3558,16 @@ InputManager:
     axis: 0
     joyNum: 3
   - serializedVersion: 3
-    m_Name: Fire4
+    m_Name: Primary4
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: h
+    positiveButton: b
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 3
     dead: 0.001
-    sensitivity: 1000
+    sensitivity: 3
     snap: 0
     invert: 0
     type: 0

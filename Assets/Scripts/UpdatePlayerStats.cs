@@ -35,7 +35,7 @@ public class UpdatePlayerStats : MonoBehaviour {
             text.text += currPlayer.GetComponent<ShipHandling>().shipDetails.ShipName + "\n";
             text.text += "Crew: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentCrew()).ToString() + "/" + Mathf.Round(currPlayer.GetComponent<ShipHandling>().shipDetails.Crew).ToString() + "\n";
             text.text += "Battery: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentBattery()).ToString() + "/" + Mathf.Round(currPlayer.GetComponent<ShipHandling>().shipDetails.Battery).ToString() + "\n";
-            text.text += "Score: " + Mathf.Round(playerScores[i]).ToString() + "\n";
+            //text.text += "Score: " + Mathf.Round(playerScores[i]).ToString() + "\n";
             
         }
 	}

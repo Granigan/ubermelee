@@ -5,58 +5,72 @@ using InControl;
 
 public class InputController : MonoBehaviour
 {
-    private int playerNumber = 1; // The order of the player regarding controller
+    private int playerNumber; // The order of the player regarding controller
     private ShipHandling shipHandling;
     private ShipDetails shipDetails;
     //input controls
-    private string turnControl = "Vertical1";
-    private string thrustControl = "Horizontal1";
-    private string shootControl = "Fire1";
-    private string specialControl = "Special1";
+    private string turnControl;
+    private string thrustControl;
+    private string primaryControl;
+    private string secondaryControl;
     private InputDevice joystick;
 
     void Start()
     {
+        //Debug.Log("Joystick count: " + InputManager.Devices.Count);
+        AssignJoysticks();
+
+    }
+
+    private void AssignJoysticks()
+    {
         shipHandling = GetComponent<ShipHandling>();
-        playerNumber = (int)shipHandling.playerNumber; 
+        playerNumber = (int)shipHandling.playerNumber;
         turnControl = "Horizontal" + playerNumber;
         thrustControl = "Vertical" + playerNumber;
-        shootControl = "Fire" + playerNumber;
-        specialControl = "Special" + (playerNumber);
-        
-       
+        primaryControl = "Primary" + playerNumber;
+        secondaryControl = "Secondary" + (playerNumber);
+        joystick = null;
+
+        InputDevice[] joysticks = new InputDevice[InputManager.Devices.Count];
+        List<InputDevice> finalJoysticks = new List<InputDevice>();
+        InputManager.Devices.CopyTo(joysticks,0);
+
+        for(int i = 0; i < joysticks.Length; i++)
+        {
+            if(joysticks[i].Name.Equals("PlayStation 4 Controller") == false ) {
+                //Debug.Log("Device type is " + joysticks[i].Name + ", joystick number is " + i + ", playerNumber is " + playerNumber);
+                finalJoysticks.Add(joysticks[i]);
+            }
+        }
+
+        //Debug.Log("finalJoysticks.Count " + finalJoysticks.Count);
+        if(finalJoysticks.Count > (playerNumber - 1))
+        {
+            //Debug.Log("Assigning joystick to player " + playerNumber);
+            joystick = finalJoysticks[(playerNumber - 1)];
+        } else {
+            //Debug.Log("Joystick for player " + playerNumber + " is NULL");
+            joystick = null;
+        }
     }
 
     private void Awake()
     {
-        foreach(InputDevice currDevice in InputManager.Devices)
-        {
-            Debug.Log("Device type is " + currDevice.Name);
-        }
-
-        Debug.Log("Joystick count: " + InputManager.Devices.Count);
-
-        if(InputManager.Devices.Count >= playerNumber)
-        {
-            joystick = InputManager.Devices[(playerNumber-1)];
-        } else
-        {
-            joystick = null;
-        }
-
-
-        //joystick = InputManager.ActiveDevice;
         
+
     }
 
     void Update()
     {
-        float shipTurn = 0;
+        AssignJoysticks();
+        
 
+        float shipTurn = 0;
 
         if (Input.GetAxis(turnControl) != 0)
         {
-            Debug.Log("turnControl = " + turnControl);
+            //Debug.Log("turnControl = " + turnControl);
             shipTurn = Input.GetAxis(turnControl);
         }
         else
@@ -84,9 +98,9 @@ public class InputController : MonoBehaviour
             specialButton = joystick.Action3;
 
 
-        if (Input.GetButton(specialControl) == true)
+        if (Input.GetButton(secondaryControl) == true)
         {
-            specialButton = Input.GetButton(specialControl);
+            specialButton = Input.GetButton(secondaryControl);
         }
 
         if (specialButton == true)
@@ -100,24 +114,16 @@ public class InputController : MonoBehaviour
             fireButton = joystick.Action1;
 
    
-        if (Input.GetButton(shootControl) == true)
+        if (Input.GetButton(primaryControl) == true)
         {
-            fireButton = Input.GetButton(shootControl);
+            fireButton = Input.GetButton(primaryControl);
         }
 
         if ( fireButton == true)
         {
-            //Debug.Log("fireButton!!");
             shipHandling.UsePrimary();
         }
-
-
-
-       
-
     }
-
-        
 }
 
 

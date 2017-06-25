@@ -14,6 +14,7 @@ public class SceneBuilder : MonoBehaviour {
     }
 
     void BuildShips() {
+        Debug.Log("BuildShips!!!");
         int playerNumber = 1;
         foreach(GameObject currPlayer in Players )
         {
