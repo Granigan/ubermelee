@@ -32,6 +32,9 @@ public class ShipHandling : MonoBehaviour {
     public float lastSecondaryUsed = 0.0f;
     public float playerNumber = 0f;
 
+    public bool AIEnabled = false;
+    private float AILastExecuted = 1f;
+    float AITurnDirection = 0f; // = Random.Range(-1.0f, 1.0f);
 
     // Use this for initialization
     void Start () {
@@ -72,6 +75,11 @@ public class ShipHandling : MonoBehaviour {
         RechargeBattery();
 
         transform.position = new Vector3(transform.position.x, transform.position.y, -3.0f);
+
+        if(AIEnabled == true)
+        {
+            executeAI();
+        }
 
 	}
 
@@ -227,6 +235,49 @@ public class ShipHandling : MonoBehaviour {
     {
         currentBattery = newBattery;
     }
+
+    void executeAI()
+    {
+        if(AIEnabled == true)
+        {
+            //Debug.Log("Time.time " + Time.time);
+            float AIExecTime = Random.Range(1.0f, 4.0f);
+            
+            if (Time.time < AIExecTime + AILastExecuted)
+            {
+                //float execTurn = Random.Range(0.0f, 1.0f);
+                //Debug.Log(turnDirection + " " + turnTime + " " + turnLastExecuted);
+                RotateShip(AITurnDirection);
+                MoveShip(Random.Range(-0.0f, 0.2f));
+
+                if(Random.Range(0.0f, 1.0f) > 0.9f)
+                {
+                    UsePrimary();
+                }
+                if (Random.Range(0.0f, 1.0f) > 0.95f)
+                {
+                    UseSecondary();
+                }
+
+
+            }
+            else {
+                AITurnDirection = Random.Range(-0.5f, 0.5f);
+                //Debug.Log("AI changed his mind!");
+                AILastExecuted = Time.time;
+
+            }
+            
+        }
+    }
+
+
+
+
+
+
+
+
 }
 
 

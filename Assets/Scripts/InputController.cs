@@ -123,6 +123,43 @@ public class InputController : MonoBehaviour
         {
             shipHandling.UsePrimary();
         }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("You pressed A1!!!");
+            GameObject[] players = GameObject.FindGameObjectsWithTag("CameraObject");
+            if(players[0].gameObject.GetComponent<ShipHandling>().AIEnabled == true)
+            {
+                players[0].gameObject.GetComponent<ShipHandling>().AIEnabled = false;
+                return;
+            } else
+            {
+                players[0].gameObject.GetComponent<ShipHandling>().AIEnabled = true;
+                //return;
+            }
+            Debug.Log( Time.time + " " + players[0].gameObject.GetComponent<ShipHandling>().AIEnabled);
+
+            // = (players[0].gameObject.GetComponent<ShipHandling>().AIEnabled == true) ? false : true;
+        }
+        /*
+        if (Input.GetButton("AI2"))
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("CameraObject");
+            players[1].gameObject.GetComponent<ShipHandling>().AIEnabled = (players[1].gameObject.GetComponent<ShipHandling>().AIEnabled) ? false : true;
+        }
+        if (Input.GetButton("AI3"))
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("CameraObject");
+            players[2].gameObject.GetComponent<ShipHandling>().AIEnabled = (players[2].gameObject.GetComponent<ShipHandling>().AIEnabled) ? false : true;
+        }
+        if (Input.GetButton("AI4"))
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("CameraObject");
+            players[3].gameObject.GetComponent<ShipHandling>().AIEnabled = (players[3].gameObject.GetComponent<ShipHandling>().AIEnabled) ? false : true;
+        }
+        */
+
+
     }
 }
 
