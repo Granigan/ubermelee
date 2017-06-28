@@ -332,7 +332,7 @@ Prefab:
     - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
       propertyPath: maxDistanceX
-      value: 82
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 114599262295883474, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
@@ -343,7 +343,7 @@ Prefab:
     - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
       propertyPath: maxDistanceY
-      value: 42
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
@@ -390,6 +390,31 @@ Prefab:
         type: 2}
       propertyPath: moveOffset
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: cameraLockedAfterJump
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: viewpointJumpLeftBottom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: viewpointJumpRightTop
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: screenEdgeBuffer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: dampTime
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
