@@ -50,7 +50,7 @@ public class ShipHandling : MonoBehaviour {
         //primaryScript = getComponent
 
         trail = GetComponentInChildren<TrailRenderer>();
-
+        
         bulletSpawnPoints = new List<Transform>();
         int i = 0;
         //bulletSpawnPoints = getChi getChildGameObject(transform.gameObject, "BulletSpawnPoint").transform;
@@ -73,6 +73,9 @@ public class ShipHandling : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         RechargeBattery();
+
+        //disable trail
+        //this.GetComponentInChildren<TrailRenderer>().enabled = false;
 
         transform.position = new Vector3(transform.position.x, transform.position.y, -3.0f);
 
@@ -139,8 +142,14 @@ public class ShipHandling : MonoBehaviour {
     {
         rb.AddForce(transform.right * shipDetails.Acceleration * throttle);
 
+        // when moving display trail
+        this.GetComponentInChildren<TrailRenderer>().enabled = true;
+
         if (throttle == 0)
         {
+            // no thrus no trail
+            this.GetComponentInChildren<TrailRenderer>().enabled = false;
+
             //rb.freezeRotation = true;
             //thruster.GetComponent<TrailRenderer>().enabled = false;
             //trail.time = 0;
