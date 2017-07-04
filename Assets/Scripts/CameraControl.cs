@@ -166,7 +166,7 @@ public class CameraControl : MonoBehaviour
             {
                 GameObject cloneship = currObject;
                 cloneship.GetComponentInChildren<TrailRenderer>().Clear();
-                Debug.Log(currObject);
+                //Debug.Log(currObject);
                 Vector3 newLocation = new Vector3(viewpointJumpLeftBottom, viewPos.y, mainCamera.nearClipPlane);
                 newLocation = mainCamera.ViewportToWorldPoint(newLocation);
 
@@ -197,7 +197,10 @@ public class CameraControl : MonoBehaviour
             {
 
                 GameObject cloneship = currObject;
-                cloneship.GetComponentInChildren<TrailRenderer>().Clear();
+
+                if (cloneship.GetComponentInChildren<TrailRenderer>())
+                    cloneship.GetComponentInChildren<TrailRenderer>().Clear();
+
                 Vector3 newLocation = new Vector3(viewPos.x, viewpointJumpLeftBottom, mainCamera.nearClipPlane);
                 newLocation = mainCamera.ViewportToWorldPoint(newLocation);
 
@@ -210,7 +213,10 @@ public class CameraControl : MonoBehaviour
             } else if (viewPos.y > 1.0f)
             {
                 GameObject cloneship = currObject;
-                cloneship.GetComponentInChildren<TrailRenderer>().Clear();
+
+                if(cloneship.GetComponentInChildren<TrailRenderer>())
+                    cloneship.GetComponentInChildren<TrailRenderer>().Clear();
+
                 Vector3 newLocation = new Vector3(viewPos.x, viewpointJumpRightTop, mainCamera.nearClipPlane);
                 newLocation = mainCamera.ViewportToWorldPoint(newLocation);
 
