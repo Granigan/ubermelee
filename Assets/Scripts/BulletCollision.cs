@@ -34,7 +34,8 @@ public class BulletCollision : MonoBehaviour {
             if(shipDestroyed == true)
             {
                 GameObject playerStats = GameObject.FindGameObjectWithTag("Player1Stats");
-                playerStats.GetComponent<UpdatePlayerStats>().playerScores[(int)col.gameObject.GetComponent<ShipHandling>().playerNumber]++;
+                //Debug.Log("Killer was " + bulletOwnerPlayerNumber);
+                playerStats.GetComponent<UpdatePlayerStats>().playerScores[(int)bulletOwnerPlayerNumber-1]++;
                 
             }
 

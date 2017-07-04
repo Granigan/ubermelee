@@ -19,7 +19,20 @@ public class UpdatePlayerStats : MonoBehaviour {
             //playerScores[i]= 0f;
             playerScores[i] = 0f;
         }
-        //Debug.Log("playerScores = " + playerScores.Length);
+
+        if(players.Length <= 3)
+        {
+            GameObject textGO = GameObject.Find("Player3Stats");
+            UnityEngine.UI.Text text = textGO.GetComponentInChildren<UnityEngine.UI.Text>();
+            text.text = "";
+        }
+        if (players.Length <= 4)
+        {
+            GameObject textGO = GameObject.Find("Player4Stats");
+            UnityEngine.UI.Text text = textGO.GetComponentInChildren<UnityEngine.UI.Text>();
+            text.text = "";
+        }
+        Debug.Log("playerScores = " + playerScores.Length);
     }
 	
 	// Update is called once per frame
@@ -35,7 +48,7 @@ public class UpdatePlayerStats : MonoBehaviour {
             text.text += currPlayer.GetComponent<ShipHandling>().shipDetails.ShipName + "\n";
             text.text += "Crew: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentCrew()).ToString() + "/" + Mathf.Round(currPlayer.GetComponent<ShipHandling>().shipDetails.Crew).ToString() + "\n";
             text.text += "Battery: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentBattery()).ToString() + "/" + Mathf.Round(currPlayer.GetComponent<ShipHandling>().shipDetails.Battery).ToString() + "\n";
-            //text.text += "Score: " + Mathf.Round(playerScores[i]).ToString() + "\n";
+            text.text += "Score: " + Mathf.Round(playerScores[i-1]).ToString() + "\n";
             
         }
 	}

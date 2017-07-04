@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class ShipHandling : MonoBehaviour {
 
+    public enum AILevels
+    {
+        IDIOT,
+        ROOKIE,
+        CYBORG
+    };
+
     public ShipDetails shipDetails;
 
     //public float hitPoints = 20;
@@ -33,8 +40,11 @@ public class ShipHandling : MonoBehaviour {
     public float playerNumber = 0f;
 
     public bool AIEnabled = false;
+    public AILevels AILevel = AILevels.IDIOT;
     private float AILastExecuted = 1f;
     float AITurnDirection = 0f; // = Random.Range(-1.0f, 1.0f);
+
+    public bool shipIsDead = false;
 
     // Use this for initialization
     void Start () {
@@ -47,6 +57,7 @@ public class ShipHandling : MonoBehaviour {
         rb.mass = shipDetails.Mass;
         rb.drag = shipDetails.Drag;
         rb.angularDrag = shipDetails.AngularDrag;
+        shipIsDead = false;
         //primaryScript = getComponent
 
         trail = GetComponentInChildren<TrailRenderer>();
@@ -105,72 +116,77 @@ public class ShipHandling : MonoBehaviour {
         Debug.Log("Ship Explosion!!!");
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, 3.0f);
+        GameObject deadShip = this.gameObject;
+        
         StartCoroutine(DieAndRespawn());
-        currentCrew = shipDetails.Crew;     
+
+        currentCrew = shipDetails.Crew;
+        //Instantiate(deadShip);
+        
     }
 
-
+    
     private IEnumerator DieAndRespawn()
     {
         Debug.Log("Player just died!!");
-        //this.gameObject.SetActive(false);
-        //GetComponent(Rigidbody).enabled = false;
-        this.GetComponentInChildren<MeshRenderer>().enabled = false;
-        this.GetComponentInChildren<Transform>().localScale = new Vector3(0, 0, 0);
-        this.GetComponentInChildren<BoxCollider>().enabled = false;
+        shipIsDead = true;
+
+        this.gameObject.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
+        this.gameObject.GetComponentInChildren<Rigidbody>().angularVelocity = Vector3.zero;
+
+        for (int j = 0; j < this.transform.childCount; j++)
+        {
+            this.transform.GetChild(j).gameObject.SetActive(false);
+        }
+
         yield return new WaitForSeconds(2.0f);
         Debug.Log("Player just respawned!!");
-        //transform.position = new Vector3(0.04833326f, 3.980667f, 0.0f);
-        //transform.rotation = Quaternion.identity;
-        //GetComponent<Renderer>().enabled = true;
+
         Vector3 respawnPoint = new Vector3(Random.Range(-respawnVariance, respawnVariance), Random.Range(-respawnVariance, respawnVariance), -3);  // Fix up the static -3 Z-axis later?
-        //this.gameObject.SetActive(true);
+
         this.GetComponentInChildren<Transform>().position = respawnPoint;
-        this.GetComponentInChildren<MeshRenderer>().enabled = true;
+
         this.GetComponentInChildren<Transform>().localScale = new Vector3(shipDetails.Scale, shipDetails.Scale, shipDetails.Scale);
-        this.GetComponentInChildren<BoxCollider>().enabled = enabled;
+        for (int j = 0; j < this.transform.childCount; j++)
+        {
+            this.transform.GetChild(j).gameObject.SetActive(true);
+        }
+        shipIsDead = false;
+
     }
 
-    public void RotateShip(float shipTurn) {
+    
+
+    public bool RotateShip(float shipTurn) {
+        if (shipIsDead == true) return false;
+
         Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -1 * shipTurn * shipDetails.RotationRate);
 
         eulerAngleVelocity.y = 0;
         rb.MoveRotation(rb.rotation * deltaRotation);
+        return true;
     }
 
-    public void MoveShip(float throttle)
+    public bool MoveShip(float throttle)
     {
+        if (shipIsDead == true) return false;
+
         rb.AddForce(transform.right * shipDetails.Acceleration * throttle);
 
         // when moving display trail
-        this.GetComponentInChildren<TrailRenderer>().enabled = true;
+        if(this.GetComponentInChildren<TrailRenderer>())
+            this.GetComponentInChildren<TrailRenderer>().enabled = true;
 
         if (throttle == 0)
         {
             // no thrus no trail
-            this.GetComponentInChildren<TrailRenderer>().enabled = false;
+            if (this.GetComponentInChildren<TrailRenderer>())
+                this.GetComponentInChildren<TrailRenderer>().enabled = false;
 
             //rb.freezeRotation = true;
             //thruster.GetComponent<TrailRenderer>().enabled = false;
             //trail.time = 0;
         }
-        /* TODO Trail code to shiphandling
-        if (shipTurn <= 0.1)
-        {
-            //rb.freezeRotation = true;
-            {
-                trail.time = 0.5f;
-            }
-
-        }
-        if (shipTurn == 0)
-        {
-            //rb.freezeRotation = true;
-            {
-                trail.time = 0.0f;
-            }
-        }
-        */
 
         if (rb.velocity.magnitude > shipDetails.MaxSpeed)
         {
@@ -178,46 +194,49 @@ public class ShipHandling : MonoBehaviour {
         }
 
 
-
+        return true;
     }
 
-    private void RechargeBattery()
+    private bool RechargeBattery()
     {
+        if (shipIsDead == true) return false;
+
         currentBattery = currentBattery + ((Time.time - lastFrameTime) * shipDetails.BatteryRechargeRate);
         lastFrameTime = Time.time;
         if (currentBattery > shipDetails.Battery)
         {
             currentBattery = shipDetails.Battery;
         }
+
+        return true;
     }
 
-    public void UsePrimary(List<Transform> paramSpawnPoints = null, float paramBatteryCharge = -1, float paramFireRate = -1)
+    public bool UsePrimary(List<Transform> paramSpawnPoints = null, float paramBatteryCharge = -1, float paramFireRate = -1)
     {
+        if (shipIsDead == true) return false;
+
         if (Time.time > shipDetails.Secondary.FireRate + lastSecondaryUsed)
         {
             shipPrimaryActions.Invoke("Ship" + shipID + "Primary", 0);
             lastSecondaryUsed = Time.time;
         }
 
-        
+        return true;
     }
 
-    public void UseSecondary()
+    public bool UseSecondary()
     {
-        // Just to test this special feature...
-        //MoveShip(8f);
-       
+        if (shipIsDead == true) return false;
+
         if (Time.time > shipDetails.Secondary.FireRate + lastSecondaryUsed)
         {
             shipSecondaryActions.Invoke("Ship" + shipID + "Secondary", 0);
             lastSecondaryUsed = Time.time;
         }
 
+        return true;
     }
-
-
-
-
+    
     static public GameObject getChildGameObject(GameObject fromGameObject, string withName)
     {
         Transform[] ts = fromGameObject.transform.GetComponentsInChildren<Transform>(true);
@@ -249,14 +268,38 @@ public class ShipHandling : MonoBehaviour {
     {
         if(AIEnabled == true)
         {
+            float closestEnemyDistance = Mathf.Infinity;
+            Transform targetPlayer = null;
+
+
+
+            if (AILevel == AILevels.ROOKIE)
+            {
+                foreach(GameObject currShip in GameObject.FindGameObjectsWithTag("CameraObject"))
+                {
+                    float distance = (currShip.transform.position - transform.position).sqrMagnitude;
+
+                    if(distance < closestEnemyDistance && currShip != this.gameObject && distance > 0)
+                    {
+                        closestEnemyDistance = distance;
+                        //Debug.Log("closestEnemyDistance = " + closestEnemyDistance);
+                        targetPlayer = currShip.gameObject.transform;
+                    }
+                }
+            } 
+
             //Debug.Log("Time.time " + Time.time);
-            float AIExecTime = Random.Range(1.0f, 4.0f);
+            float AIExecTime = Random.Range(1.0f, 5.0f);
             
             if (Time.time < AIExecTime + AILastExecuted)
             {
                 //float execTurn = Random.Range(0.0f, 1.0f);
                 //Debug.Log(turnDirection + " " + turnTime + " " + turnLastExecuted);
+
+               
                 RotateShip(AITurnDirection);
+                
+                
                 MoveShip(Random.Range(-0.0f, 0.2f));
 
                 if(Random.Range(0.0f, 1.0f) > 0.9f)
@@ -267,11 +310,117 @@ public class ShipHandling : MonoBehaviour {
                 {
                     UseSecondary();
                 }
-
+                
 
             }
             else {
-                AITurnDirection = Random.Range(-0.5f, 0.5f);
+                /*
+                if(AILevel == AILevels.ROOKIE)
+                {
+                    AITurnDirection = 0f;
+                    Quaternion rotationAngle = Quaternion.LookRotation(targetPlayer.position - transform.position);
+                    Debug.Log(rotationAngle.eulerAngles.z);
+
+                    //transform.Rotate(0, 0, rotationAngle.z*10);
+                    transform.rotation = Quaternion.Euler(rotationAngle.x, rotationAngle.y, 0);
+
+                    //transform.LookAt(targetPlayer.position, Vector3.forward);
+                    //transform.localEulerAngles
+                    /*
+                    var lookDir = targetPlayer.position - transform.position;
+                    lookDir.y = 0; // keep only the horizontal direction
+                    //lookDir.x = 180; // keep only the horizontal direction
+                    Debug.Log("lookDir = " + lookDir);
+
+                    transform.rotation = Quaternion.LookRotation(lookDir);
+                    */
+    /*
+    Quaternion rotationAngle = Quaternion.LookRotation(targetPlayer.position - transform.position, Vector3.up);
+    //rotationAngle.SetEulerAngles()
+    transform.rotation = Quaternion.Slerp(transform.rotation, rotationAngle, Time.deltaTime * 10); // we rotate the rotationAngle 
+    */
+    //transform.localEulerAngles = new Vector3(180, 0, transform.localEulerAngles.z);
+
+
+    //Vector3 dirToFace = targetPlayer.position - transform.position;
+    //transform.rotation = Quaternion.LookRotation(dirToFace);
+
+
+
+
+    /*
+    Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -1 * shipTurn * shipDetails.RotationRate);
+
+    eulerAngleVelocity.y = 0;
+    rb.MoveRotation(rb.rotation * deltaRotation);
+    */
+    /*
+    Quaternion rotationAngle = Quaternion.LookRotation(targetPlayer.position - transform.position); // we get the angle has to be rotated
+
+    Debug.Log("rotationAngle = " + rotationAngle.ToString());
+
+    transform.rotation = Quaternion.Slerp(transform.rotation, rotationAngle, Time.deltaTime * 10); // we rotate the rotationAngle 
+    RotateShip(0f);
+    */
+    /*
+    Vector3 targetPoint = targetPlayer.position;
+    targetPoint.x = 0.0f;
+    targetPoint.y = 0.0f;
+    transform.LookAt(targetPoint);
+    */
+    /*
+    Quaternion newRotation = Quaternion.LookRotation(transform.position - targetPoint);
+    //newRotation.x = 0.0;
+    //newRotation.y = 0.0;
+    //transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 800);
+    Debug.Log("targetPoint = " + targetPoint.ToString());
+
+    Quaternion deltaRotation = Quaternion.Euler(0, 0, Time.deltaTime * newRotation.z * shipDetails.RotationRate * 1000);
+
+
+    //rb.MoveRotation(rb.rotation * deltaRotation);
+
+    //targetRotation. = 0.0f;
+    //AITurnDirection = targetRotation.y;
+    //rb.MoveRotation(targetRotation);
+
+
+
+    //targetRotation = 
+    //transform.rotation.set(180.0f, 0.0f, transform.rotation.z);// = 180.0f;
+    //transform.y = 180.0f;
+
+    float step = 1000f * Time.deltaTime;
+    //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetPlayer.rotation, step);
+    transform.right = transform.position - targetPlayer.position;
+    */
+
+    /*
+    if (targetPlayer.position.x >= transform.position.x && targetPlayer.position.y >= transform.position.y)
+    {
+        AITurnDirection = -0.5f;
+        Debug.Log("Enemy top right!");
+    } else if (targetPlayer.position.x <= transform.position.x && targetPlayer.position.y >= transform.position.y)
+    {
+        AITurnDirection = 0.5f;
+        Debug.Log("Enemy bottom right!");
+    }
+    else if (targetPlayer.position.x >= transform.position.x && targetPlayer.position.y <= transform.position.y)
+    {
+        AITurnDirection = -0.5f;
+        Debug.Log("Enemy top right!");
+    }
+    else if (targetPlayer.position.x <= transform.position.x && targetPlayer.position.y <= transform.position.y)
+    {
+        AITurnDirection = 0.5f;
+        Debug.Log("Enemy top left!");
+    }
+    */
+
+
+    AITurnDirection = Random.Range(-0.5f, 0.5f);
+                
+                
                 //Debug.Log("AI changed his mind!");
                 AILastExecuted = Time.time;
 
