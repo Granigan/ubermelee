@@ -14,7 +14,7 @@ MonoBehaviour:
   Acceleration: 15
   MaxSpeed: 6
   Mass: 9
-  RotationRate: 0.6
+  RotationRate: 0.4
   Crew: 16
   Battery: 40
   BatteryRechargeRate: 8
