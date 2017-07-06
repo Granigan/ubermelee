@@ -315,16 +315,21 @@ public class ShipHandling : MonoBehaviour {
             }
             else {
                 /*
-                if(AILevel == AILevels.ROOKIE)
+                if (AILevel == AILevels.ROOKIE)
                 {
                     AITurnDirection = 0f;
-                    Quaternion rotationAngle = Quaternion.LookRotation(targetPlayer.position - transform.position);
-                    Debug.Log(rotationAngle.eulerAngles.z);
+                   // Quaternion rotationAngle = Quaternion.LookRotation(targetPlayer.position - transform.position);
+                   // Debug.Log(rotationAngle.eulerAngles.z);
 
                     //transform.Rotate(0, 0, rotationAngle.z*10);
-                    transform.rotation = Quaternion.Euler(rotationAngle.x, rotationAngle.y, 0);
+                    //transform.rotation = Quaternion.Euler(rotationAngle.x, rotationAngle.y, 0);
 
-                    //transform.LookAt(targetPlayer.position, Vector3.forward);
+
+                    transform.LookAt(targetPlayer.position);
+
+                
+                }
+                */
                     //transform.localEulerAngles
                     /*
                     var lookDir = targetPlayer.position - transform.position;

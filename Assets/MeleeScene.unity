@@ -415,6 +415,11 @@ Prefab:
       propertyPath: dampTime
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 114599262295883474, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: NumberOfPlanets
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
   m_IsPrefabParent: 0
@@ -433,6 +438,22 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 907619343}
+--- !u!1 &935499249 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1316403383244244, guid: 66fd2920119760f4f8738a42625d015f,
+    type: 2}
+  m_PrefabInternal: {fileID: 902958272}
+--- !u!114 &935499253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935499249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6339cfbf9707ed48a03f8e7afbe2428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1082144284
 GameObject:
   m_ObjectHideFlags: 0

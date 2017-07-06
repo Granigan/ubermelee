@@ -6,15 +6,18 @@ public class SceneBuilder : MonoBehaviour {
     public GameObject Planet;
     public GameObject[] Players;
     private List<GameObject> PlayerInstances = new List<GameObject>();
+    public int NumberOfPlanets = 10;
 
     void Awake() {
-        Instantiate(Planet);
-        BuildShips();      
+        //Instantiate(Planet);
+        BuildPlanets();
+        BuildShips();
+        
 
     }
 
     void BuildShips() {
-        Debug.Log("BuildShips!!!");
+        //Debug.Log("BuildShips!!!");
         int playerNumber = 1;
         foreach(GameObject currPlayer in Players )
         {
@@ -40,5 +43,18 @@ public class SceneBuilder : MonoBehaviour {
         }
     }
 
+
+    void BuildPlanets()
+    {
+        for(int i = 0; i < NumberOfPlanets; i++)
+        {
+            //Debug.Log("Buildign planet " + i);
+            GameObject currPlanet =Instantiate(Planet);
+            currPlanet.transform.position = new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), -3);
+            float scale = Random.Range(0.7f, 1.5f);
+            currPlanet.transform.localScale = new Vector3(scale, scale, scale);
+
+        }
+    }
     
 }
