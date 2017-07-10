@@ -13,12 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 1
   Scale: 0.1
-  Speed: 20
-  TimeToLive: 0.4
-  Mass: 1
+  Speed: 10
+  TimeToLive: 2
+  Mass: 0.05
   Drag: 0
   AngularDrag: 0
   BatteryCharge: 2
   FireRate: 0.2
   HitPoints: 1
-  specialPrefab: {fileID: 0}
+  SecondaryPrefab: {fileID: 0}
