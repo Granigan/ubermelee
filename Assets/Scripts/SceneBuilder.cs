@@ -23,6 +23,7 @@ public class SceneBuilder : MonoBehaviour {
         {
             PlayerInstances.Add(Instantiate(currPlayer));
             currPlayer.GetComponent<ShipHandling>().playerNumber = playerNumber;
+            //currPlayer.GetComponent<ShipHandling>().AIEnabled = true;
             //Debug.Log("playerNumber: "+ playerNumber);
             playerNumber++;
             currPlayer.transform.position = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), -3);
@@ -39,7 +40,9 @@ public class SceneBuilder : MonoBehaviour {
 
             }
 
-           // currPlayer.GetComponent<ShipDetails>().score = 0f;
+            // currPlayer.GetComponent<ShipDetails>().score = 0f;
+
+            
         }
     }
 
@@ -51,10 +54,16 @@ public class SceneBuilder : MonoBehaviour {
             //Debug.Log("Buildign planet " + i);
             GameObject currPlanet =Instantiate(Planet);
             currPlanet.transform.position = new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), -3);
-            float scale = Random.Range(0.7f, 1.5f);
+            float scale = Random.Range(1.3f, 2.9f);
             currPlanet.transform.localScale = new Vector3(scale, scale, scale);
 
         }
     }
     
+
+
+public void ResetScene() {
+        BuildPlanets();
+        BuildShips();
+    }
 }

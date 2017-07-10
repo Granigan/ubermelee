@@ -25,8 +25,8 @@ public class BulletCollision : MonoBehaviour {
         if (col.gameObject.tag == "CameraObject")
         {
 
-            var damageFunction = col.gameObject.GetComponent<ShipHandling>();
-            bool shipDestroyed = damageFunction.DoDamage(damage);
+            var shipHandling = col.gameObject.GetComponent<ShipHandling>();
+            bool shipDestroyed = shipHandling.DoDamage(damage);
             GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(explosion, 3.0f);
             Destroy(this.gameObject);
@@ -35,8 +35,13 @@ public class BulletCollision : MonoBehaviour {
             {
                 GameObject playerStats = GameObject.FindGameObjectWithTag("Player1Stats");
                 //Debug.Log("Killer was " + bulletOwnerPlayerNumber);
-                playerStats.GetComponent<UpdatePlayerStats>().playerScores[(int)bulletOwnerPlayerNumber-1]++;
-                
+
+                // Don't add points if killed by itself!
+                if(bulletOwnerPlayerNumber != shipHandling.playerNumber)
+                {
+                    playerStats.GetComponent<UpdatePlayerStats>().playerScores[(int)bulletOwnerPlayerNumber - 1]++;
+                }
+
             }
 
         }

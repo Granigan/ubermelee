@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44300318, g: 0.49219632, b: 0.57192606, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -274,7 +274,7 @@ Prefab:
     - target: {fileID: 114599262295883474, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
       propertyPath: Players.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4322187724850758, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
       propertyPath: m_LocalPosition.x
@@ -354,13 +354,13 @@ Prefab:
         type: 2}
       propertyPath: Players.Array.data[0]
       value: 
-      objectReference: {fileID: 1065157009348514, guid: 22f6a3d4c34fc354baa0cc54401abff7,
+      objectReference: {fileID: 1521372026914272, guid: 61baa0c1d5aa84743aff39944f8e5df9,
         type: 2}
     - target: {fileID: 114599262295883474, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
       propertyPath: Players.Array.data[1]
       value: 
-      objectReference: {fileID: 1617482157489880, guid: ba234a7716edb064984c82f59fadda3c,
+      objectReference: {fileID: 1745512433016608, guid: 8270c47871974bc498a5983a6e42a4bc,
         type: 2}
     - target: {fileID: 1316403383244244, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
       propertyPath: m_TagString
@@ -370,7 +370,7 @@ Prefab:
         type: 2}
       propertyPath: Players.Array.data[2]
       value: 
-      objectReference: {fileID: 1745512433016608, guid: 8270c47871974bc498a5983a6e42a4bc,
+      objectReference: {fileID: 1617482157489880, guid: ba234a7716edb064984c82f59fadda3c,
         type: 2}
     - target: {fileID: 4978094787119110, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
       propertyPath: m_LocalScale.x
@@ -384,7 +384,8 @@ Prefab:
         type: 2}
       propertyPath: Players.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1065157009348514, guid: 22f6a3d4c34fc354baa0cc54401abff7,
+        type: 2}
     - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
       propertyPath: moveOffset
@@ -549,6 +550,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  GameOverScore: 10
 --- !u!1001 &1099169751
 Prefab:
   m_ObjectHideFlags: 0
@@ -723,82 +725,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1250847800}
---- !u!1 &1462468976
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1462468979}
-  - component: {fileID: 1462468978}
-  - component: {fileID: 1462468977}
-  m_Layer: 0
-  m_Name: TextField
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1462468977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1462468976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.1397059, b: 0.1397059, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 0410ad49c91d744308a3357425d86f3a, type: 3}
-    m_FontSize: 30
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 0
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 'Hello!!
-
-    1123455'
---- !u!222 &1462468978
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1462468976}
---- !u!224 &1462468979
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1462468976}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.8579683}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 225, y: -367}
-  m_SizeDelta: {x: 556, y: 268}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1611870351
 Prefab:
   m_ObjectHideFlags: 0
@@ -837,6 +763,30 @@ Prefab:
     - target: {fileID: 4667256761444216, guid: c0f7eb6ef2c0ebd41bb6f18df3fac699, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 108879815143883572, guid: c0f7eb6ef2c0ebd41bb6f18df3fac699,
+        type: 2}
+      propertyPath: m_Intensity
+      value: 1.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 108879815143883572, guid: c0f7eb6ef2c0ebd41bb6f18df3fac699,
+        type: 2}
+      propertyPath: m_BounceIntensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108879815143883572, guid: c0f7eb6ef2c0ebd41bb6f18df3fac699,
+        type: 2}
+      propertyPath: m_Lightmapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108879815143883572, guid: c0f7eb6ef2c0ebd41bb6f18df3fac699,
+        type: 2}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891415500168680, guid: c0f7eb6ef2c0ebd41bb6f18df3fac699, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0f7eb6ef2c0ebd41bb6f18df3fac699, type: 2}

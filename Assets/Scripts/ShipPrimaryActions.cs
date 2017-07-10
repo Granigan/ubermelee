@@ -50,6 +50,12 @@ public class ShipPrimaryActions : MonoBehaviour
 
     }
 
+    public void Ship64Primary()
+    {
+        genericPrimaryShoot();
+
+    }
+
 
     private void genericPrimaryShoot()
     {
