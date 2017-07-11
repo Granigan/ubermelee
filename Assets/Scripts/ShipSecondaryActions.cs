@@ -52,7 +52,8 @@ public class ShipSecondaryActions : MonoBehaviour
                 bullet.GetComponent<BulletCollision>().bulletOwnerPlayerNumber = shipHandling.playerNumber;
                 Transform transform = bullet.GetComponentInChildren<Transform>();
                 transform.localScale = new Vector3(shipDetails.Secondary.Scale, shipDetails.Secondary.Scale, shipDetails.Secondary.Scale);
-
+                bullet.GetComponent<BulletCollision>().bulletHitPoints = shipDetails.Secondary.HitPoints;
+                bullet.gameObject.tag = "Bullet";
 
                 // Add velocity to the bullet
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.Secondary.Speed;
@@ -147,7 +148,9 @@ public class ShipSecondaryActions : MonoBehaviour
             bullet.GetComponent<BulletCollision>().bulletOwnerPlayerNumber = shipHandling.playerNumber;
             Transform transform = bullet.GetComponentInChildren<Transform>();
             transform.localScale = new Vector3(shipDetails.Secondary.Scale, shipDetails.Secondary.Scale, shipDetails.Secondary.Scale);
-            
+            bullet.GetComponent<BulletCollision>().bulletHitPoints = shipDetails.Secondary.HitPoints;
+            bullet.gameObject.tag = "Bullet";
+
             // Add velocity to the bullet
             //bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.Secondary.Speed;
 
@@ -205,7 +208,8 @@ public class ShipSecondaryActions : MonoBehaviour
                 bullet.GetComponent<BulletCollision>().bulletOwnerPlayerNumber = shipHandling.playerNumber;
                 Transform transform = bullet.GetComponentInChildren<Transform>();
                 transform.localScale = new Vector3(shipDetails.Secondary.Scale, shipDetails.Secondary.Scale, shipDetails.Secondary.Scale);
-
+                bullet.GetComponent<BulletCollision>().bulletHitPoints = shipDetails.Secondary.HitPoints;
+                bullet.gameObject.tag = "Bullet";
 
                 // Add velocity to the bullet
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.Secondary.Speed;

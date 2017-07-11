@@ -78,7 +78,10 @@ public class ShipPrimaryActions : MonoBehaviour
                     shipDetails.Primary.bulletPrefab,
                     currBulletSpawnPoint.position,
                     currBulletSpawnPoint.rotation);
+                    bullet.transform.parent = gameObject.transform;
                     bullet.GetComponent<BulletCollision>().bulletOwnerPlayerNumber = shipHandling.playerNumber;
+                    bullet.GetComponent<BulletCollision>().bulletHitPoints = shipDetails.Primary.HitPoints;
+                    bullet.gameObject.tag = "Bullet";
 
                     Transform transform = bullet.GetComponentInChildren<Transform>();
                     transform.localScale = new Vector3(shipDetails.Primary.Scale, shipDetails.Primary.Scale, shipDetails.Primary.Scale);
