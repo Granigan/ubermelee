@@ -23,7 +23,8 @@ public class SceneBuilder : MonoBehaviour {
         {
             PlayerInstances.Add(Instantiate(currPlayer));
             currPlayer.GetComponent<ShipHandling>().playerNumber = playerNumber;
-            //currPlayer.GetComponent<ShipHandling>().AIEnabled = true;
+//if(playerNumber != 1)
+//currPlayer.GetComponent<ShipHandling>().AIEnabled = true;
             //Debug.Log("playerNumber: "+ playerNumber);
             playerNumber++;
             currPlayer.transform.position = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), -3);

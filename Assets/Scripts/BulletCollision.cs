@@ -8,6 +8,7 @@ public class BulletCollision : MonoBehaviour {
     public float damage = 2.0f;
     public GameObject explosionPrefab;
     public float bulletOwnerPlayerNumber = 0f;
+    public float bulletHitPoints = 1f;
 
     // Use this for initialization
     void Start () {
@@ -44,6 +45,31 @@ public class BulletCollision : MonoBehaviour {
 
             }
 
+        } else if(col.gameObject.tag == "Bullet")
+        {
+            //Debug.Log("Bullet Collision!!");
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            
+            // Exchange damage
+            bulletHitPoints = bulletHitPoints - col.transform.GetComponent<BulletCollision>().damage;
+            col.transform.GetComponent<BulletCollision>().bulletHitPoints = col.transform.GetComponent<BulletCollision>().bulletHitPoints - damage;
+
+            //Debug.Log("Bullet hitpoints after collision: " + bulletHitPoints + " and " + col.transform.GetComponent<BulletCollision>().bulletHitPoints);
+
+            // Check for casualties
+            if (bulletHitPoints <= 0)
+            {
+                Destroy(explosion, 3.0f);
+                Destroy(this.gameObject);
+            }
+            if (col.transform.GetComponent<BulletCollision>().bulletHitPoints <= 0)
+            {
+                Destroy(explosion, 3.0f);
+                Destroy(col.gameObject);
+            }
+
+
+
         }
     }
 
@@ -52,5 +78,6 @@ public class BulletCollision : MonoBehaviour {
     {
         damage = newDamage;
     }
+
 
 }
