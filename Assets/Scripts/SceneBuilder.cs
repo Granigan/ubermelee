@@ -53,9 +53,9 @@ public class SceneBuilder : MonoBehaviour {
         for(int i = 0; i < NumberOfPlanets; i++)
         {
             //Debug.Log("Buildign planet " + i);
-            GameObject currPlanet =Instantiate(Planet);
+            GameObject currPlanet = Instantiate(Planet);
             currPlanet.transform.position = new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), -3);
-            float scale = Random.Range(1.3f, 2.9f);
+            float scale = Random.Range(0.05f, 0.3f);
             currPlanet.transform.localScale = new Vector3(scale, scale, scale);
 
         }
