@@ -141,8 +141,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745512433016608}
-  m_LocalRotation: {x: 0.9271838, y: 0.37460655, z: -0, w: 0}
-  m_LocalPosition: {x: -5, y: -5, z: -3}
+  m_LocalRotation: {x: 0.15643455, y: -0.98768836, z: -0, w: 0}
+  m_LocalPosition: {x: 4, y: 2, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4581946234325456}
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipDetails: {fileID: 11400000, guid: e4b77c04ebb10ab4e891aa6f83a95ee9, type: 2}
-  explosionPrefab: {fileID: 1132007625944278, guid: 63533b19cffe05141b4e8d6ff19580e7,
+  explosionPrefab: {fileID: 1304572950438414, guid: e40af0e21b5cec54082ba4c827aa561d,
     type: 2}
   respawnVariance: 30
   shipID: 47
