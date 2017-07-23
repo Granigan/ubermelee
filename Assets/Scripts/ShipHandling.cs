@@ -113,7 +113,7 @@ public class ShipHandling : MonoBehaviour {
 
     private void ExplodeShip() { 
     
-        Debug.Log("Ship Explosion!!!");
+        //Debug.Log("Ship Explosion!!!");
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, 3.0f);
         GameObject deadShip = this.gameObject;
@@ -128,7 +128,7 @@ public class ShipHandling : MonoBehaviour {
     
     private IEnumerator DieAndRespawn()
     {
-        Debug.Log("Player just died!!");
+        //Debug.Log("Player just died!!");
         shipIsDead = true;
 
         this.gameObject.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
@@ -140,7 +140,7 @@ public class ShipHandling : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(2.0f);
-        Debug.Log("Player just respawned!!");
+        //Debug.Log("Player just respawned!!");
 
         Vector3 respawnPoint = new Vector3(Random.Range(-respawnVariance, respawnVariance), Random.Range(-respawnVariance, respawnVariance), -3);  // Fix up the static -3 Z-axis later?
 

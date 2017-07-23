@@ -141,6 +141,7 @@ public class ShipSecondaryActions : MonoBehaviour
 
         foreach (Transform currBulletSpawnPoint in bulletSpecialSpawnPoints)
         {
+            
             GameObject bullet = (GameObject)Instantiate(
             shipDetails.Secondary.SecondaryPrefab,
             currBulletSpawnPoint.position,
@@ -150,7 +151,8 @@ public class ShipSecondaryActions : MonoBehaviour
             transform.localScale = new Vector3(shipDetails.Secondary.Scale, shipDetails.Secondary.Scale, shipDetails.Secondary.Scale);
             bullet.GetComponent<BulletCollision>().bulletHitPoints = shipDetails.Secondary.HitPoints;
             bullet.gameObject.tag = "Bullet";
-
+            bullet.GetComponent<BulletCollision>().isMine = true;
+            bullet.transform.SetPositionAndRotation(currBulletSpawnPoint.position, Quaternion.identity);
             // Add velocity to the bullet
             //bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.Secondary.Speed;
 
