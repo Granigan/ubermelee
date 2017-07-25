@@ -20,6 +20,6 @@ MonoBehaviour:
   AngularDrag: 0
   BatteryCharge: 4
   FireRate: 0.3
-  HitPoints: 30
+  HitPoints: 4
   SecondaryPrefab: {fileID: 1696281707263470, guid: 3ced24eca3187a147b45c91057fcdb2f,
     type: 2}
