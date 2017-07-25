@@ -635,6 +635,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1442135968714916, guid: 9297db079f51bca44a398e9ae3b63500,
         type: 2}
+    - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: closedBorders
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
   m_IsPrefabParent: 0

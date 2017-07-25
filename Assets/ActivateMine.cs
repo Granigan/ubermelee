@@ -37,6 +37,9 @@ public class ActivateMine : MonoBehaviour {
             if (col.transform.parent.tag == "CameraObject" && bc.isMine == true && bc.bulletOwnerPlayerNumber == shipHandling.playerNumber)
             {
                 // Do nothing
+            } else if (col.transform.tag == "Bullet")
+            {
+                // Do nothing
             }
             else
             {
