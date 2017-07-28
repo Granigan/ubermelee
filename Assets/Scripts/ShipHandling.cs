@@ -90,8 +90,13 @@ public class ShipHandling : MonoBehaviour {
 
         transform.position = new Vector3(transform.position.x, transform.position.y, -3.0f);
 
-        if(AIEnabled == true)
+
+        
+
+
+        if (AIEnabled == true)
         {
+            getClosestEnemy();
             executeAI();
         }
 
@@ -264,29 +269,171 @@ public class ShipHandling : MonoBehaviour {
         currentBattery = newBattery;
     }
 
+    Transform getClosestEnemy()
+    {
+        float closestEnemyDistance = Mathf.Infinity;
+        Transform targetPlayer = null;
+
+
+
+        if (AILevel == AILevels.ROOKIE)
+        {
+            int i = 1;
+            foreach (GameObject currShip in GameObject.FindGameObjectsWithTag("CameraObject"))
+            {
+                float distance = (currShip.transform.position - transform.position).sqrMagnitude;
+                //Debug.Log("i=" + i + " distance = " + distance);
+                i++;
+
+                if (distance < closestEnemyDistance && distance > 0.1)
+                {
+                    closestEnemyDistance = distance;
+                    //Debug.Log("closestEnemyDistance = " + closestEnemyDistance);
+                    targetPlayer = currShip.gameObject.transform;
+                }
+            }
+
+            // Turn the ship according to closest enemy
+            float targetAngle = 0f;
+            float aimRotation = 0f;
+            float myX = Mathf.Abs(this.transform.position.x);
+            float myY = Mathf.Abs(this.transform.position.y);
+            float targetPlayerX = Mathf.Abs(targetPlayer.position.x);
+            float targetPlayerY = Mathf.Abs(targetPlayer.position.y);
+            float diffY = 0f;
+            float diffX = 0f;
+
+            // Case 1: Enemy top right from player
+            if (targetPlayer.position.y >= this.transform.position.y && targetPlayer.position.x >= this.transform.position.x)
+            {
+                if ((targetPlayer.position.y > 0 && this.transform.position.y > 0) || (targetPlayer.position.y < 0 && this.transform.position.y < 0))
+                {
+                    diffY = targetPlayerY - myY;
+                }
+                else
+                {
+                    diffY = targetPlayerY + myY;
+                }
+
+                if ((targetPlayer.position.x > 0 && this.transform.position.x > 0) || (targetPlayer.position.x < 0 && this.transform.position.x < 0))
+                {
+                    diffX = targetPlayerX - myX;
+                }
+                else
+                {
+                    diffX = targetPlayerX + myX;
+                }
+
+                targetAngle = Mathf.Abs(Mathf.Atan((diffY) / (diffX)) * Mathf.Rad2Deg);
+                aimRotation = targetAngle * -1;
+            }
+            // Case 2: Enemy top left from player
+            else if (targetPlayer.position.y >= this.transform.position.y && targetPlayer.position.x <= this.transform.position.x)
+            {
+                if ((targetPlayer.position.y > 0 && this.transform.position.y > 0) || (targetPlayer.position.y < 0 && this.transform.position.y < 0))
+                {
+                    diffY = targetPlayerY - myY;
+                }
+                else
+                {
+                    diffY = targetPlayerY + myY;
+                }
+
+                if ((targetPlayer.position.x > 0 && this.transform.position.x > 0) || (targetPlayer.position.x < 0 && this.transform.position.x < 0))
+                {
+                    diffX = myX - targetPlayerX;
+                }
+                else
+                {
+                    diffX = myX + targetPlayerX;
+                }
+
+                targetAngle = Mathf.Abs(Mathf.Atan((diffX) / (diffY)) * Mathf.Rad2Deg) + 90f;
+                aimRotation = targetAngle * -1;
+
+            }
+            // Case 3: Enemy down right from player
+            else if (targetPlayer.position.y <= this.transform.position.y && targetPlayer.position.x >= this.transform.position.x)
+            {
+                if ((targetPlayer.position.y > 0 && this.transform.position.y > 0) || (targetPlayer.position.y < 0 && this.transform.position.y < 0))
+                {
+                    diffY = myY - targetPlayerY;
+                }
+                else
+                {
+                    diffY = myY + targetPlayerY;
+                }
+
+                if ((targetPlayer.position.x > 0 && this.transform.position.x > 0) || (targetPlayer.position.x < 0 && this.transform.position.x < 0))
+                {
+                    diffX = targetPlayerX - myX;
+                }
+                else
+                {
+                    diffX = targetPlayerX + myX;
+                }
+
+                targetAngle = Mathf.Abs(Mathf.Atan((diffX) / (diffY)) * Mathf.Rad2Deg) + 270f;
+                aimRotation = 360 - targetAngle;
+
+            }
+            // Case 4: Enemy down right from player
+            else 
+            {
+                if ((targetPlayer.position.y > 0 && this.transform.position.y > 0) || (targetPlayer.position.y < 0 && this.transform.position.y < 0))
+                {
+                    diffY = myY - targetPlayerY;
+                }
+                else
+                {
+                    diffY = myY + targetPlayerY;
+                }
+
+                if ((targetPlayer.position.x > 0 && this.transform.position.x > 0) || (targetPlayer.position.x < 0 && this.transform.position.x < 0))
+                {
+                    diffX = myX - targetPlayerX;
+                }
+                else
+                {
+                    diffX = myX + targetPlayerX;
+                }
+
+                targetAngle = Mathf.Abs(Mathf.Atan((diffY) / (diffX)) * Mathf.Rad2Deg) + 180f;
+                aimRotation = targetAngle -90;
+
+            }
+
+            // Start the turning according to the target
+            if(aimRotation > gameObject.transform.rotation.eulerAngles.z -180f)
+            {
+                RotateShip(1);
+            } else if (aimRotation == gameObject.transform.rotation.eulerAngles.z - 180f)
+            {
+                RotateShip(0);
+            }
+            else
+            {
+                RotateShip(-1);
+            }
+
+
+            //Debug.Log("targetPlayer = " + targetPlayer.ToString() + " this.transform =  " + this.transform.ToString() + " targetAngle = " + targetAngle);
+            //Debug.Log("this.transform.rotation.z = " + (gameObject.transform.rotation.eulerAngles.z -180f) + " targetAngle = " + targetAngle + " aimRotation = " + aimRotation);
+            
+
+        }
+
+
+
+        return targetPlayer;
+    }
+
+
     void executeAI()
     {
         if(AIEnabled == true)
         {
-            float closestEnemyDistance = Mathf.Infinity;
-            Transform targetPlayer = null;
-
-
-
-            if (AILevel == AILevels.ROOKIE)
-            {
-                foreach(GameObject currShip in GameObject.FindGameObjectsWithTag("CameraObject"))
-                {
-                    float distance = (currShip.transform.position - transform.position).sqrMagnitude;
-
-                    if(distance < closestEnemyDistance && currShip != this.gameObject && distance > 0)
-                    {
-                        closestEnemyDistance = distance;
-                        //Debug.Log("closestEnemyDistance = " + closestEnemyDistance);
-                        targetPlayer = currShip.gameObject.transform;
-                    }
-                }
-            } 
+        
 
             //Debug.Log("Time.time " + Time.time);
             float AIExecTime = Random.Range(1.0f, 5.0f);
