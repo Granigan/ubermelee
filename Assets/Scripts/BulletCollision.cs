@@ -98,6 +98,12 @@ public class BulletCollision : MonoBehaviour {
 
 
 
+            } else
+            {
+                // On any other object, just destroy the bullet
+                GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                Destroy(explosion, 3.0f);
+                Destroy(this.gameObject);
             }
 
         }

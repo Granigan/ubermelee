@@ -50,14 +50,20 @@ public class SceneBuilder : MonoBehaviour {
 
     void BuildPlanets()
     {
-        for(int i = 0; i < NumberOfPlanets; i++)
+        
+
+        for (int i = 0; i < NumberOfPlanets; i++)
         {
+            Vector3 force = new Vector3(Random.Range(0f, 50f), Random.Range(0f, 50f), 0);
+            Vector3 forcePosition = new Vector3(Random.Range(0.1f, 1f), Random.Range(0.1f, 1f), 0);
+            Vector3 velocity = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
             //Debug.Log("Buildign planet " + i);
             GameObject currPlanet = Instantiate(Planet);
             currPlanet.transform.position = new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), -3);
             float scale = Random.Range(0.05f, 0.3f);
             currPlanet.transform.localScale = new Vector3(scale, scale, scale);
-
+            currPlanet.GetComponent<Rigidbody>().velocity = velocity;
+            currPlanet.GetComponent<Rigidbody>().AddForceAtPosition(force, forcePosition);
         }
     }
     

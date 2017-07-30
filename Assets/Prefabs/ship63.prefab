@@ -169,8 +169,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1617482157489880}
-  m_LocalRotation: {x: -0.976296, y: 0.21643977, z: -0, w: 0}
-  m_LocalPosition: {x: -4, y: 3, z: -3}
+  m_LocalRotation: {x: 0.71325016, y: -0.70090955, z: -0, w: 0}
+  m_LocalPosition: {x: -4, y: -4, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4970687467089386}
@@ -427,7 +427,7 @@ MonoBehaviour:
   eulerAngleVelocity: {x: 0, y: 0, z: -180}
   lastShot: 0
   lastSecondaryUsed: 0
-  playerNumber: 2
+  playerNumber: 3
   AIEnabled: 0
   AILevel: 1
   shipIsDead: 0

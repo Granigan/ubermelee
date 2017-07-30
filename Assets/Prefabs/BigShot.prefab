@@ -141,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToLive: 3
   damage: 2
-  explosionPrefab: {fileID: 1701049221895126, guid: bf6c7abd5fb392a4c9d85ab72825d049,
+  explosionPrefab: {fileID: 1848359790392016, guid: f73e42544b241d14b9ba531246c34a13,
     type: 2}
   explosionPrefabBig: {fileID: 1304572950438414, guid: e40af0e21b5cec54082ba4c827aa561d,
     type: 2}

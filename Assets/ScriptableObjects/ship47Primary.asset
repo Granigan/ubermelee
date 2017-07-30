@@ -23,5 +23,5 @@ MonoBehaviour:
   HitPoints: 8
   bulletPrefab: {fileID: 1555994552972690, guid: 3d66419feaf62a843a387156c8455f0d,
     type: 2}
-  explosionPrefab: {fileID: 1701049221895126, guid: bf6c7abd5fb392a4c9d85ab72825d049,
+  explosionPrefab: {fileID: 1848359790392016, guid: f73e42544b241d14b9ba531246c34a13,
     type: 2}

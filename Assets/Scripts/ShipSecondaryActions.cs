@@ -5,16 +5,24 @@ using UnityEngine;
 // All the ship secondary actions go here. They are invoked by shipID.
 public class ShipSecondaryActions : MonoBehaviour
 {
-
+    private bool Ship47SecondaryActive = false;
+    float Ship47SpeedReduction = 100f;
+    float Ship47RotationSpeed = 0f;
+    float Ship47InitialRotationSpeed = 23.3f;
     // Use this for initialization
     void Start()
     {
-
+        Ship47RotationSpeed = Ship47InitialRotationSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(Ship47SecondaryActive == true)
+        {
+            RotateShip47();
+        }
+
     }
 
     //Ship31 Secondary
@@ -84,32 +92,35 @@ public class ShipSecondaryActions : MonoBehaviour
     {
         ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
         ShipDetails shipDetails = shipHandling.shipDetails;
-        if(shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge)
+        
+
+        if (shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge && Ship47SecondaryActive == false)
         {
-            //This works as well, but not smoothly..
-            //transform.Rotate(0, 0, Time.deltaTime * 3000, Space.Self);
-            
-            Vector3 eulerAngleVelocity = new Vector3(0,0,-180);
-            Rigidbody rb = shipHandling.GetComponent<Rigidbody>();
-            Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity *1);
-            rb.MoveRotation(rb.rotation * deltaRotation);
-
+            Ship47SecondaryActive = true;
             shipHandling.currentBattery -= shipDetails.Secondary.BatteryCharge;
-
-        }
-
-
-
-        //}
-        //Transform currTransform = GetComponent<Transform>();
-
-
-        //transform.RotateAround(transform.position, transform.up, 180f);
-        //Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * 10f * Time.deltaTime * -1);
-
-
+        } 
 
     }
+
+    void RotateShip47()
+    {
+
+        //Debug.Log(Ship47RotationSpeed);
+        if (Ship47RotationSpeed > 0)
+        {
+            Ship47RotationSpeed -= Ship47SpeedReduction * Time.deltaTime; 
+            this.GetComponentInParent<ShipHandling>().RotateShip(Ship47RotationSpeed);
+        }
+        else
+        {
+            Ship47RotationSpeed = Ship47InitialRotationSpeed;
+            Ship47SecondaryActive = false;
+        }
+
+    }
+
+
+
 
     public void Ship63Secondary()
     {

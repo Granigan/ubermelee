@@ -443,22 +443,35 @@ public class ShipHandling : MonoBehaviour {
                 //float execTurn = Random.Range(0.0f, 1.0f);
                 //Debug.Log(turnDirection + " " + turnTime + " " + turnLastExecuted);
 
-               
-                RotateShip(AITurnDirection);
-                
-                
-                MoveShip(Random.Range(-0.0f, 0.2f));
-
-                if(Random.Range(0.0f, 1.0f) > 0.9f)
+                if (AILevel == AILevels.IDIOT)
                 {
-                    UsePrimary();
-                }
-                if (Random.Range(0.0f, 1.0f) > 0.95f)
-                {
-                    UseSecondary();
-                }
-                
+                    RotateShip(AITurnDirection);
 
+
+                    MoveShip(Random.Range(-0.0f, 0.2f));
+
+                    if (Random.Range(0.0f, 1.0f) > 0.9f)
+                    {
+                        UsePrimary();
+                    }
+                    if (Random.Range(0.0f, 1.0f) > 0.95f)
+                    {
+                        UseSecondary();
+                    }
+
+                } else if (AILevel == AILevels.ROOKIE)
+                {
+                    MoveShip(Random.Range(-0.0f, 0.2f));
+
+                    if (Random.Range(0.0f, 1.0f) > 0.85f)
+                    {
+                        UsePrimary();
+                    }
+                    if (Random.Range(0.0f, 1.0f) > 0.98f)
+                    {
+                        UseSecondary();
+                    }
+                }
             }
             else {
                 /*
