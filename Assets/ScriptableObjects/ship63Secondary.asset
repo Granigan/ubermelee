@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2abc56e208e3b444b69ac99efa456c2, type: 3}
   m_Name: ship63Secondary
   m_EditorClassIdentifier: 
-  Damage: 5
+  Damage: 8
   Scale: 0.1
   Speed: 0
   TimeToLive: 30
@@ -20,6 +20,6 @@ MonoBehaviour:
   AngularDrag: 0
   BatteryCharge: 4
   FireRate: 0.3
-  HitPoints: 4
+  HitPoints: 8
   SecondaryPrefab: {fileID: 1696281707263470, guid: 3ced24eca3187a147b45c91057fcdb2f,
     type: 2}
