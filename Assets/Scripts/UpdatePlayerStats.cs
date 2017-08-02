@@ -15,8 +15,8 @@ public class UpdatePlayerStats : MonoBehaviour {
     private bool MeleeInProgress = true;
 
     // GUI test stuff...
-    public GameObject[] HealthArray;
-    public GameObject[] EnergyArray;
+    //public GameObject[] HealthArray;
+    //public GameObject[] EnergyArray;
     // GUI test stuff...
 
     // Use this for initialization
@@ -86,10 +86,10 @@ public class UpdatePlayerStats : MonoBehaviour {
             text.text += "Score: " + Mathf.Round(playerScores[i - 1]).ToString() + "\n";
 
             // GUI Test Stuff...
-            GameObject CrewBar = GameObject.Find("HealthBar" + i);
-            GameObject EnergyBar = GameObject.Find("EnergyBar" + i);
-            CrewBar.transform.localScale = new Vector3(1, Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentCrew()), 1);
-            EnergyBar.transform.localScale = new Vector3(1, Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentBattery()), 1);
+            //GameObject CrewBar = GameObject.Find("HealthBar" + i);
+            //GameObject EnergyBar = GameObject.Find("EnergyBar" + i);
+            //CrewBar.transform.localScale = new Vector3(1, Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentCrew()), 1);
+            //EnergyBar.transform.localScale = new Vector3(1, Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentBattery()), 1);
             // GUI Test Stuff...
         }
         return true;
