@@ -360,7 +360,7 @@ Prefab:
         type: 2}
       propertyPath: Players.Array.data[1]
       value: 
-      objectReference: {fileID: 1617482157489880, guid: ba234a7716edb064984c82f59fadda3c,
+      objectReference: {fileID: 1745512433016608, guid: 8270c47871974bc498a5983a6e42a4bc,
         type: 2}
     - target: {fileID: 1316403383244244, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
       propertyPath: m_TagString
@@ -370,7 +370,7 @@ Prefab:
         type: 2}
       propertyPath: Players.Array.data[2]
       value: 
-      objectReference: {fileID: 1745512433016608, guid: 8270c47871974bc498a5983a6e42a4bc,
+      objectReference: {fileID: 1617482157489880, guid: ba234a7716edb064984c82f59fadda3c,
         type: 2}
     - target: {fileID: 4978094787119110, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
       propertyPath: m_LocalScale.x
@@ -384,7 +384,11 @@ Prefab:
         type: 2}
       propertyPath: Players.Array.data[3]
       value: 
+<<<<<<< HEAD
       objectReference: {fileID: 1065157009348514, guid: 22f6a3d4c34fc354baa0cc54401abff7,
+=======
+      objectReference: {fileID: 1521372026914272, guid: 61baa0c1d5aa84743aff39944f8e5df9,
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
         type: 2}
     - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
@@ -421,6 +425,20 @@ Prefab:
       propertyPath: NumberOfPlanets
       value: 10
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+=======
+    - target: {fileID: 114599262295883474, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: Planet
+      value: 
+      objectReference: {fileID: 1442135968714916, guid: 9297db079f51bca44a398e9ae3b63500,
+        type: 2}
+    - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: closedBorders
+      value: 1
+      objectReference: {fileID: 0}
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
   m_IsPrefabParent: 0
@@ -792,6 +810,68 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0f7eb6ef2c0ebd41bb6f18df3fac699, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1878991331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1878991334}
+  - component: {fileID: 1878991333}
+  - component: {fileID: 1878991332}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1878991332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1878991331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1878991333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1878991331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!4 &1878991334
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1878991331}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1992581620
 GameObject:
   m_ObjectHideFlags: 0

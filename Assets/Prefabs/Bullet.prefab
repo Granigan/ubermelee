@@ -113,7 +113,11 @@ MonoBehaviour:
   damage: 2
   explosionPrefab: {fileID: 1701049221895126, guid: bf6c7abd5fb392a4c9d85ab72825d049,
     type: 2}
+  explosionPrefabBig: {fileID: 1304572950438414, guid: e40af0e21b5cec54082ba4c827aa561d,
+    type: 2}
   bulletOwnerPlayerNumber: 0
+  bulletHitPoints: 1
+  isMine: 0
 --- !u!135 &135237842348101350
 SphereCollider:
   m_ObjectHideFlags: 1

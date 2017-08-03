@@ -17,7 +17,7 @@ MonoBehaviour:
   RotationRate: 0.4
   Crew: 16
   Battery: 40
-  BatteryRechargeRate: 8
+  BatteryRechargeRate: 5
   AngularDrag: 5
   Drag: 0
   Scale: 1

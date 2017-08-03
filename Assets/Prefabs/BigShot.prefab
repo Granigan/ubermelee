@@ -9,57 +9,48 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1442135968714916}
+  m_RootGameObject: {fileID: 1555994552972690}
   m_IsPrefabParent: 1
---- !u!1 &1442135968714916
+--- !u!1 &1555994552972690
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4307441434261082}
-  - component: {fileID: 33414650680589906}
-  - component: {fileID: 23198726528013574}
-<<<<<<< HEAD
-  - component: {fileID: 95063620393190366}
-  - component: {fileID: 54275039635869012}
-  - component: {fileID: 136380568468322152}
-=======
-  - component: {fileID: 54522774132933238}
-  - component: {fileID: 135259494425992152}
->>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
+  - component: {fileID: 4677792990306564}
+  - component: {fileID: 33058422364854984}
+  - component: {fileID: 23515164521869234}
+  - component: {fileID: 95458042311039468}
+  - component: {fileID: 54646633257816272}
+  - component: {fileID: 114055198218669870}
+  - component: {fileID: 65723281396242524}
   m_Layer: 0
-  m_Name: Asteroid1
-  m_TagString: Untagged
+  m_Name: BigShot
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
---- !u!4 &4307441434261082
+--- !u!4 &4677792990306564
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1442135968714916}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< HEAD
-  m_LocalPosition: {x: 4.35, y: 1.165, z: -3}
-  m_LocalScale: {x: 0.1, y: 0.07482957, z: 0.1}
-=======
+  m_GameObject: {fileID: 1555994552972690}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
->>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23198726528013574
+--- !u!23 &23515164521869234
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1442135968714916}
+  m_GameObject: {fileID: 1555994552972690}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -67,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6e6fdf00cd867c7428a86124c5b7ae65, type: 2}
+  - {fileID: 2100000, guid: 42ed84931ff649b4e91cb9207e59f8b7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,25 +77,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33414650680589906
+--- !u!33 &33058422364854984
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1442135968714916}
-  m_Mesh: {fileID: 4300000, guid: a20e02836bba1ac4da73137e8497b6c8, type: 3}
-<<<<<<< HEAD
---- !u!54 &54275039635869012
-=======
---- !u!54 &54522774132933238
->>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
+  m_GameObject: {fileID: 1555994552972690}
+  m_Mesh: {fileID: 4300000, guid: 774f70e46b5e4fa449990c4f6c31ab4b, type: 3}
+--- !u!54 &54646633257816272
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1442135968714916}
+  m_GameObject: {fileID: 1555994552972690}
   serializedVersion: 2
-<<<<<<< HEAD
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
@@ -113,15 +99,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!95 &95063620393190366
+--- !u!65 &65723281396242524
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1555994552972690}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8028615, y: 1.8028619, z: 4.2659507}
+  m_Center: {x: 0.00000008940697, y: 0, z: 0.14776781}
+--- !u!95 &95458042311039468
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1442135968714916}
+  m_GameObject: {fileID: 1555994552972690}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a20e02836bba1ac4da73137e8497b6c8, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 774f70e46b5e4fa449990c4f6c31ab4b, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -130,34 +128,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!136 &136380568468322152
-CapsuleCollider:
-=======
-  m_Mass: 100
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 8
-  m_CollisionDetection: 1
---- !u!135 &135259494425992152
-SphereCollider:
->>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
+--- !u!114 &114055198218669870
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1442135968714916}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_GameObject: {fileID: 1555994552972690}
   m_Enabled: 1
-<<<<<<< HEAD
-  m_Radius: 10.46854
-  m_Height: 27.979689
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.0000015930773, z: 0.28541327}
-=======
-  serializedVersion: 2
-  m_Radius: 10.532373
-  m_Center: {x: 0, y: 0.00000047683716, z: 0}
->>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78f6d3413f39c9409c3bfe65d38ace0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToLive: 3
+  damage: 2
+  explosionPrefab: {fileID: 1848359790392016, guid: f73e42544b241d14b9ba531246c34a13,
+    type: 2}
+  explosionPrefabBig: {fileID: 1304572950438414, guid: e40af0e21b5cec54082ba4c827aa561d,
+    type: 2}
+  bulletOwnerPlayerNumber: 0
+  bulletHitPoints: 1
+  isMine: 0

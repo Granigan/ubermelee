@@ -90,8 +90,13 @@ public class ShipHandling : MonoBehaviour {
 
         transform.position = new Vector3(transform.position.x, transform.position.y, -3.0f);
 
-        if(AIEnabled == true)
+
+        
+
+
+        if (AIEnabled == true)
         {
+            getClosestEnemy();
             executeAI();
         }
 
@@ -113,7 +118,7 @@ public class ShipHandling : MonoBehaviour {
 
     private void ExplodeShip() { 
     
-        Debug.Log("Ship Explosion!!!");
+        //Debug.Log("Ship Explosion!!!");
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, 3.0f);
         GameObject deadShip = this.gameObject;
@@ -128,7 +133,11 @@ public class ShipHandling : MonoBehaviour {
     
     private IEnumerator DieAndRespawn()
     {
+<<<<<<< HEAD
         Debug.Log("Player just died!!");
+=======
+        //Debug.Log("Player just died!!");
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
         shipIsDead = true;
 
         this.gameObject.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
@@ -140,7 +149,11 @@ public class ShipHandling : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(2.0f);
+<<<<<<< HEAD
         Debug.Log("Player just respawned!!");
+=======
+        //Debug.Log("Player just respawned!!");
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
 
         Vector3 respawnPoint = new Vector3(Random.Range(-respawnVariance, respawnVariance), Random.Range(-respawnVariance, respawnVariance), -3);  // Fix up the static -3 Z-axis later?
 
@@ -264,10 +277,171 @@ public class ShipHandling : MonoBehaviour {
         currentBattery = newBattery;
     }
 
+    Transform getClosestEnemy()
+    {
+        float closestEnemyDistance = Mathf.Infinity;
+        Transform targetPlayer = null;
+
+
+
+        if (AILevel == AILevels.ROOKIE)
+        {
+            int i = 1;
+            foreach (GameObject currShip in GameObject.FindGameObjectsWithTag("CameraObject"))
+            {
+                float distance = (currShip.transform.position - transform.position).sqrMagnitude;
+                //Debug.Log("i=" + i + " distance = " + distance);
+                i++;
+
+                if (distance < closestEnemyDistance && distance > 0.1)
+                {
+                    closestEnemyDistance = distance;
+                    //Debug.Log("closestEnemyDistance = " + closestEnemyDistance);
+                    targetPlayer = currShip.gameObject.transform;
+                }
+            }
+
+            // Turn the ship according to closest enemy
+            float targetAngle = 0f;
+            float aimRotation = 0f;
+            float myX = Mathf.Abs(this.transform.position.x);
+            float myY = Mathf.Abs(this.transform.position.y);
+            float targetPlayerX = Mathf.Abs(targetPlayer.position.x);
+            float targetPlayerY = Mathf.Abs(targetPlayer.position.y);
+            float diffY = 0f;
+            float diffX = 0f;
+
+            // Case 1: Enemy top right from player
+            if (targetPlayer.position.y >= this.transform.position.y && targetPlayer.position.x >= this.transform.position.x)
+            {
+                if ((targetPlayer.position.y > 0 && this.transform.position.y > 0) || (targetPlayer.position.y < 0 && this.transform.position.y < 0))
+                {
+                    diffY = targetPlayerY - myY;
+                }
+                else
+                {
+                    diffY = targetPlayerY + myY;
+                }
+
+                if ((targetPlayer.position.x > 0 && this.transform.position.x > 0) || (targetPlayer.position.x < 0 && this.transform.position.x < 0))
+                {
+                    diffX = targetPlayerX - myX;
+                }
+                else
+                {
+                    diffX = targetPlayerX + myX;
+                }
+
+                targetAngle = Mathf.Abs(Mathf.Atan((diffY) / (diffX)) * Mathf.Rad2Deg);
+                aimRotation = targetAngle * -1;
+            }
+            // Case 2: Enemy top left from player
+            else if (targetPlayer.position.y >= this.transform.position.y && targetPlayer.position.x <= this.transform.position.x)
+            {
+                if ((targetPlayer.position.y > 0 && this.transform.position.y > 0) || (targetPlayer.position.y < 0 && this.transform.position.y < 0))
+                {
+                    diffY = targetPlayerY - myY;
+                }
+                else
+                {
+                    diffY = targetPlayerY + myY;
+                }
+
+                if ((targetPlayer.position.x > 0 && this.transform.position.x > 0) || (targetPlayer.position.x < 0 && this.transform.position.x < 0))
+                {
+                    diffX = myX - targetPlayerX;
+                }
+                else
+                {
+                    diffX = myX + targetPlayerX;
+                }
+
+                targetAngle = Mathf.Abs(Mathf.Atan((diffX) / (diffY)) * Mathf.Rad2Deg) + 90f;
+                aimRotation = targetAngle * -1;
+
+            }
+            // Case 3: Enemy down right from player
+            else if (targetPlayer.position.y <= this.transform.position.y && targetPlayer.position.x >= this.transform.position.x)
+            {
+                if ((targetPlayer.position.y > 0 && this.transform.position.y > 0) || (targetPlayer.position.y < 0 && this.transform.position.y < 0))
+                {
+                    diffY = myY - targetPlayerY;
+                }
+                else
+                {
+                    diffY = myY + targetPlayerY;
+                }
+
+                if ((targetPlayer.position.x > 0 && this.transform.position.x > 0) || (targetPlayer.position.x < 0 && this.transform.position.x < 0))
+                {
+                    diffX = targetPlayerX - myX;
+                }
+                else
+                {
+                    diffX = targetPlayerX + myX;
+                }
+
+                targetAngle = Mathf.Abs(Mathf.Atan((diffX) / (diffY)) * Mathf.Rad2Deg) + 270f;
+                aimRotation = 360 - targetAngle;
+
+            }
+            // Case 4: Enemy down right from player
+            else 
+            {
+                if ((targetPlayer.position.y > 0 && this.transform.position.y > 0) || (targetPlayer.position.y < 0 && this.transform.position.y < 0))
+                {
+                    diffY = myY - targetPlayerY;
+                }
+                else
+                {
+                    diffY = myY + targetPlayerY;
+                }
+
+                if ((targetPlayer.position.x > 0 && this.transform.position.x > 0) || (targetPlayer.position.x < 0 && this.transform.position.x < 0))
+                {
+                    diffX = myX - targetPlayerX;
+                }
+                else
+                {
+                    diffX = myX + targetPlayerX;
+                }
+
+                targetAngle = Mathf.Abs(Mathf.Atan((diffY) / (diffX)) * Mathf.Rad2Deg) + 180f;
+                aimRotation = targetAngle -90;
+
+            }
+
+            // Start the turning according to the target
+            if(aimRotation > gameObject.transform.rotation.eulerAngles.z -180f)
+            {
+                RotateShip(1);
+            } else if (aimRotation == gameObject.transform.rotation.eulerAngles.z - 180f)
+            {
+                RotateShip(0);
+            }
+            else
+            {
+                RotateShip(-1);
+            }
+
+
+            //Debug.Log("targetPlayer = " + targetPlayer.ToString() + " this.transform =  " + this.transform.ToString() + " targetAngle = " + targetAngle);
+            //Debug.Log("this.transform.rotation.z = " + (gameObject.transform.rotation.eulerAngles.z -180f) + " targetAngle = " + targetAngle + " aimRotation = " + aimRotation);
+            
+
+        }
+
+
+
+        return targetPlayer;
+    }
+
+
     void executeAI()
     {
         if(AIEnabled == true)
         {
+<<<<<<< HEAD
             float closestEnemyDistance = Mathf.Infinity;
             Transform targetPlayer = null;
 
@@ -287,6 +461,9 @@ public class ShipHandling : MonoBehaviour {
                     }
                 }
             } 
+=======
+        
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
 
             //Debug.Log("Time.time " + Time.time);
             float AIExecTime = Random.Range(1.0f, 5.0f);
@@ -295,21 +472,63 @@ public class ShipHandling : MonoBehaviour {
             {
                 //float execTurn = Random.Range(0.0f, 1.0f);
                 //Debug.Log(turnDirection + " " + turnTime + " " + turnLastExecuted);
+<<<<<<< HEAD
 
                
                 RotateShip(AITurnDirection);
                 
                 
                 MoveShip(Random.Range(-0.0f, 0.2f));
+=======
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
 
-                if(Random.Range(0.0f, 1.0f) > 0.9f)
+                if (AILevel == AILevels.IDIOT)
                 {
-                    UsePrimary();
-                }
-                if (Random.Range(0.0f, 1.0f) > 0.95f)
+                    RotateShip(AITurnDirection);
+
+
+                    MoveShip(Random.Range(-0.0f, 0.2f));
+
+                    if (Random.Range(0.0f, 1.0f) > 0.9f)
+                    {
+                        UsePrimary();
+                    }
+                    if (Random.Range(0.0f, 1.0f) > 0.95f)
+                    {
+                        UseSecondary();
+                    }
+
+                } else if (AILevel == AILevels.ROOKIE)
                 {
-                    UseSecondary();
+                    MoveShip(Random.Range(-0.0f, 0.2f));
+
+                    if (Random.Range(0.0f, 1.0f) > 0.85f)
+                    {
+                        UsePrimary();
+                    }
+                    if (Random.Range(0.0f, 1.0f) > 0.98f)
+                    {
+                        UseSecondary();
+                    }
                 }
+            }
+            else {
+                /*
+                if (AILevel == AILevels.ROOKIE)
+                {
+                    AITurnDirection = 0f;
+                   // Quaternion rotationAngle = Quaternion.LookRotation(targetPlayer.position - transform.position);
+                   // Debug.Log(rotationAngle.eulerAngles.z);
+
+                    //transform.Rotate(0, 0, rotationAngle.z*10);
+                    //transform.rotation = Quaternion.Euler(rotationAngle.x, rotationAngle.y, 0);
+
+
+                    transform.LookAt(targetPlayer.position);
+
+                
+                }
+<<<<<<< HEAD
                 
 
             }
@@ -346,6 +565,25 @@ public class ShipHandling : MonoBehaviour {
     */
     //transform.localEulerAngles = new Vector3(180, 0, transform.localEulerAngles.z);
 
+=======
+                */
+                    //transform.localEulerAngles
+                    /*
+                    var lookDir = targetPlayer.position - transform.position;
+                    lookDir.y = 0; // keep only the horizontal direction
+                    //lookDir.x = 180; // keep only the horizontal direction
+                    Debug.Log("lookDir = " + lookDir);
+
+                    transform.rotation = Quaternion.LookRotation(lookDir);
+                    */
+    /*
+    Quaternion rotationAngle = Quaternion.LookRotation(targetPlayer.position - transform.position, Vector3.up);
+    //rotationAngle.SetEulerAngles()
+    transform.rotation = Quaternion.Slerp(transform.rotation, rotationAngle, Time.deltaTime * 10); // we rotate the rotationAngle 
+    */
+    //transform.localEulerAngles = new Vector3(180, 0, transform.localEulerAngles.z);
+
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
 
     //Vector3 dirToFace = targetPlayer.position - transform.position;
     //transform.rotation = Quaternion.LookRotation(dirToFace);

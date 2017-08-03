@@ -2,6 +2,7 @@
 
 public class CameraControl : MonoBehaviour
 {
+    public bool closedBorders = false;
     public float dampTime = 0.2f;                 // Approximate time for the camera to refocus.
     public float screenEdgeBuffer = 4f;           // Space between the top/bottom most target and the screen edge.
     public float minSize = 6.5f;                  // The smallest orthographic size the camera can be.
@@ -154,6 +155,8 @@ public class CameraControl : MonoBehaviour
 
     public bool CheckPlayAreaBoundaries()
     {
+        float minBorder = 0.000f;
+        float maxBorder = 1.0f;
         foreach (GameObject currObject in targets)
         {
                         
@@ -162,9 +165,10 @@ public class CameraControl : MonoBehaviour
             //Debug.Log("viewPos = " + viewPos);
             //Debug.Log("currObject.name " + currObject.name);
 
-            if (viewPos.x < 0.0f)
+            if (viewPos.x <= 0.0f)
             {
                 GameObject cloneship = currObject;
+<<<<<<< HEAD
                 cloneship.GetComponentInChildren<TrailRenderer>().Clear();
                 //Debug.Log(currObject);
                 Vector3 newLocation = new Vector3(viewpointJumpLeftBottom, viewPos.y, mainCamera.nearClipPlane);
@@ -176,27 +180,62 @@ public class CameraControl : MonoBehaviour
                 //lockCameraZoom(cameraLockedAfterJump);
                 return true;
                 
+=======
+                if (closedBorders)
+                {
+                    Vector3 newLocation = new Vector3(minBorder, viewPos.y, mainCamera.nearClipPlane);
+                    newLocation = mainCamera.ViewportToWorldPoint(newLocation);
+                    currObject.transform.position = new Vector3(newLocation.x, currObject.transform.position.y, currObject.transform.position.z);
+                    //return true;
+                } else
+                {
+                    cloneship.GetComponentInChildren<TrailRenderer>().Clear();
+                    //Debug.Log(currObject);
+                    Vector3 newLocation = new Vector3(viewpointJumpLeftBottom, viewPos.y, mainCamera.nearClipPlane);
+                    newLocation = mainCamera.ViewportToWorldPoint(newLocation);
+
+                    currObject.transform.position = new Vector3(newLocation.x, currObject.transform.position.y, currObject.transform.position.z);
+                    //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
+                    //SetStartPositionAndSize();
+                    //lockCameraZoom(cameraLockedAfterJump);
+                    return true;
+
+
+                }
+
+
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
             }
-            else if (viewPos.x > 1.0f)
+            else if (viewPos.x >= 1.0f)
             {
                 GameObject cloneship = currObject;
-                cloneship.GetComponentInChildren<TrailRenderer>().Clear();
-                Vector3 newLocation = new Vector3(viewpointJumpRightTop, viewPos.y, mainCamera.nearClipPlane);
-                newLocation = mainCamera.ViewportToWorldPoint(newLocation);
+                if (closedBorders)
+                {
+                    Vector3 newLocation = new Vector3(maxBorder, viewPos.y, mainCamera.nearClipPlane);
+                    newLocation = mainCamera.ViewportToWorldPoint(newLocation);
+                    currObject.transform.position = new Vector3(newLocation.x, currObject.transform.position.y, currObject.transform.position.z);
+                    //return true;
+                }
+                else
+                {
 
-                currObject.transform.position = new Vector3(newLocation.x, currObject.transform.position.y, currObject.transform.position.z);
-                //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
-                //SetStartPositionAndSize();
-                //lockCameraZoom(cameraLockedAfterJump);
-                return true;
-                
+                    cloneship.GetComponentInChildren<TrailRenderer>().Clear();
+                    Vector3 newLocation = new Vector3(viewpointJumpRightTop, viewPos.y, mainCamera.nearClipPlane);
+                    newLocation = mainCamera.ViewportToWorldPoint(newLocation);
+
+                    currObject.transform.position = new Vector3(newLocation.x, currObject.transform.position.y, currObject.transform.position.z);
+                    //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
+                    //SetStartPositionAndSize();
+                    //lockCameraZoom(cameraLockedAfterJump);
+                    return true;
+                }
             }
 
 
-            if (viewPos.y < 0.0f)
+            if (viewPos.y <= 0.0f)
             {
-
                 GameObject cloneship = currObject;
+<<<<<<< HEAD
 
                 if (cloneship.GetComponentInChildren<TrailRenderer>())
                     cloneship.GetComponentInChildren<TrailRenderer>().Clear();
@@ -209,10 +248,35 @@ public class CameraControl : MonoBehaviour
                 //SetStartPositionAndSize();                
                 //lockCameraZoom(cameraLockedAfterJump);
                 return true;
+=======
+                if (closedBorders)
+                {
+                    Vector3 newLocation = new Vector3(viewPos.x, minBorder, mainCamera.nearClipPlane);
+                    newLocation = mainCamera.ViewportToWorldPoint(newLocation);
+                    currObject.transform.position = new Vector3(currObject.transform.position.x, newLocation.y, currObject.transform.position.z);
+                    //return true;
+                }
+                else
+                {
+
+                    if (cloneship.GetComponentInChildren<TrailRenderer>())
+                        cloneship.GetComponentInChildren<TrailRenderer>().Clear();
+
+                    Vector3 newLocation = new Vector3(viewPos.x, viewpointJumpLeftBottom, mainCamera.nearClipPlane);
+                    newLocation = mainCamera.ViewportToWorldPoint(newLocation);
+
+                    currObject.transform.position = new Vector3(currObject.transform.position.x, newLocation.y, currObject.transform.position.z);
+                    //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
+                    //SetStartPositionAndSize();                
+                    //lockCameraZoom(cameraLockedAfterJump);
+                    return true;
+                }
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
                 
-            } else if (viewPos.y > 1.0f)
+            } else if (viewPos.y >= 1.0f)
             {
                 GameObject cloneship = currObject;
+<<<<<<< HEAD
 
                 if(cloneship.GetComponentInChildren<TrailRenderer>())
                     cloneship.GetComponentInChildren<TrailRenderer>().Clear();
@@ -226,6 +290,31 @@ public class CameraControl : MonoBehaviour
                 //lockCameraZoom(cameraLockedAfterJump);
                 return true;
                 
+=======
+                if (closedBorders)
+                {
+                    Vector3 newLocation = new Vector3(viewPos.x, maxBorder, mainCamera.nearClipPlane);
+                    newLocation = mainCamera.ViewportToWorldPoint(newLocation);
+                    currObject.transform.position = new Vector3(currObject.transform.position.x, newLocation.y, currObject.transform.position.z);
+                    //return true;
+                }
+                else
+                {
+
+
+                    if (cloneship.GetComponentInChildren<TrailRenderer>())
+                        cloneship.GetComponentInChildren<TrailRenderer>().Clear();
+
+                    Vector3 newLocation = new Vector3(viewPos.x, viewpointJumpRightTop, mainCamera.nearClipPlane);
+                    newLocation = mainCamera.ViewportToWorldPoint(newLocation);
+
+                    currObject.transform.position = new Vector3(currObject.transform.position.x, newLocation.y, currObject.transform.position.z);
+                    //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
+                    //SetStartPositionAndSize();
+                    //lockCameraZoom(cameraLockedAfterJump);
+                    return true;
+                }
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
             }
 
 

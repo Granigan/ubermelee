@@ -13,6 +13,14 @@ public class UpdatePlayerStats : MonoBehaviour {
     public float GameOverScore = 10;
     public float RestartSceneWaitTime = 5.0f;
     private bool MeleeInProgress = true;
+<<<<<<< HEAD
+=======
+
+    // GUI test stuff...
+    //public GameObject[] HealthArray;
+    //public GameObject[] EnergyArray;
+    // GUI test stuff...
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
 
     // Use this for initialization
     void Start () {
@@ -79,10 +87,20 @@ public class UpdatePlayerStats : MonoBehaviour {
             text.text += "Crew: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentCrew()).ToString() + "/" + Mathf.Round(currPlayer.GetComponent<ShipHandling>().shipDetails.Crew).ToString() + "\n";
             text.text += "Battery: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentBattery()).ToString() + "/" + Mathf.Round(currPlayer.GetComponent<ShipHandling>().shipDetails.Battery).ToString() + "\n";
             text.text += "Score: " + Mathf.Round(playerScores[i - 1]).ToString() + "\n";
+<<<<<<< HEAD
             
 
 
             
+=======
+
+            // GUI Test Stuff...
+            //GameObject CrewBar = GameObject.Find("HealthBar" + i);
+            //GameObject EnergyBar = GameObject.Find("EnergyBar" + i);
+            //CrewBar.transform.localScale = new Vector3(1, Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentCrew()), 1);
+            //EnergyBar.transform.localScale = new Vector3(1, Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentBattery()), 1);
+            // GUI Test Stuff...
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
         }
         return true;
 	}

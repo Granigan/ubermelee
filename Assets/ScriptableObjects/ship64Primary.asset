@@ -11,15 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8f2ded8c0fcb0c45ac3335939e88c9b, type: 3}
   m_Name: ship64Primary
   m_EditorClassIdentifier: 
-  Damage: 1
+  Damage: 2
   Scale: 0.15
-  Speed: 12
+  Speed: 14
   TimeToLive: 1.2
   Mass: 0.05
   Drag: 0
   AngularDrag: 0
   BatteryCharge: 4
-  FireRate: 0.4
+  FireRate: 0.8
   HitPoints: 1
   bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
     type: 2}

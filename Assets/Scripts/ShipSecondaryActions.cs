@@ -5,16 +5,24 @@ using UnityEngine;
 // All the ship secondary actions go here. They are invoked by shipID.
 public class ShipSecondaryActions : MonoBehaviour
 {
-
+    private bool Ship47SecondaryActive = false;
+    float Ship47SpeedReduction = 100f;
+    float Ship47RotationSpeed = 0f;
+    float Ship47InitialRotationSpeed = 23.3f;
     // Use this for initialization
     void Start()
     {
-
+        Ship47RotationSpeed = Ship47InitialRotationSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(Ship47SecondaryActive == true)
+        {
+            RotateShip47();
+        }
+
     }
 
     //Ship31 Secondary
@@ -84,6 +92,7 @@ public class ShipSecondaryActions : MonoBehaviour
     {
         ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
         ShipDetails shipDetails = shipHandling.shipDetails;
+<<<<<<< HEAD
         if(shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge)
         {
             //This works as well, but not smoothly..
@@ -93,23 +102,49 @@ public class ShipSecondaryActions : MonoBehaviour
             Rigidbody rb = shipHandling.GetComponent<Rigidbody>();
             Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity *1);
             rb.MoveRotation(rb.rotation * deltaRotation);
+=======
+        
 
+        if (shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge && Ship47SecondaryActive == false)
+        {
+            Ship47SecondaryActive = true;
             shipHandling.currentBattery -= shipDetails.Secondary.BatteryCharge;
+        } 
 
+    }
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
+
+    void RotateShip47()
+    {
+
+        //Debug.Log(Ship47RotationSpeed);
+        if (Ship47RotationSpeed > 0)
+        {
+            Ship47RotationSpeed -= Ship47SpeedReduction * Time.deltaTime; 
+            this.GetComponentInParent<ShipHandling>().RotateShip(Ship47RotationSpeed);
         }
+        else
+        {
+            Ship47RotationSpeed = Ship47InitialRotationSpeed;
+            Ship47SecondaryActive = false;
+        }
+<<<<<<< HEAD
 
 
 
         //}
         //Transform currTransform = GetComponent<Transform>();
-
-
-        //transform.RotateAround(transform.position, transform.up, 180f);
-        //Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * 10f * Time.deltaTime * -1);
-
-
+=======
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
 
     }
+
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
+
 
     public void Ship63Secondary()
     {
@@ -141,6 +176,7 @@ public class ShipSecondaryActions : MonoBehaviour
 
         foreach (Transform currBulletSpawnPoint in bulletSpecialSpawnPoints)
         {
+            
             GameObject bullet = (GameObject)Instantiate(
             shipDetails.Secondary.SecondaryPrefab,
             currBulletSpawnPoint.position,
@@ -150,7 +186,12 @@ public class ShipSecondaryActions : MonoBehaviour
             transform.localScale = new Vector3(shipDetails.Secondary.Scale, shipDetails.Secondary.Scale, shipDetails.Secondary.Scale);
             bullet.GetComponent<BulletCollision>().bulletHitPoints = shipDetails.Secondary.HitPoints;
             bullet.gameObject.tag = "Bullet";
+<<<<<<< HEAD
 
+=======
+            bullet.GetComponent<BulletCollision>().isMine = true;
+            bullet.transform.SetPositionAndRotation(currBulletSpawnPoint.position, Quaternion.identity);
+>>>>>>> f02afbea1adc735de60e7110bd1b529f2774cb51
             // Add velocity to the bullet
             //bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.Secondary.Speed;
 

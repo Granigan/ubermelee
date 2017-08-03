@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: ship47Primary
   m_EditorClassIdentifier: 
   Damage: 6
-  Scale: 0.4
+  Scale: 0.2
   Speed: 26
   TimeToLive: 1
   Mass: 0.1
@@ -21,7 +21,7 @@ MonoBehaviour:
   BatteryCharge: 15
   FireRate: 0.3
   HitPoints: 8
-  bulletPrefab: {fileID: 1114022768256390, guid: ffd0ea90db72a2640a696a883a98fc3e,
+  bulletPrefab: {fileID: 1555994552972690, guid: 3d66419feaf62a843a387156c8455f0d,
     type: 2}
-  explosionPrefab: {fileID: 1701049221895126, guid: bf6c7abd5fb392a4c9d85ab72825d049,
+  explosionPrefab: {fileID: 1848359790392016, guid: f73e42544b241d14b9ba531246c34a13,
     type: 2}
