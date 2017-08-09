@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: ship31Secondary
   m_EditorClassIdentifier: 
   Damage: 1
-  Scale: 0.1
+  Scale: 0.3
   Speed: 15
   TimeToLive: 0.4
   Mass: 0.01
@@ -20,4 +20,6 @@ MonoBehaviour:
   AngularDrag: 0
   BatteryCharge: 2
   FireRate: 0.1
-  specialPrefab: {fileID: 0}
+  HitPoints: 1
+  SecondaryPrefab: {fileID: 1870047491770102, guid: 6276f70a6c2079b4287d65e130b340fe,
+    type: 2}
