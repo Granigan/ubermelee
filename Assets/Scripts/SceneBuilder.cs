@@ -2,55 +2,70 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneBuilder : MonoBehaviour {
+public class SceneBuilder : MonoBehaviour
+{
     public GameObject Planet;
     public GameObject[] Players;
     private List<GameObject> PlayerInstances = new List<GameObject>();
     public int NumberOfPlanets = 10;
+    public int StartPos;
 
-    void Awake() {
+    void Awake()
+    {
         //Instantiate(Planet);
         BuildPlanets();
         BuildShips();
-        
+
 
     }
 
-    void BuildShips() {
+
+    void BuildShips()
+    {
         //Debug.Log("BuildShips!!!");
         int playerNumber = 1;
-        foreach(GameObject currPlayer in Players )
+        foreach (GameObject currPlayer in Players)
         {
-            PlayerInstances.Add(Instantiate(currPlayer));
-            currPlayer.GetComponent<ShipHandling>().playerNumber = playerNumber;
-//if(playerNumber != 1)
-//currPlayer.GetComponent<ShipHandling>().AIEnabled = true;
+            GameObject clone = Instantiate (currPlayer);
+            //PlayerInstances.Add(Instantiate(currPlayer));
+            //currPlayer.GetComponent<ShipHandling>().playerNumber = playerNumber;
+            clone.GetComponent<ShipHandling>().playerNumber = playerNumber;
+            //if(playerNumber != 1)
+            //currPlayer.GetComponent<ShipHandling>().AIEnabled = true;
             //Debug.Log("playerNumber: "+ playerNumber);
-            playerNumber++;
-            currPlayer.transform.position = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), -3);
-            currPlayer.transform.Rotate(Vector3.forward, Random.Range(-180, 180));
-            {
-                Collider[] hitColliders = Physics.OverlapSphere(currPlayer.transform.position, 1);
-                //Debug.Log("ship1colliders" + hitColliders.Length);
-                while (hitColliders.Length > 0)
-                {
-                    currPlayer.transform.position = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), -3);
-                    hitColliders = Physics.OverlapSphere(currPlayer.transform.position, 1);
-                    //Debug.Log("ship1colliders2" + hitColliders.Length);
-                }
 
+            //currPlayer.transform.position = new Vector3(Random.Range(-StartPos, StartPos), Random.Range(-StartPos, StartPos), -3);
+            //currPlayer.transform.Rotate(Vector3.forward, Random.Range(-180, 180));
+            clone.transform.Rotate(Vector3.forward, Random.Range(-180, 180));
+            clone.transform.position = new Vector3(Random.Range(-StartPos, StartPos), Random.Range(-StartPos, StartPos), -3);
+            playerNumber++;
+            clone.layer = 2;
+            
+            {
+                clone.layer = 2;
+                Collider[] hitColliders = Physics.OverlapSphere(clone.transform.position, 2);
+                Debug.Log("shipcolliders" + hitColliders.Length);
+                while (hitColliders.Length > 4)
+                {
+                    clone.layer = 2;
+                    clone.transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -3);
+                    hitColliders = Physics.OverlapSphere(clone.transform.position, 2);
+                    Debug.Log("shipcolliders2" + hitColliders.Length);
+                  
+                }
+                //clone.layer = 0;
             }
 
             // currPlayer.GetComponent<ShipDetails>().score = 0f;
 
-            
+
         }
     }
 
 
     void BuildPlanets()
     {
-        
+
 
         for (int i = 0; i < NumberOfPlanets; i++)
         {
@@ -66,11 +81,14 @@ public class SceneBuilder : MonoBehaviour {
             currPlanet.GetComponent<Rigidbody>().AddForceAtPosition(force, forcePosition);
         }
     }
-    
 
 
-public void ResetScene() {
+
+
+    public void ResetScene()
+    {
         BuildPlanets();
         BuildShips();
     }
+    
 }

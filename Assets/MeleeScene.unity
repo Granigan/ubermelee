@@ -432,6 +432,11 @@ Prefab:
       propertyPath: closedBorders
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114599262295883474, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: StartPos
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
   m_IsPrefabParent: 0
@@ -653,6 +658,10 @@ Prefab:
     - target: {fileID: 11403178, guid: 81154777d5417884981849c5243f6c01, type: 2}
       propertyPath: m_UiScaleMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22323452, guid: 81154777d5417884981849c5243f6c01, type: 2}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 81154777d5417884981849c5243f6c01, type: 2}
