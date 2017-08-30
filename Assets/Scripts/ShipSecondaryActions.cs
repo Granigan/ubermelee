@@ -54,7 +54,7 @@ public class ShipSecondaryActions : MonoBehaviour
             foreach (Transform currBulletSpawnPoint in usedSpawnPoints)
             {
                 GameObject bullet = (GameObject)Instantiate(
-                shipDetails.Primary.bulletPrefab,
+                shipDetails.Secondary.SecondaryPrefab,
                 currBulletSpawnPoint.position,
                 currBulletSpawnPoint.rotation);
                 bullet.GetComponent<BulletCollision>().bulletOwnerPlayerNumber = shipHandling.playerNumber;

@@ -20,7 +20,7 @@ MonoBehaviour:
   BatteryRechargeRate: 4
   AngularDrag: 0
   Drag: 0
-  Scale: 0.5
+  Scale: 0.8
   Primary: {fileID: 11400000, guid: d46a5cc3239cda744ab17e91a7dea151, type: 2}
   Secondary: {fileID: 11400000, guid: e021c665dee933e4390f7980cd2453dc, type: 2}
   ShipName: Musketeer

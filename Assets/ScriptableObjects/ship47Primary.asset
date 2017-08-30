@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: ship47Primary
   m_EditorClassIdentifier: 
   Damage: 6
-  Scale: 0.2
+  Scale: 0.15
   Speed: 26
   TimeToLive: 1
   Mass: 0.1

@@ -6,7 +6,7 @@ public class SceneBuilder : MonoBehaviour
 {
     public GameObject Planet;
     public GameObject[] Players;
-    private List<GameObject> PlayerInstances = new List<GameObject>();
+    //private List<GameObject> PlayerInstances = new List<GameObject>();
     public int NumberOfPlanets = 10;
     public int StartPos;
 

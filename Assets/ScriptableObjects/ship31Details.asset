@@ -20,7 +20,7 @@ MonoBehaviour:
   BatteryRechargeRate: 8
   AngularDrag: 5
   Drag: 0
-  Scale: 0.8
+  Scale: 1
   Primary: {fileID: 11400000, guid: 820f4c5e7cfc79a47b29f47e71e76105, type: 2}
   Secondary: {fileID: 11400000, guid: 4b88b722a665c9c42a13d674782e31a9, type: 2}
   ShipName: Daredevil

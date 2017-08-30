@@ -1,0 +1,150 @@
+fileFormatVersion: 2
+guid: 67321547f8f7c724290fa3b7f2ef19ac
+timeCreated: 1503389723
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Gun
+    100002: Gun2
+    100004: Gun3
+    100006: Gun4
+    100008: Hull
+    100010: L_Wings
+    100012: Object001
+    100014: Object002
+    100016: PhotometricLight001
+    100018: PhotometricLight002
+    100020: PhotometricLight003
+    100022: R_Wing
+    100024: //RootNode
+    100026: Thruster
+    100028: Thruster 1
+    100030: Thruster 2
+    100032: Thruster 3
+    400000: Gun
+    400002: Gun2
+    400004: Gun3
+    400006: Gun4
+    400008: Hull
+    400010: L_Wings
+    400012: Object001
+    400014: Object002
+    400016: PhotometricLight001
+    400018: PhotometricLight002
+    400020: PhotometricLight003
+    400022: R_Wing
+    400024: //RootNode
+    400026: Thruster
+    400028: Thruster 1
+    400030: Thruster 2
+    400032: Thruster 3
+    2300000: Gun
+    2300002: Gun2
+    2300004: Gun3
+    2300006: Gun4
+    2300008: Hull
+    2300010: L_Wings
+    2300012: Object001
+    2300014: Object002
+    2300016: R_Wing
+    2300018: Thruster
+    2300020: Thruster 1
+    2300022: Thruster 2
+    2300024: Thruster 3
+    3300000: Gun
+    3300002: Gun2
+    3300004: Gun3
+    3300006: Gun4
+    3300008: Hull
+    3300010: L_Wings
+    3300012: Object001
+    3300014: Object002
+    3300016: R_Wing
+    3300018: Thruster
+    3300020: Thruster 1
+    3300022: Thruster 2
+    3300024: Thruster 3
+    4300000: Thruster
+    4300002: Thruster
+    4300004: Thruster
+    4300006: Thruster
+    4300008: R_Wing
+    4300010: L_Wings
+    4300012: Gun4
+    4300014: Gun3
+    4300016: Gun
+    4300018: Gun2
+    4300020: Hull
+    4300022: Object001
+    4300024: Object002
+  materials:
+    importMaterials: 1
+    materialName: 2
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
