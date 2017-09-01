@@ -11,6 +11,10 @@ TagManager:
   - Player2Stats
   - FramerateCounter
   - Camera
+  - Player1UIPanel
+  - Player2UIPanel
+  - Player3UIPanel
+  - Player4UIPanel
   layers:
   - Default
   - TransparentFX

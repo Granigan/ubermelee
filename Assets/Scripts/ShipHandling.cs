@@ -79,6 +79,8 @@ public class ShipHandling : MonoBehaviour {
 
         shipPrimaryActions = gameObject.AddComponent<ShipPrimaryActions>();
         shipSecondaryActions = gameObject.AddComponent<ShipSecondaryActions>();
+
+        GameObject.FindGameObjectWithTag("Player1Stats").GetComponent<UpdatePlayerStats>().SetShipName((int)playerNumber, shipDetails.ShipName);
     }
 	
 	// Update is called once per frame
@@ -100,7 +102,8 @@ public class ShipHandling : MonoBehaviour {
             executeAI();
         }
 
-	}
+        GameObject.FindGameObjectWithTag("Player1Stats").GetComponent<UpdatePlayerStats>().SetShipName((int)playerNumber, shipDetails.ShipName);
+    }
 
     public bool DoDamage(float Damage)
     {
@@ -122,8 +125,15 @@ public class ShipHandling : MonoBehaviour {
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, 3.0f);
         GameObject deadShip = this.gameObject;
-        
-        StartCoroutine(DieAndRespawn());
+
+        if(AIEnabled == true)
+        {
+            StartCoroutine(DieAndRespawn());
+        }
+        else
+        {
+            StartCoroutine(DieAndEnableShipSelectionUI());
+        }
 
         currentCrew = shipDetails.Crew;
         //Instantiate(deadShip);
@@ -133,20 +143,25 @@ public class ShipHandling : MonoBehaviour {
     
     private IEnumerator DieAndRespawn()
     {
-        //Debug.Log("Player just died!!");
         shipIsDead = true;
 
         this.gameObject.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
         this.gameObject.GetComponentInChildren<Rigidbody>().angularVelocity = Vector3.zero;
-
+        
         for (int j = 0; j < this.transform.childCount; j++)
         {
             this.transform.GetChild(j).gameObject.SetActive(false);
         }
+                
+        yield return new WaitForSeconds(3.0f);
 
-        yield return new WaitForSeconds(2.0f);
-        //Debug.Log("Player just respawned!!");
+        GameObject UICanvas = GameObject.FindGameObjectWithTag("Player" + playerNumber + "UIPanel");
+        UICanvas.GetComponent<ShipSelection>().SelectionEnabled = true;
 
+        int randomShipID = UICanvas.GetComponent<ShipSelection>().getRandomShipID();
+        GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>().InstantiateShip(playerNumber, randomShipID, true) ;
+        //UICanvas.GetComponent<CanvasGroup>().alpha = 1f;
+        /*
         Vector3 respawnPoint = new Vector3(Random.Range(-respawnVariance, respawnVariance), Random.Range(-respawnVariance, respawnVariance), -3);  // Fix up the static -3 Z-axis later?
 
         this.GetComponentInChildren<Transform>().position = respawnPoint;
@@ -156,11 +171,39 @@ public class ShipHandling : MonoBehaviour {
         {
             this.transform.GetChild(j).gameObject.SetActive(true);
         }
-        shipIsDead = false;
+        */
+        //shipIsDead = false;
+        //clone.GetComponent<ShipHandling>().playerNumber = playerNumber;
+
+        Destroy(this.transform.gameObject);
+    }
+
+    private IEnumerator DieAndEnableShipSelectionUI()
+    {
+        //Debug.Log("Player just died!!");
+        shipIsDead = true;
+
+        this.gameObject.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
+        this.gameObject.GetComponentInChildren<Rigidbody>().angularVelocity = Vector3.zero;
+        
+        for (int j = 0; j < this.transform.childCount; j++)
+        {
+            this.transform.GetChild(j).gameObject.SetActive(false);
+        }
+        
+        yield return new WaitForSeconds(1.0f);
+
+        //Debug.Log("Player" + playerNumber + "UIPanel");
+        GameObject UICanvas = GameObject.FindGameObjectWithTag("Player" + playerNumber + "UIPanel");
+        UICanvas.GetComponent<CanvasGroup>().alpha = 1f;
+        UICanvas.GetComponent<ShipSelection>().SelectionEnabled = true;
+
+        Destroy(this.transform.gameObject);
 
     }
 
-    
+
+
 
     public bool RotateShip(float shipTurn) {
         if (shipIsDead == true) return false;
@@ -298,6 +341,13 @@ public class ShipHandling : MonoBehaviour {
             float aimRotation = 0f;
             float myX = Mathf.Abs(this.transform.position.x);
             float myY = Mathf.Abs(this.transform.position.y);
+
+            if(targetPlayer == null)
+            {
+                // All other players are dead. Return null for now...
+                return null;
+            }
+
             float targetPlayerX = Mathf.Abs(targetPlayer.position.x);
             float targetPlayerY = Mathf.Abs(targetPlayer.position.y);
             float diffY = 0f;

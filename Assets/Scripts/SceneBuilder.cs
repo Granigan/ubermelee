@@ -6,17 +6,22 @@ public class SceneBuilder : MonoBehaviour
 {
     public GameObject Planet;
     public GameObject[] Players;
-    //private List<GameObject> PlayerInstances = new List<GameObject>();
-    public int NumberOfPlanets = 10;
+    public int NumberOfPlanets = 8;
     public int StartPos;
+    public float respawnVariance = 30f;
+    public float randomMin = 0f;
+    public float randomMax = 1f;
 
+    public GameObject[] ShipTypes;
+    
+    
     void Awake()
     {
         //Instantiate(Planet);
         BuildPlanets();
         BuildShips();
 
-
+        HidePlayerUIs();
     }
 
 
@@ -30,8 +35,14 @@ public class SceneBuilder : MonoBehaviour
             //PlayerInstances.Add(Instantiate(currPlayer));
             //currPlayer.GetComponent<ShipHandling>().playerNumber = playerNumber;
             clone.GetComponent<ShipHandling>().playerNumber = playerNumber;
+
+            InitNewShip(clone);
+            playerNumber++;
+
+//            currPlayer.GetComponent<ShipHandling>().AIEnabled = true;
+
+            /*
             //if(playerNumber != 1)
-            //currPlayer.GetComponent<ShipHandling>().AIEnabled = true;
             //Debug.Log("playerNumber: "+ playerNumber);
 
             //currPlayer.transform.position = new Vector3(Random.Range(-StartPos, StartPos), Random.Range(-StartPos, StartPos), -3);
@@ -55,7 +66,7 @@ public class SceneBuilder : MonoBehaviour
                 }
                 //clone.layer = 0;
             }
-
+            */
             // currPlayer.GetComponent<ShipDetails>().score = 0f;
 
 
@@ -91,4 +102,83 @@ public class SceneBuilder : MonoBehaviour
         BuildShips();
     }
     
+    
+    public GameObject InstantiateShip(float playerNumber, int shipID, bool AIEnabled = false)
+    {
+        //Debug.Log("Prefabs/ship" + shipID);
+        GameObject clone;
+        //GameObject ship = Instantiate(Resources.Load<GameObject>("ship" + shipID));
+        foreach (GameObject currShipType in ShipTypes )
+        {
+            if(currShipType.GetComponent<ShipHandling>().shipID == shipID)
+            {
+                clone = Instantiate(currShipType);
+                //PlayerInstances.Add(Instantiate(currPlayer));
+                //currPlayer.GetComponent<ShipHandling>().playerNumber = playerNumber;
+                clone.GetComponent<ShipHandling>().playerNumber = playerNumber;
+                //Vector3 respawnPoint = new Vector3(Random.Range(-respawnVariance, respawnVariance), Random.Range(-respawnVariance, respawnVariance), -3);  // Fix up the static -3 Z-axis later?
+
+                //Camera mainCamera = GameObject.FindGameObjectWithTag("Camera").GetComponentInChildren<Camera>();
+                //Vector3 randomPoint = new Vector3(Random.Range(randomMin, randomMax), Random.Range(randomMin, randomMax), -3f);
+                //clone.transform.position = mainCamera.ViewportToWorldPoint(randomPoint);
+
+
+                //this.GetComponentInChildren<Transform>().position = respawnPoint;
+                if(AIEnabled == true)
+                {
+                    clone.GetComponent<ShipHandling>().AIEnabled = true;
+                }
+
+                // Found the right ship type...
+                InitNewShip(clone);
+                return clone;
+            }
+        }
+
+        return null;
+     
+    }
+    
+
+    private void InitNewShip(GameObject ship)
+    {
+
+        ship.transform.Rotate(Vector3.forward, Random.Range(-180, 180));
+
+        //ship.transform.position = new Vector3(Random.Range(-StartPos, StartPos), Random.Range(-StartPos, StartPos), -3);
+        
+        Camera mainCamera = GameObject.FindGameObjectWithTag("Camera").GetComponentInChildren<Camera>();
+        Vector3 randomPoint = new Vector3(Random.Range(randomMin, randomMax), Random.Range(randomMin, randomMax), -3f);
+        ship.transform.position = mainCamera.ViewportToWorldPoint(randomPoint);
+      
+
+        //Debug.Log("ship.transform.position = " + ship.transform.position);
+
+        ship.layer = 2;
+        Collider[] hitColliders = Physics.OverlapSphere(ship.transform.position, 2);
+        while (hitColliders.Length > 4)
+        {
+            //Debug.Log("shipcolliders in loop" + hitColliders.Length);
+
+            ship.layer = 2;
+            //ship.transform.position = new Vector3(Random.Range(-StartPos, StartPos), Random.Range(-StartPos, StartPos), -3);
+
+            randomPoint = new Vector3(Random.Range(randomMin, randomMax), Random.Range(randomMin, randomMax), -3f);
+            ship.transform.position = mainCamera.ViewportToWorldPoint(randomPoint);
+            
+            hitColliders = Physics.OverlapSphere(ship.transform.position, 2);
+            //Debug.Log("shipcolliders2" + hitColliders.Length);
+        }
+        ship.layer = 0;
+
+    }
+
+    private void HidePlayerUIs()
+    {
+        for(int playerNumber = 1; playerNumber <= 4; playerNumber++)
+        {
+            GameObject UICanvas = GameObject.FindGameObjectWithTag("Player" + playerNumber + "UIPanel");
+            UICanvas.GetComponent<CanvasGroup>().alpha = 0f;
+        }
+    }
 }
