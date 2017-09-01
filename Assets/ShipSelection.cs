@@ -7,7 +7,7 @@ public class ShipSelection : MonoBehaviour {
 
     public int playerNumber = 1;
     private string turnControl;
-    //private string thrustControl;
+    private string thrustControl;
     private string primaryControl;
     private string secondaryControl;
     private InputDevice joystick;
@@ -39,11 +39,8 @@ public class ShipSelection : MonoBehaviour {
 	void Update () {
         AssignJoysticks();
 
-        //textField.text = Input.GetAxis(turnControl).ToString();
-
-        
         //if(Input.GetAxis(turnControl) > 0)
-        if (Input.GetAxisRaw(turnControl) == 1)
+        if (Input.GetAxisRaw(turnControl) == 1 || joystick.LeftStickX > 0 || joystick.DPadLeft > 0)
         {
             if (axisInUse == false)
             {
@@ -52,7 +49,7 @@ public class ShipSelection : MonoBehaviour {
             }
 
         } //else if (Input.GetAxis(turnControl) < 0)
-        if (Input.GetAxisRaw(turnControl) == -1)
+        if (Input.GetAxisRaw(turnControl) == -1 || joystick.LeftStickX < 0 || joystick.DPadLeft < 0)
         {
             if (axisInUse == false)
             {
@@ -74,14 +71,14 @@ public class ShipSelection : MonoBehaviour {
 
         textField.text = shipArray[currentSelectionIndex].Key.ToString();
 
-        if (Input.GetAxisRaw(turnControl) == 0)
+        if (Input.GetAxisRaw(turnControl) == 0 )
         {
             axisInUse = false;
         }
 
         
         // Check if ship is selected by button press
-        if (Input.GetButton(primaryControl) == true && SelectionEnabled == true)
+        if ((Input.GetButton(primaryControl) == true || joystick.Action1 == true) && SelectionEnabled == true)
         {
             int selectedShipID = 0;
             if(shipArray[currentSelectionIndex].Value == 0)
@@ -116,10 +113,10 @@ public class ShipSelection : MonoBehaviour {
 
     private void AssignJoysticks()
     {
-        //string turnControl = "Horizontal" + playerNumber;
-        //string thrustControl = "Vertical" + playerNumber;
-        //string primaryControl = "Primary" + playerNumber;
-        //string secondaryControl = "Secondary" + (playerNumber);
+        turnControl = "Horizontal" + playerNumber;
+        thrustControl = "Vertical" + playerNumber;
+        primaryControl = "Primary" + playerNumber;
+        secondaryControl = "Secondary" + (playerNumber);
         joystick = null;
 
         InputDevice[] joysticks = new InputDevice[InputManager.Devices.Count];
