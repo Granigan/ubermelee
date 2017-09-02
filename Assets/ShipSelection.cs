@@ -19,6 +19,9 @@ public class ShipSelection : MonoBehaviour {
     private bool axisInUse = false;
     public bool SelectionEnabled = false;
 
+    private float timeSinceLastInput = 0f;
+    private float inputTimeout = 0.15f;
+
     // Use this for initialization
     void Start () {
         GameObject textGO = GameObject.Find("Player" + playerNumber + "UIPanel");
@@ -39,22 +42,57 @@ public class ShipSelection : MonoBehaviour {
 	void Update () {
         AssignJoysticks();
 
-        //if(Input.GetAxis(turnControl) > 0)
-        if (Input.GetAxisRaw(turnControl) == 1 || joystick.LeftStickX > 0 || joystick.DPadLeft > 0)
+        if(axisInUse == true)
+        {
+            UpdateInputTimeout();
+            return;
+        }
+
+        if(joystick != null)
+        {
+            if (joystick.LeftStickX > 0.5 || joystick.DPadRight > 0)
+            {
+                if (axisInUse == false)
+                {
+                    axisInUse = true;
+                    currentSelectionIndex++;
+                    StartInputTimeout();
+                }
+            } 
+        }
+
+        if (Input.GetAxisRaw(turnControl) == 1 )
         {
             if (axisInUse == false)
             {
                 axisInUse = true;
                 currentSelectionIndex++;
+                StartInputTimeout();
             }
 
-        } //else if (Input.GetAxis(turnControl) < 0)
-        if (Input.GetAxisRaw(turnControl) == -1 || joystick.LeftStickX < 0 || joystick.DPadLeft < 0)
+        } 
+
+        if(joystick != null)
+        {
+            if (joystick.LeftStickX < -0.5 || joystick.DPadLeft > 0)
+            {
+                if (axisInUse == false)
+                {
+                    axisInUse = true;
+                    currentSelectionIndex--;
+                    StartInputTimeout();
+                }
+            }
+
+        }
+
+        if (Input.GetAxisRaw(turnControl) == -1)
         {
             if (axisInUse == false)
             {
                 axisInUse = true;
                 currentSelectionIndex--;
+                StartInputTimeout();
             }
         }
 
@@ -65,20 +103,23 @@ public class ShipSelection : MonoBehaviour {
 
         if (currentSelectionIndex >= (shipArray.Length-1))
         {
-            //Debug.Log("shipArray.Length = " + (shipArray.Length-1));
             currentSelectionIndex = (shipArray.Length-1);
         }
 
         textField.text = shipArray[currentSelectionIndex].Key.ToString();
 
-        if (Input.GetAxisRaw(turnControl) == 0 )
+        bool joystickButtonPressed = false;
+
+        if(joystick != null)
         {
-            axisInUse = false;
+            if(joystick.Action1 == true)
+            {
+                joystickButtonPressed = true;
+            }
         }
 
-        
         // Check if ship is selected by button press
-        if ((Input.GetButton(primaryControl) == true || joystick.Action1 == true) && SelectionEnabled == true)
+        if ((Input.GetButton(primaryControl) == true || joystickButtonPressed == true) && SelectionEnabled == true)
         {
             int selectedShipID = 0;
             if(shipArray[currentSelectionIndex].Value == 0)
@@ -98,7 +139,26 @@ public class ShipSelection : MonoBehaviour {
 
 
 
+
+
     }
+
+    private void StartInputTimeout()
+    {
+        timeSinceLastInput = inputTimeout;
+        axisInUse = true;
+    }
+
+    private void UpdateInputTimeout()
+    {
+        timeSinceLastInput -= Time.deltaTime;
+        if(timeSinceLastInput <= 0f)
+        {
+            axisInUse = false;
+            timeSinceLastInput = 0f;
+        }
+    }
+
 
     public int getRandomShipID()
     {
@@ -122,6 +182,9 @@ public class ShipSelection : MonoBehaviour {
         InputDevice[] joysticks = new InputDevice[InputManager.Devices.Count];
         List<InputDevice> finalJoysticks = new List<InputDevice>();
         InputManager.Devices.CopyTo(joysticks, 0);
+
+        //Debug.Log("Number of joysticks " + joysticks.Length);
+
 
         for (int i = 0; i < joysticks.Length; i++)
         {
