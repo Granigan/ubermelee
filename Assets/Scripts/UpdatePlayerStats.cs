@@ -147,8 +147,10 @@ public class UpdatePlayerStats : MonoBehaviour {
 
         Debug.Log("Reset now!!");
 
-        
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>().ResetScene();
+
         
     }
 

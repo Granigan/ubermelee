@@ -406,7 +406,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 2
+  currentSelectionIndex: 1
   SelectionEnabled: 0
+  countdownSelect: 3
+  AIEnabled: 0
 --- !u!114 &381058994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,7 +581,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -350, y: -215.70003}
+  m_AnchoredPosition: {x: -350, y: -215.70001}
   m_SizeDelta: {x: -696.5, y: -431.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &816042244
@@ -593,7 +596,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 3
+  currentSelectionIndex: 1
   SelectionEnabled: 0
+  countdownSelect: 3
+  AIEnabled: 0
 --- !u!114 &816042245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -967,7 +973,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
+  currentSelectionIndex: 1
   SelectionEnabled: 0
+  countdownSelect: 3
+  AIEnabled: 0
 --- !u!225 &1050682148
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1209,7 +1218,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 349.99997, y: -215.67995}
+  m_AnchoredPosition: {x: 349.99997, y: -215.6799}
   m_SizeDelta: {x: -700, y: -431.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1149564486
@@ -1224,7 +1233,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 4
+  currentSelectionIndex: 1
   SelectionEnabled: 0
+  countdownSelect: 3
+  AIEnabled: 0
 --- !u!114 &1149564487
 MonoBehaviour:
   m_ObjectHideFlags: 0
