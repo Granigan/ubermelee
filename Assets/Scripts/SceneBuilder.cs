@@ -13,15 +13,19 @@ public class SceneBuilder : MonoBehaviour
     public float randomMax = 1f;
 
     public GameObject[] ShipTypes;
-    
+    public bool[] AIEnabled = new bool[5];
     
     void Awake()
     {
         //Instantiate(Planet);
         BuildPlanets();
         BuildShips();
-
         HidePlayerUIs();
+
+        for(int i = 0; i < AIEnabled.Length; i++)
+        {
+            AIEnabled[i] = false;
+        }
     }
 
 
@@ -35,40 +39,10 @@ public class SceneBuilder : MonoBehaviour
             //PlayerInstances.Add(Instantiate(currPlayer));
             //currPlayer.GetComponent<ShipHandling>().playerNumber = playerNumber;
             clone.GetComponent<ShipHandling>().playerNumber = playerNumber;
-
+            clone.GetComponent<ShipHandling>().AIEnabled = AIEnabled[playerNumber];
             InitNewShip(clone);
             playerNumber++;
-
-//            currPlayer.GetComponent<ShipHandling>().AIEnabled = true;
-
-            /*
-            //if(playerNumber != 1)
-            //Debug.Log("playerNumber: "+ playerNumber);
-
-            //currPlayer.transform.position = new Vector3(Random.Range(-StartPos, StartPos), Random.Range(-StartPos, StartPos), -3);
-            //currPlayer.transform.Rotate(Vector3.forward, Random.Range(-180, 180));
-            clone.transform.Rotate(Vector3.forward, Random.Range(-180, 180));
-            clone.transform.position = new Vector3(Random.Range(-StartPos, StartPos), Random.Range(-StartPos, StartPos), -3);
-            playerNumber++;
-            clone.layer = 2;
             
-            {
-                clone.layer = 2;
-                Collider[] hitColliders = Physics.OverlapSphere(clone.transform.position, 2);
-                Debug.Log("shipcolliders" + hitColliders.Length);
-                while (hitColliders.Length > 4)
-                {
-                    clone.layer = 2;
-                    clone.transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -3);
-                    hitColliders = Physics.OverlapSphere(clone.transform.position, 2);
-                    Debug.Log("shipcolliders2" + hitColliders.Length);
-                  
-                }
-                //clone.layer = 0;
-            }
-            */
-            // currPlayer.GetComponent<ShipDetails>().score = 0f;
-
 
         }
     }
@@ -100,6 +74,7 @@ public class SceneBuilder : MonoBehaviour
     {
         BuildPlanets();
         BuildShips();
+        HidePlayerUIs();
     }
     
     

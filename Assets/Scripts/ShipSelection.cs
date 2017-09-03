@@ -15,12 +15,19 @@ public class ShipSelection : MonoBehaviour {
     public KeyValuePair<string, int>[] shipArray;
     public List<KeyValuePair<string, int>> shipList = new List<KeyValuePair<string, int>>();
 
-    private int currentSelectionIndex = 1;
+    public int currentSelectionIndex = 1;
     private bool axisInUse = false;
     public bool SelectionEnabled = false;
 
     private float timeSinceLastInput = 0f;
     private float inputTimeout = 0.15f;
+
+    private static float initCountdownValue = 3f;
+    public float countdownSelect = initCountdownValue;
+    private bool timerOn = false;
+
+    public bool AIEnabled = false;
+
 
     // Use this for initialization
     void Start () {
@@ -42,7 +49,10 @@ public class ShipSelection : MonoBehaviour {
 	void Update () {
         AssignJoysticks();
 
-        if(axisInUse == true)
+        if (timerOn)
+            UpdateCountdownTimer();
+
+        if (axisInUse == true)
         {
             UpdateInputTimeout();
             return;
@@ -106,7 +116,9 @@ public class ShipSelection : MonoBehaviour {
             currentSelectionIndex = (shipArray.Length-1);
         }
 
+        // Set the text here
         textField.text = shipArray[currentSelectionIndex].Key.ToString();
+        textField.text += " " + Mathf.RoundToInt(countdownSelect).ToString();
 
         bool joystickButtonPressed = false;
 
@@ -129,18 +141,31 @@ public class ShipSelection : MonoBehaviour {
             {
                 selectedShipID = shipArray[currentSelectionIndex].Value;
             }
-            GameObject clone = GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>().InstantiateShip(playerNumber, selectedShipID);
-            clone.GetComponent<ShipHandling>().playerNumber = playerNumber;
-            // Hide ShipSelection and disable it's input
-            this.gameObject.GetComponent<CanvasGroup>().alpha = 0f;
-            SelectionEnabled = false;
-            
+
+            CreateShip(selectedShipID);
+            HideUI();
+
         }
 
+        
 
 
 
+    }
 
+    private void CreateShip(int selectedShipID)
+    {
+        GameObject clone = GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>().InstantiateShip(playerNumber, selectedShipID, AIEnabled);
+        clone.GetComponent<ShipHandling>().playerNumber = playerNumber;
+
+    }
+
+    private void HideUI()
+    {
+        // Hide ShipSelection and disable it's input
+        this.gameObject.GetComponent<CanvasGroup>().alpha = 0f;
+        SelectionEnabled = false;
+        currentSelectionIndex = 0;
     }
 
     private void StartInputTimeout()
@@ -165,12 +190,7 @@ public class ShipSelection : MonoBehaviour {
         return shipArray[Random.Range(1, shipArray.Length)].Value;
 
     }
-
-
-
-
-
-
+    
     private void AssignJoysticks()
     {
         turnControl = "Horizontal" + playerNumber;
@@ -208,4 +228,24 @@ public class ShipSelection : MonoBehaviour {
         }
     }
 
+    public void StartSelectionTimer()
+    {
+        countdownSelect = initCountdownValue;
+        timerOn = true;
+    }
+
+    private void UpdateCountdownTimer()
+    {
+        countdownSelect -= Time.deltaTime;
+
+        if(countdownSelect <= 0)
+        {
+            CreateShip(getRandomShipID());
+            HideUI();
+            timerOn = false;
+
+        }
+    }
+
 }
+

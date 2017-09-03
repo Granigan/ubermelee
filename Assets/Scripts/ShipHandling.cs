@@ -126,14 +126,16 @@ public class ShipHandling : MonoBehaviour {
         Destroy(explosion, 3.0f);
         GameObject deadShip = this.gameObject;
 
+        /*
         if(AIEnabled == true)
         {
             StartCoroutine(DieAndRespawn());
         }
         else
         {
+            */
             StartCoroutine(DieAndEnableShipSelectionUI());
-        }
+        //}
 
         currentCrew = shipDetails.Crew;
         //Instantiate(deadShip);
@@ -148,6 +150,8 @@ public class ShipHandling : MonoBehaviour {
         this.gameObject.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
         this.gameObject.GetComponentInChildren<Rigidbody>().angularVelocity = Vector3.zero;
         
+        
+
         for (int j = 0; j < this.transform.childCount; j++)
         {
             this.transform.GetChild(j).gameObject.SetActive(false);
@@ -159,7 +163,7 @@ public class ShipHandling : MonoBehaviour {
         UICanvas.GetComponent<ShipSelection>().SelectionEnabled = true;
 
         int randomShipID = UICanvas.GetComponent<ShipSelection>().getRandomShipID();
-        GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>().InstantiateShip(playerNumber, randomShipID, true) ;
+        GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>().InstantiateShip(playerNumber, randomShipID, AIEnabled) ;
         //UICanvas.GetComponent<CanvasGroup>().alpha = 1f;
         /*
         Vector3 respawnPoint = new Vector3(Random.Range(-respawnVariance, respawnVariance), Random.Range(-respawnVariance, respawnVariance), -3);  // Fix up the static -3 Z-axis later?
@@ -196,7 +200,10 @@ public class ShipHandling : MonoBehaviour {
         //Debug.Log("Player" + playerNumber + "UIPanel");
         GameObject UICanvas = GameObject.FindGameObjectWithTag("Player" + playerNumber + "UIPanel");
         UICanvas.GetComponent<CanvasGroup>().alpha = 1f;
+        UICanvas.GetComponent<ShipSelection>().AIEnabled = AIEnabled;
+        UICanvas.GetComponent<ShipSelection>().currentSelectionIndex = 0; // Set to random by default
         UICanvas.GetComponent<ShipSelection>().SelectionEnabled = true;
+        UICanvas.GetComponent<ShipSelection>().StartSelectionTimer();
 
         Destroy(this.transform.gameObject);
 

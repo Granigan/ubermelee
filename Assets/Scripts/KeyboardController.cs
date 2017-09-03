@@ -12,6 +12,8 @@ public class KeyboardController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         GameObject[] players = GameObject.FindGameObjectsWithTag("CameraObject");
+        SceneBuilder sceneBuilder = GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>();
+
 
         if (Input.GetKeyDown(KeyCode.F1))
         {
@@ -20,10 +22,12 @@ public class KeyboardController : MonoBehaviour {
             if (players[0].gameObject.GetComponent<ShipHandling>().AIEnabled == true)
             {
                 players[0].gameObject.GetComponent<ShipHandling>().AIEnabled = false;
+                sceneBuilder.AIEnabled[1] = false;
             }
             else
             {
                 players[0].gameObject.GetComponent<ShipHandling>().AIEnabled = true;
+                sceneBuilder.AIEnabled[1] = true;
             }
         }
 
@@ -32,10 +36,12 @@ public class KeyboardController : MonoBehaviour {
             if (players[1].gameObject.GetComponent<ShipHandling>().AIEnabled == true)
             {
                 players[1].gameObject.GetComponent<ShipHandling>().AIEnabled = false;
+                sceneBuilder.AIEnabled[2] = false;
             }
             else
             {
                 players[1].gameObject.GetComponent<ShipHandling>().AIEnabled = true;
+                sceneBuilder.AIEnabled[2] = true;
             }
         }
 
@@ -45,10 +51,12 @@ public class KeyboardController : MonoBehaviour {
                 if (players[2].gameObject.GetComponent<ShipHandling>().AIEnabled == true)
                 {
                     players[2].gameObject.GetComponent<ShipHandling>().AIEnabled = false;
+                    sceneBuilder.AIEnabled[3] = false;
                 }
                 else
                 {
                     players[2].gameObject.GetComponent<ShipHandling>().AIEnabled = true;
+                    sceneBuilder.AIEnabled[3] = true;
                 }
             }
             
@@ -60,10 +68,12 @@ public class KeyboardController : MonoBehaviour {
                 if (players[3].gameObject.GetComponent<ShipHandling>().AIEnabled == true)
                 {
                     players[3].gameObject.GetComponent<ShipHandling>().AIEnabled = false;
+                    sceneBuilder.AIEnabled[4] = false;
                 }
                 else
                 {
                     players[3].gameObject.GetComponent<ShipHandling>().AIEnabled = true;
+                    sceneBuilder.AIEnabled[4] = true;
                 }
             }
         }
