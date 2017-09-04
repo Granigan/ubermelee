@@ -17,5 +17,7 @@ public class ShipDetails : ShipSO {
     public float Scale = 1f;
     public PrimaryDetails Primary;
     public SecondaryDetails Secondary;
-    public string ShipName = ""; 
+    public string ShipName = "";
+    public float AIPrimaryUsagePercent = 70f;
+    public float AISecondaryUsagePercent = 30f;
 }
