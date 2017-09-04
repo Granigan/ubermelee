@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 54624074082288768}
   - component: {fileID: 114268791728323432}
   - component: {fileID: 114672600483442856}
+  - component: {fileID: 114777859362301328}
   m_Layer: 0
   m_Name: ship47
   m_TagString: CameraObject
@@ -600,6 +601,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9730ebf7806b0479b3e7c223aa076c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114777859362301328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1745512433016608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839c02a4fa7ed764f97bdcbac2ab774c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: []
+  ringColor: []
+  ring: {fileID: 1002383159957740, guid: cbd744d77ed5f76409a8fc574c60e2d2, type: 2}
+  player: 0
+  playerNumber: 0
 --- !u!114 &114849834996481022
 MonoBehaviour:
   m_ObjectHideFlags: 1

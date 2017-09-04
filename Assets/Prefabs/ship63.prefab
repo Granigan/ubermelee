@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 54975204989646852}
   - component: {fileID: 114149221455520226}
   - component: {fileID: 114062532963511832}
+  - component: {fileID: 114812796390177280}
   m_Layer: 0
   m_Name: ship63
   m_TagString: CameraObject
@@ -723,6 +724,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114812796390177280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1617482157489880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839c02a4fa7ed764f97bdcbac2ab774c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: []
+  ringColor: []
+  ring: {fileID: 1002383159957740, guid: cbd744d77ed5f76409a8fc574c60e2d2, type: 2}
+  player: 0
+  playerNumber: 0
 --- !u!114 &114854157300528742
 MonoBehaviour:
   m_ObjectHideFlags: 1
