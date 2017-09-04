@@ -8,7 +8,7 @@ public class ShipSecondaryActions : MonoBehaviour
     private bool Ship47SecondaryActive = false;
     float Ship47SpeedReduction = 100f;
     float Ship47RotationSpeed = 0f;
-    float Ship47InitialRotationSpeed = 23.3f;
+    float Ship47InitialRotationSpeed = 25.3f;
     // Use this for initialization
     void Start()
     {

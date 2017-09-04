@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipHandling : MonoBehaviour {
+public class ShipHandling : MonoBehaviour
+{
 
     public enum AILevels
     {
@@ -47,11 +48,14 @@ public class ShipHandling : MonoBehaviour {
     public bool shipIsDead = false;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
+        AILastExecuted = Time.time;
+
         currentCrew = shipDetails.Crew;
         currentBattery = shipDetails.Battery;
         transform = GetComponentInChildren<Transform>();
-        transform.localScale = new Vector3( shipDetails.Scale, shipDetails.Scale, transform.localScale.z);
+        transform.localScale = new Vector3(shipDetails.Scale, shipDetails.Scale, transform.localScale.z);
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.mass = shipDetails.Mass;
@@ -61,7 +65,7 @@ public class ShipHandling : MonoBehaviour {
         //primaryScript = getComponent
 
         trail = GetComponentInChildren<TrailRenderer>();
-        
+
         bulletSpawnPoints = new List<Transform>();
         int i = 0;
         //bulletSpawnPoints = getChi getChildGameObject(transform.gameObject, "BulletSpawnPoint").transform;
@@ -82,9 +86,10 @@ public class ShipHandling : MonoBehaviour {
 
         GameObject.FindGameObjectWithTag("Player1Stats").GetComponent<UpdatePlayerStats>().SetShipName((int)playerNumber, shipDetails.ShipName);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         RechargeBattery();
 
         //disable trail
@@ -92,14 +97,10 @@ public class ShipHandling : MonoBehaviour {
 
         transform.position = new Vector3(transform.position.x, transform.position.y, -3.0f);
 
-
-        
-
-
         if (AIEnabled == true)
         {
-            getClosestEnemy();
-            executeAI();
+            GetClosestEnemy();
+            ExecuteAI();
         }
 
         GameObject.FindGameObjectWithTag("Player1Stats").GetComponent<UpdatePlayerStats>().SetShipName((int)playerNumber, shipDetails.ShipName);
@@ -109,7 +110,7 @@ public class ShipHandling : MonoBehaviour {
     {
         this.currentCrew = this.currentCrew - Damage;
         //Debug.Log("Hitpoints left " + this.currCrew);
-        if(this.currentCrew <= 0)
+        if (this.currentCrew <= 0)
         {
             ExplodeShip();
             //shipDetails.score++;
@@ -119,8 +120,9 @@ public class ShipHandling : MonoBehaviour {
         return false;
     }
 
-    private void ExplodeShip() { 
-    
+    private void ExplodeShip()
+    {
+
         //Debug.Log("Ship Explosion!!!");
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, 3.0f);
@@ -134,36 +136,36 @@ public class ShipHandling : MonoBehaviour {
         else
         {
             */
-            StartCoroutine(DieAndEnableShipSelectionUI());
+        StartCoroutine(DieAndEnableShipSelectionUI());
         //}
 
         currentCrew = shipDetails.Crew;
         //Instantiate(deadShip);
-        
+
     }
 
-    
+
     private IEnumerator DieAndRespawn()
     {
         shipIsDead = true;
 
         this.gameObject.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
         this.gameObject.GetComponentInChildren<Rigidbody>().angularVelocity = Vector3.zero;
-        
-        
+
+
 
         for (int j = 0; j < this.transform.childCount; j++)
         {
             this.transform.GetChild(j).gameObject.SetActive(false);
         }
-                
+
         yield return new WaitForSeconds(3.0f);
 
         GameObject UICanvas = GameObject.FindGameObjectWithTag("Player" + playerNumber + "UIPanel");
         UICanvas.GetComponent<ShipSelection>().SelectionEnabled = true;
 
         int randomShipID = UICanvas.GetComponent<ShipSelection>().getRandomShipID();
-        GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>().InstantiateShip(playerNumber, randomShipID, AIEnabled) ;
+        GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>().InstantiateShip(playerNumber, randomShipID, AIEnabled);
         //UICanvas.GetComponent<CanvasGroup>().alpha = 1f;
         /*
         Vector3 respawnPoint = new Vector3(Random.Range(-respawnVariance, respawnVariance), Random.Range(-respawnVariance, respawnVariance), -3);  // Fix up the static -3 Z-axis later?
@@ -189,12 +191,12 @@ public class ShipHandling : MonoBehaviour {
 
         this.gameObject.GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
         this.gameObject.GetComponentInChildren<Rigidbody>().angularVelocity = Vector3.zero;
-        
+
         for (int j = 0; j < this.transform.childCount; j++)
         {
             this.transform.GetChild(j).gameObject.SetActive(false);
         }
-        
+
         yield return new WaitForSeconds(1.0f);
 
         //Debug.Log("Player" + playerNumber + "UIPanel");
@@ -212,7 +214,8 @@ public class ShipHandling : MonoBehaviour {
 
 
 
-    public bool RotateShip(float shipTurn) {
+    public bool RotateShip(float shipTurn)
+    {
         if (shipIsDead == true) return false;
 
         Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -1 * shipTurn * shipDetails.RotationRate);
@@ -229,7 +232,7 @@ public class ShipHandling : MonoBehaviour {
         rb.AddForce(transform.right * shipDetails.Acceleration * throttle);
 
         // when moving display trail
-        if(this.GetComponentInChildren<TrailRenderer>())
+        if (this.GetComponentInChildren<TrailRenderer>())
             this.GetComponentInChildren<TrailRenderer>().enabled = true;
 
         if (throttle == 0)
@@ -291,7 +294,7 @@ public class ShipHandling : MonoBehaviour {
 
         return true;
     }
-    
+
     static public GameObject getChildGameObject(GameObject fromGameObject, string withName)
     {
         Transform[] ts = fromGameObject.transform.GetComponentsInChildren<Transform>(true);
@@ -319,7 +322,7 @@ public class ShipHandling : MonoBehaviour {
         currentBattery = newBattery;
     }
 
-    Transform getClosestEnemy()
+    Transform GetClosestEnemy()
     {
         float closestEnemyDistance = Mathf.Infinity;
         Transform targetPlayer = null;
@@ -349,7 +352,7 @@ public class ShipHandling : MonoBehaviour {
             float myX = Mathf.Abs(this.transform.position.x);
             float myY = Mathf.Abs(this.transform.position.y);
 
-            if(targetPlayer == null)
+            if (targetPlayer == null)
             {
                 // All other players are dead. Return null for now...
                 return null;
@@ -435,7 +438,7 @@ public class ShipHandling : MonoBehaviour {
 
             }
             // Case 4: Enemy down right from player
-            else 
+            else
             {
                 if ((targetPlayer.position.y > 0 && this.transform.position.y > 0) || (targetPlayer.position.y < 0 && this.transform.position.y < 0))
                 {
@@ -456,15 +459,16 @@ public class ShipHandling : MonoBehaviour {
                 }
 
                 targetAngle = Mathf.Abs(Mathf.Atan((diffY) / (diffX)) * Mathf.Rad2Deg) + 180f;
-                aimRotation = targetAngle -90;
+                aimRotation = targetAngle - 90;
 
             }
 
             // Start the turning according to the target
-            if(aimRotation > gameObject.transform.rotation.eulerAngles.z -180f)
+            if (aimRotation > gameObject.transform.rotation.eulerAngles.z - 180f)
             {
                 RotateShip(1);
-            } else if (aimRotation == gameObject.transform.rotation.eulerAngles.z - 180f)
+            }
+            else if (aimRotation == gameObject.transform.rotation.eulerAngles.z - 180f)
             {
                 RotateShip(0);
             }
@@ -476,7 +480,7 @@ public class ShipHandling : MonoBehaviour {
 
             //Debug.Log("targetPlayer = " + targetPlayer.ToString() + " this.transform =  " + this.transform.ToString() + " targetAngle = " + targetAngle);
             //Debug.Log("this.transform.rotation.z = " + (gameObject.transform.rotation.eulerAngles.z -180f) + " targetAngle = " + targetAngle + " aimRotation = " + aimRotation);
-            
+
 
         }
 
@@ -486,179 +490,68 @@ public class ShipHandling : MonoBehaviour {
     }
 
 
-    void executeAI()
+    void ExecuteAI()
     {
-        if(AIEnabled == true)
+        if (AIEnabled == false)
         {
+            return;
+        }
+
+        float AIExecTime = Random.Range(0.01f, 1.0f);
+
+        //Debug.Log("Time.time " + Time.time + " > " + AILastExecuted);
+
+
+        if (Time.time > AIExecTime + AILastExecuted)
+        {
+            //float execTurn = Random.Range(0.0f, 1.0f);
+            //Debug.Log(turnDirection + " " + turnTime + " " + turnLastExecuted);
+
+            //Debug.Log("AI Makes moves!!");
+
+            if (AILevel == AILevels.IDIOT)
+            {
+                RotateShip(AITurnDirection);
+
+
+                MoveShip(Random.Range(-0.0f, 0.2f));
+
+                if (Random.Range(0.0f, 1.0f) > 0.9f)
+                {
+                    UsePrimary();
+                }
+                if (Random.Range(0.0f, 1.0f) > 0.95f)
+                {
+                    UseSecondary();
+                }
+
+            }
+            else if (AILevel == AILevels.ROOKIE)
+            {
+                MoveShip(Random.Range(0.8f, 1.0f));
+
+                if (Random.Range(0.0f, 1.0f) <= (shipDetails.AIPrimaryUsagePercent / 100f))
+                {
+                    UsePrimary();
+                }
+                if (Random.Range(0.0f, 1.0f) <= (shipDetails.AISecondaryUsagePercent / 100f))
+                {
+                    UseSecondary();
+                }
+            }
+
+            AILastExecuted = Time.time;
+        }
+
         
 
-            //Debug.Log("Time.time " + Time.time);
-            float AIExecTime = Random.Range(1.0f, 5.0f);
-            
-            if (Time.time < AIExecTime + AILastExecuted)
-            {
-                //float execTurn = Random.Range(0.0f, 1.0f);
-                //Debug.Log(turnDirection + " " + turnTime + " " + turnLastExecuted);
+        //MoveShip(Random.Range(-0.0f, 0.2f));
 
-                if (AILevel == AILevels.IDIOT)
-                {
-                    RotateShip(AITurnDirection);
-
-
-                    MoveShip(Random.Range(-0.0f, 0.2f));
-
-                    if (Random.Range(0.0f, 1.0f) > 0.9f)
-                    {
-                        UsePrimary();
-                    }
-                    if (Random.Range(0.0f, 1.0f) > 0.95f)
-                    {
-                        UseSecondary();
-                    }
-
-                } else if (AILevel == AILevels.ROOKIE)
-                {
-                    MoveShip(Random.Range(-0.0f, 0.2f));
-
-                    if (Random.Range(0.0f, 1.0f) > 0.85f)
-                    {
-                        UsePrimary();
-                    }
-                    if (Random.Range(0.0f, 1.0f) > 0.98f)
-                    {
-                        UseSecondary();
-                    }
-                }
-            }
-            else {
-                /*
-                if (AILevel == AILevels.ROOKIE)
-                {
-                    AITurnDirection = 0f;
-                   // Quaternion rotationAngle = Quaternion.LookRotation(targetPlayer.position - transform.position);
-                   // Debug.Log(rotationAngle.eulerAngles.z);
-
-                    //transform.Rotate(0, 0, rotationAngle.z*10);
-                    //transform.rotation = Quaternion.Euler(rotationAngle.x, rotationAngle.y, 0);
-
-
-                    transform.LookAt(targetPlayer.position);
-
-                
-                }
-                */
-                    //transform.localEulerAngles
-                    /*
-                    var lookDir = targetPlayer.position - transform.position;
-                    lookDir.y = 0; // keep only the horizontal direction
-                    //lookDir.x = 180; // keep only the horizontal direction
-                    Debug.Log("lookDir = " + lookDir);
-
-                    transform.rotation = Quaternion.LookRotation(lookDir);
-                    */
-    /*
-    Quaternion rotationAngle = Quaternion.LookRotation(targetPlayer.position - transform.position, Vector3.up);
-    //rotationAngle.SetEulerAngles()
-    transform.rotation = Quaternion.Slerp(transform.rotation, rotationAngle, Time.deltaTime * 10); // we rotate the rotationAngle 
-    */
-    //transform.localEulerAngles = new Vector3(180, 0, transform.localEulerAngles.z);
-
-
-    //Vector3 dirToFace = targetPlayer.position - transform.position;
-    //transform.rotation = Quaternion.LookRotation(dirToFace);
-
-
-
-
-    /*
-    Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime * -1 * shipTurn * shipDetails.RotationRate);
-
-    eulerAngleVelocity.y = 0;
-    rb.MoveRotation(rb.rotation * deltaRotation);
-    */
-    /*
-    Quaternion rotationAngle = Quaternion.LookRotation(targetPlayer.position - transform.position); // we get the angle has to be rotated
-
-    Debug.Log("rotationAngle = " + rotationAngle.ToString());
-
-    transform.rotation = Quaternion.Slerp(transform.rotation, rotationAngle, Time.deltaTime * 10); // we rotate the rotationAngle 
-    RotateShip(0f);
-    */
-    /*
-    Vector3 targetPoint = targetPlayer.position;
-    targetPoint.x = 0.0f;
-    targetPoint.y = 0.0f;
-    transform.LookAt(targetPoint);
-    */
-    /*
-    Quaternion newRotation = Quaternion.LookRotation(transform.position - targetPoint);
-    //newRotation.x = 0.0;
-    //newRotation.y = 0.0;
-    //transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 800);
-    Debug.Log("targetPoint = " + targetPoint.ToString());
-
-    Quaternion deltaRotation = Quaternion.Euler(0, 0, Time.deltaTime * newRotation.z * shipDetails.RotationRate * 1000);
-
-
-    //rb.MoveRotation(rb.rotation * deltaRotation);
-
-    //targetRotation. = 0.0f;
-    //AITurnDirection = targetRotation.y;
-    //rb.MoveRotation(targetRotation);
-
-
-
-    //targetRotation = 
-    //transform.rotation.set(180.0f, 0.0f, transform.rotation.z);// = 180.0f;
-    //transform.y = 180.0f;
-
-    float step = 1000f * Time.deltaTime;
-    //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetPlayer.rotation, step);
-    transform.right = transform.position - targetPlayer.position;
-    */
-
-    /*
-    if (targetPlayer.position.x >= transform.position.x && targetPlayer.position.y >= transform.position.y)
-    {
-        AITurnDirection = -0.5f;
-        Debug.Log("Enemy top right!");
-    } else if (targetPlayer.position.x <= transform.position.x && targetPlayer.position.y >= transform.position.y)
-    {
-        AITurnDirection = 0.5f;
-        Debug.Log("Enemy bottom right!");
     }
-    else if (targetPlayer.position.x >= transform.position.x && targetPlayer.position.y <= transform.position.y)
-    {
-        AITurnDirection = -0.5f;
-        Debug.Log("Enemy top right!");
-    }
-    else if (targetPlayer.position.x <= transform.position.x && targetPlayer.position.y <= transform.position.y)
-    {
-        AITurnDirection = 0.5f;
-        Debug.Log("Enemy top left!");
-    }
-    */
-
-
-    AITurnDirection = Random.Range(-0.5f, 0.5f);
-                
-                
-                //Debug.Log("AI changed his mind!");
-                AILastExecuted = Time.time;
-
-            }
-            
-        }
-    }
-
-
-
-
-
-
-
-
 }
+
+
+
 
 
 

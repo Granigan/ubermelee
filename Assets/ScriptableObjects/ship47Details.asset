@@ -24,3 +24,5 @@ MonoBehaviour:
   Primary: {fileID: 11400000, guid: f30b79eeedd80254394e890d585546e5, type: 2}
   Secondary: {fileID: 11400000, guid: fceb7da3c36c9c048a6025f890db50c7, type: 2}
   ShipName: Gunship
+  AIPrimaryUsagePercent: 90
+  AISecondaryUsagePercent: 10
