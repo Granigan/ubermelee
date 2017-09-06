@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 114398101681979206}
   - component: {fileID: 54112258328971468}
   - component: {fileID: 82763519637975738}
+  - component: {fileID: 114507530550983552}
   m_Layer: 0
   m_Name: SpaceMine
   m_TagString: Untagged
@@ -302,6 +303,22 @@ MonoBehaviour:
   bulletOwnerPlayerNumber: 0
   bulletHitPoints: 1
   isMine: 0
+--- !u!114 &114507530550983552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696281707263470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 518143d2d7ecabb4ba6d203d8c46bac0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: []
+  ringColor: []
+  ring: {fileID: 1238977555409780, guid: 498e3299e791e4c42a444fc7e5e6f01d, type: 2}
+  player: 0
+  playerNumber: 0
 --- !u!135 &135319283897826988
 SphereCollider:
   m_ObjectHideFlags: 1
