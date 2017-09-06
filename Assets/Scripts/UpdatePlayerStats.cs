@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class UpdatePlayerStats : MonoBehaviour {
 
-    GameObject[] players;
+    //GameObject[] players;
     private int numberOfPlayers = 4;
     private float playerNumber;
 
@@ -13,9 +13,11 @@ public class UpdatePlayerStats : MonoBehaviour {
 
     [HideInInspector]
     public float[] playerScores = new float[5];
-    public float GameOverScore = 10;
     public float RestartSceneWaitTime = 5.0f;
     private bool MeleeInProgress = true;
+
+    public MeleeManager meleeManager;
+        
 
     // GUI test stuff...
     //public GameObject[] HealthArray;
@@ -24,9 +26,10 @@ public class UpdatePlayerStats : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        meleeManager = GameObject.FindGameObjectWithTag("MeleeManager").GetComponent<MeleeManager>();
         playerScores = new float[5];
         //players[0] = new GameObject;
-        players = GameObject.FindGameObjectsWithTag("CameraObject");
+        //players = GameObject.FindGameObjectsWithTag("CameraObject");
         //Debug.Log("players = " + players.Length);
         /*
         playerScores[0] = 0f;
@@ -42,13 +45,13 @@ public class UpdatePlayerStats : MonoBehaviour {
         }
         
 
-        if (players.Length <= 3)
+        if (meleeManager.players.Length <= 3)
         {
             GameObject textGO = GameObject.Find("Player3Stats");
             UnityEngine.UI.Text text = textGO.GetComponentInChildren<UnityEngine.UI.Text>();
             text.text = "";
         }
-        if (players.Length <= 4)
+        if (meleeManager.players.Length <= 4)
         {
             GameObject textGO = GameObject.Find("Player4Stats");
             UnityEngine.UI.Text text = textGO.GetComponentInChildren<UnityEngine.UI.Text>();
@@ -65,18 +68,18 @@ public class UpdatePlayerStats : MonoBehaviour {
             return false;
         }
 
-        players = GameObject.FindGameObjectsWithTag("CameraObject");
+        //players = GameObject.FindGameObjectsWithTag("CameraObject");
 
         //foreach (GameObject currPlayer in players) {
-        for(int i = 1; i <= numberOfPlayers; i++) { 
+        for(int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++) { 
             //i++;
 
             //Debug.Log("playerScores = "  + playerScores.Length + " and i = " + i );
 
-            if (playerScores[i-1] >= GameOverScore)
+            if (playerScores[playerNumber - 1] >= meleeManager.settings.GameOverScore)
             {
                 //MeleeInProgress = false;
-                KillAllOtherPlayers(players[i]);
+                KillAllOtherPlayers(playerNumber);
                 StartCoroutine(ShowWinnerStats());
                 //GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>().ResetScene();
                 // Display winner stats
@@ -85,21 +88,21 @@ public class UpdatePlayerStats : MonoBehaviour {
             } 
             // Update score UI as usual.
             //Debug.Log("i = " + i);
-            GameObject textGO = GameObject.Find("Player" + i + "Stats");
+            GameObject textGO = GameObject.Find("Player" + playerNumber + "Stats");
             UnityEngine.UI.Text text = textGO.GetComponentInChildren<UnityEngine.UI.Text>();
             
             text.text = "";
-            if(Mathf.Round(playerScores[i - 1]) >= GameOverScore)
+            if(Mathf.Round(playerScores[playerNumber - 1]) >= meleeManager.settings.GameOverScore)
             {
                 text.text += "WINNER!!!\n";
                 text.fontStyle = FontStyle.BoldAndItalic;
                 text.fontSize = 12;
             }
-            text.text += "PLAYER " + Mathf.Round(i).ToString() + "\n";
-            text.text += shipNames[i] + "\n";
+            text.text += "PLAYER " + Mathf.Round(playerNumber).ToString() + "\n";
+            text.text += shipNames[playerNumber] + "\n";
             //text.text += "Crew: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentCrew()).ToString() + "/" + Mathf.Round(currPlayer.GetComponent<ShipHandling>().shipDetails.Crew).ToString() + "\n";
             //text.text += "Battery: " + Mathf.Round(currPlayer.GetComponent<ShipHandling>().getCurrentBattery()).ToString() + "/" + Mathf.Round(currPlayer.GetComponent<ShipHandling>().shipDetails.Battery).ToString() + "\n";
-            text.text += "Score: " + Mathf.Round(playerScores[i - 1]).ToString() + "\n";
+            text.text += "Score: " + Mathf.Round(playerScores[playerNumber - 1]).ToString() + "\n";
 
             // GUI Test Stuff...
             //GameObject CrewBar = GameObject.Find("HealthBar" + i);
@@ -114,27 +117,22 @@ public class UpdatePlayerStats : MonoBehaviour {
     
 
 
-    private void KillAllOtherPlayers(GameObject winnerPlayer)
+    private void KillAllOtherPlayers(int winnerPlayerNumber)
     {
-        int i = 0;
-        foreach (GameObject currPlayer in players)
+        foreach (GameObject currPlayer in meleeManager.players)
         {
-            i++;
-            if(currPlayer != null && winnerPlayer != null)
+            if (currPlayer == null) continue;
+
+            if(currPlayer.GetComponent<ShipHandling>().playerNumber != winnerPlayerNumber)
             {
-                if (currPlayer != winnerPlayer)
+                // DESTROY!!!
+                for (int j = 0; j < currPlayer.transform.childCount; j++)
                 {
-                    for (int j = 0; j < currPlayer.transform.childCount; j++)
-                    {
-                        //currPlayer.transform.GetChild(j).gameObject.SetActive(false);
-                        Destroy(currPlayer.transform.GetChild(j).gameObject);
-                    }
+                    //currPlayer.transform.GetChild(j).gameObject.SetActive(false);
+                    Destroy(currPlayer.transform.GetChild(j).gameObject);
                 }
-                //Destroy(currPlayer);
                 currPlayer.GetComponent<ShipHandling>().shipIsDead = true;
-
             }
-
         }
     }
 

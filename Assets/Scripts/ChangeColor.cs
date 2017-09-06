@@ -25,22 +25,7 @@ public class ChangeColor : MonoBehaviour {
     ringColor[4] = Color.magenta;
     rings();
     }
-    //void Awake(){
-
-        //howMany = GameObject.FindGameObjectsWithTag("CameraObject"); 
-        //Debug.Log("monta" + howMany.Length);
-
-        //i = howMany.Length;
-        //Debug.Log(i);
-        //if (i <= 3)
-        //{
-        //  i++;
-        //  rings();
-        
-        //rings();
-        //}
-
-    //}
+    
 
     // Update is called once per frame
     void rings () {
@@ -51,25 +36,7 @@ public class ChangeColor : MonoBehaviour {
         childObject.transform.parent = ship.transform;
         childObject.transform.localPosition = Vector3.zero;
         childObject.GetComponent<Renderer>().material.color = ringColor[player];
-        //childObject.GetComponentInChildren<Renderer>().material.color = ringColor[player];
-        //players = GameObject.FindGameObjectsWithTag("CameraObject");
-        //float playerNumber;
-        //int player;
-
-        //foreach (GameObject ship in players)
-
-        //{
-
-        //ship.GetComponent<ShipHandling>().playerNumber = playerNumber;
-        //playerNumber = ship.GetComponent<ShipHandling>().playerNumber;
-        //player = (int)playerNumber;
-        //GameObject childObject = Instantiate(ring) as GameObject;
-        //childObject.transform.parent = ship.transform;
-        //childObject.transform.localPosition = Vector3.zero;
-        //childObject.GetComponentInChildren<Renderer>().material.color = ringColor[player];
-        //player++;
-        //  i++;
-        //}
+       
     }
 }
 

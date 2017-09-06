@@ -406,7 +406,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 2
+  currentSelectionIndex: 1
   SelectionEnabled: 0
+  countdownSelect: 3
+  AIEnabled: 0
 --- !u!114 &381058994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,6 +454,49 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &488462696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 488462697}
+  - component: {fileID: 488462699}
+  m_Layer: 0
+  m_Name: MeleeManagerObject
+  m_TagString: MeleeManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &488462697
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 488462696}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 696.1288, y: 757.8625, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &488462699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 488462696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9c1c8bbc7fd61409e428d3f8173690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: fe92bff64e94ab44586516e819e11e46, type: 2}
+  players: []
+  sceneBuilder: {fileID: 0}
 --- !u!1 &577702065
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +624,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -349.99997, y: -215.70006}
+  m_AnchoredPosition: {x: -350, y: -215.70001}
   m_SizeDelta: {x: -696.5, y: -431.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &816042244
@@ -593,7 +639,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 3
+  currentSelectionIndex: 1
   SelectionEnabled: 0
+  countdownSelect: 3
+  AIEnabled: 0
 --- !u!114 &816042245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,7 +847,7 @@ Prefab:
     - target: {fileID: 114599262295883474, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
       propertyPath: NumberOfPlanets
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 114599262295883474, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
@@ -919,7 +968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -348.30002, y: 216.1}
+  m_AnchoredPosition: {x: -348.30005, y: 216.1}
   m_SizeDelta: {x: -696.5, y: -432.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1050682145
@@ -967,7 +1016,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
+  currentSelectionIndex: 1
   SelectionEnabled: 0
+  countdownSelect: 3
+  AIEnabled: 0
 --- !u!225 &1050682148
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1074,8 +1126,8 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  GameOverScore: 5
   RestartSceneWaitTime: 10
+  meleeManager: {fileID: 0}
 --- !u!1001 &1099169751
 Prefab:
   m_ObjectHideFlags: 0
@@ -1209,7 +1261,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 350, y: -215.67992}
+  m_AnchoredPosition: {x: 350, y: -215.67987}
   m_SizeDelta: {x: -700, y: -431.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1149564486
@@ -1224,7 +1276,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 4
+  currentSelectionIndex: 1
   SelectionEnabled: 0
+  countdownSelect: 3
+  AIEnabled: 0
 --- !u!114 &1149564487
 MonoBehaviour:
   m_ObjectHideFlags: 0

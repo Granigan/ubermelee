@@ -7,9 +7,9 @@ public class ShipSelection : MonoBehaviour {
 
     public int playerNumber = 1;
     private string turnControl;
-    private string thrustControl;
+    //private string thrustControl;
     private string primaryControl;
-    private string secondaryControl;
+    //private string secondaryControl;
     private InputDevice joystick;
     private UnityEngine.UI.Text textField;
     public KeyValuePair<string, int>[] shipArray;
@@ -194,9 +194,9 @@ public class ShipSelection : MonoBehaviour {
     private void AssignJoysticks()
     {
         turnControl = "Horizontal" + playerNumber;
-        thrustControl = "Vertical" + playerNumber;
+        //this.thrustControl = "Vertical" + playerNumber;
         primaryControl = "Primary" + playerNumber;
-        secondaryControl = "Secondary" + (playerNumber);
+        //this.secondaryControl = "Secondary" + (playerNumber);
         joystick = null;
 
         InputDevice[] joysticks = new InputDevice[InputManager.Devices.Count];

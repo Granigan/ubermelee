@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SceneBuilder : MonoBehaviour
 {
+    private MeleeManager meleeManager;
     public GameObject Planet;
     public GameObject[] Players;
     public int NumberOfPlanets = 8;
@@ -17,15 +18,18 @@ public class SceneBuilder : MonoBehaviour
     
     void Awake()
     {
+        meleeManager = GameObject.FindGameObjectWithTag("MeleeManager").GetComponent<MeleeManager>();
         //Instantiate(Planet);
         BuildPlanets();
         BuildShips();
         HidePlayerUIs();
 
+        /*
         for(int i = 0; i < AIEnabled.Length; i++)
         {
             AIEnabled[i] = false;
         }
+        */
     }
 
 
@@ -39,7 +43,7 @@ public class SceneBuilder : MonoBehaviour
             //PlayerInstances.Add(Instantiate(currPlayer));
             //currPlayer.GetComponent<ShipHandling>().playerNumber = playerNumber;
             clone.GetComponent<ShipHandling>().playerNumber = playerNumber;
-            clone.GetComponent<ShipHandling>().AIEnabled = AIEnabled[playerNumber];
+            clone.GetComponent<ShipHandling>().AIEnabled = meleeManager.GetAIEnabled(playerNumber);
             InitNewShip(clone);
             playerNumber++;
             

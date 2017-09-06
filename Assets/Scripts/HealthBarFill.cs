@@ -44,11 +44,11 @@ public class HealthBarFill : MonoBehaviour {
 
         
 
-        ArmorBarL.GetComponent<Image>().fillAmount = Mathf.Round(GetComponentInParent<ShipHandling>().getCurrentCrew()) / Mathf.Round(GetComponentInParent<ShipHandling>().shipDetails.Crew);
-        ArmorBarR.GetComponent<Image>().fillAmount = Mathf.Round(GetComponentInParent<ShipHandling>().getCurrentCrew()) / Mathf.Round(GetComponentInParent<ShipHandling>().shipDetails.Crew);
+        ArmorBarL.GetComponent<Image>().fillAmount = Mathf.Round(GetComponentInParent<ShipHandling>().currentCrew) / Mathf.Round(GetComponentInParent<ShipHandling>().shipDetails.Crew);
+        ArmorBarR.GetComponent<Image>().fillAmount = Mathf.Round(GetComponentInParent<ShipHandling>().currentCrew) / Mathf.Round(GetComponentInParent<ShipHandling>().shipDetails.Crew);
 
-        EnergyBarL.GetComponent<Image>().fillAmount = Mathf.Round(GetComponentInParent<ShipHandling>().getCurrentBattery()) / Mathf.Round(GetComponentInParent<ShipHandling>().shipDetails.Battery);
-        EnergyBarR.GetComponent<Image>().fillAmount = Mathf.Round(GetComponentInParent<ShipHandling>().getCurrentBattery()) / Mathf.Round(GetComponentInParent<ShipHandling>().shipDetails.Battery);
+        EnergyBarL.GetComponent<Image>().fillAmount = Mathf.Round(GetComponentInParent<ShipHandling>().currentBattery) / Mathf.Round(GetComponentInParent<ShipHandling>().shipDetails.Battery);
+        EnergyBarR.GetComponent<Image>().fillAmount = Mathf.Round(GetComponentInParent<ShipHandling>().currentBattery) / Mathf.Round(GetComponentInParent<ShipHandling>().shipDetails.Battery);
 
     }
 }

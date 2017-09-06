@@ -5,13 +5,6 @@ using UnityEngine;
 public class ShipHandling : MonoBehaviour
 {
 
-    public enum AILevels
-    {
-        IDIOT,
-        ROOKIE,
-        CYBORG
-    };
-
     public ShipDetails shipDetails;
 
     //public float hitPoints = 20;
@@ -41,15 +34,18 @@ public class ShipHandling : MonoBehaviour
     public float playerNumber = 0f;
 
     public bool AIEnabled = false;
-    public AILevels AILevel = AILevels.IDIOT;
+    //public AILevels AILevel = AILevels.IDIOT;
     private float AILastExecuted = 1f;
     float AITurnDirection = 0f; // = Random.Range(-1.0f, 1.0f);
 
     public bool shipIsDead = false;
 
+    private MeleeManager meleeManager;
+
     // Use this for initialization
     void Start()
     {
+        meleeManager = GameObject.FindGameObjectWithTag("MeleeManager").GetComponent<MeleeManager>();
         AILastExecuted = Time.time;
 
         currentCrew = shipDetails.Crew;
@@ -62,13 +58,11 @@ public class ShipHandling : MonoBehaviour
         rb.drag = shipDetails.Drag;
         rb.angularDrag = shipDetails.AngularDrag;
         shipIsDead = false;
-        //primaryScript = getComponent
 
         trail = GetComponentInChildren<TrailRenderer>();
 
         bulletSpawnPoints = new List<Transform>();
         int i = 0;
-        //bulletSpawnPoints = getChi getChildGameObject(transform.gameObject, "BulletSpawnPoint").transform;
         foreach (Transform child in transform)
         {
             //Debug.Log("child.name = " + child.name);
@@ -302,26 +296,6 @@ public class ShipHandling : MonoBehaviour
         return null;
     }
 
-    public float getCurrentCrew()
-    {
-        return currentCrew;
-    }
-
-    void setCurrentCrew(float newCrew)
-    {
-        currentCrew = newCrew;
-    }
-
-    public float getCurrentBattery()
-    {
-        return currentBattery;
-    }
-
-    void setCurrentBattery(float newBattery)
-    {
-        currentBattery = newBattery;
-    }
-
     Transform GetClosestEnemy()
     {
         float closestEnemyDistance = Mathf.Infinity;
@@ -329,11 +303,13 @@ public class ShipHandling : MonoBehaviour
 
 
 
-        if (AILevel == AILevels.ROOKIE)
+        if (meleeManager.settings.AILevel == GlobalSettings.AILevels.ROOKIE)
         {
             int i = 1;
-            foreach (GameObject currShip in GameObject.FindGameObjectsWithTag("CameraObject"))
+            foreach (GameObject currShip in meleeManager.players)
             {
+                if (currShip == null) continue;
+
                 float distance = (currShip.transform.position - transform.position).sqrMagnitude;
                 //Debug.Log("i=" + i + " distance = " + distance);
                 i++;
@@ -509,7 +485,7 @@ public class ShipHandling : MonoBehaviour
 
             //Debug.Log("AI Makes moves!!");
 
-            if (AILevel == AILevels.IDIOT)
+            if (meleeManager.settings.AILevel == GlobalSettings.AILevels.IDIOT)
             {
                 RotateShip(AITurnDirection);
 
@@ -526,7 +502,7 @@ public class ShipHandling : MonoBehaviour
                 }
 
             }
-            else if (AILevel == AILevels.ROOKIE)
+            else if (meleeManager.settings.AILevel == GlobalSettings.AILevels.ROOKIE)
             {
                 MoveShip(Random.Range(0.8f, 1.0f));
 

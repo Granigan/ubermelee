@@ -7,7 +7,7 @@ public class CameraControl : MonoBehaviour
     public float screenEdgeBuffer = 4f;           // Space between the top/bottom most target and the screen edge.
     public float minSize = 6.5f;                  // The smallest orthographic size the camera can be.
                                                     //[HideInInspector] public Transform[] m_Targets; // All the targets the camera needs to encompass.
-    public GameObject[] targets; // All the targets the camera needs to encompass.
+    //public GameObject[] targets; // All the targets the camera needs to encompass.
 
     public float maxZoomLevel = 16f;
 
@@ -21,16 +21,20 @@ public class CameraControl : MonoBehaviour
     public float viewpointJumpLeftBottom = 1.2f;
     public float viewpointJumpRightTop = -0.2f;
 
+    private MeleeManager meleeManager;
+
+
     private void Awake()
     {
         mainCamera = GetComponentInChildren<Camera>();
+        meleeManager = GameObject.FindGameObjectWithTag("MeleeManager").GetComponent<MeleeManager>();
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
-
-        targets = GameObject.FindGameObjectsWithTag("CameraObject");
+        meleeManager = GameObject.FindGameObjectWithTag("MeleeManager").GetComponent<MeleeManager>();
+        //targets = meleeManager.players;
 
         // Move the camera towards a desired position.
         Move();
@@ -65,14 +69,16 @@ public class CameraControl : MonoBehaviour
         int numTargets = 0;
 
         // Go through all the targets and add their positions together.
-        for (int i = 0; i < targets.Length; i++)
+        for (int i = 0; i < meleeManager.players.Length; i++)
         {
+            if (meleeManager.players[i] == null) continue;
+
             // If the target isn't active, go on to the next one.
-            if (!targets[i].gameObject.activeSelf)
+            if (!meleeManager.players[i].gameObject.activeSelf)
                 continue;
 
             // Add to the average and increment the number of targets in the average.
-            averagePos += targets[i].transform.position;
+            averagePos += meleeManager.players[i].transform.position;
             numTargets++;
         }
 
@@ -111,14 +117,15 @@ public class CameraControl : MonoBehaviour
         float size = 0f;
 
         // Go through all the targets...
-        for (int i = 0; i < targets.Length; i++)
+        for (int i = 0; i < meleeManager.players.Length; i++)
         {
+            if (meleeManager.players[i] == null) continue;
             // ... and if they aren't active continue on to the next target.
-            if (!targets[i].gameObject.activeSelf)
+            if (!meleeManager.players[i].gameObject.activeSelf)
                 continue;
 
             // Otherwise, find the position of the target in the camera's local space.
-            Vector3 targetLocalPos = transform.InverseTransformPoint(targets[i].transform.position);
+            Vector3 targetLocalPos = transform.InverseTransformPoint(meleeManager.players[i].transform.position);
 
             // Find the position of the target from the desired position of the camera's local space.
             Vector3 desiredPosToTarget = targetLocalPos - desiredLocalPos;
@@ -157,9 +164,10 @@ public class CameraControl : MonoBehaviour
     {
         float minBorder = 0.000f;
         float maxBorder = 1.0f;
-        foreach (GameObject currObject in targets)
+        foreach (GameObject currObject in meleeManager.players)
         {
-                        
+            if (currObject == null) continue;
+            
             Vector3 viewPos = mainCamera.WorldToViewportPoint(currObject.GetComponentInChildren<Transform>().position);
 
             //Debug.Log("viewPos = " + viewPos);
@@ -176,18 +184,20 @@ public class CameraControl : MonoBehaviour
                     //return true;
                 } else
                 {
-                    cloneship.GetComponentInChildren<TrailRenderer>().Clear();
-                    //Debug.Log(currObject);
-                    Vector3 newLocation = new Vector3(viewpointJumpLeftBottom, viewPos.y, mainCamera.nearClipPlane);
-                    newLocation = mainCamera.ViewportToWorldPoint(newLocation);
+                    if (cloneship != null && cloneship.GetComponentInChildren<TrailRenderer>() != null)
+                    {
+                        cloneship.GetComponentInChildren<TrailRenderer>().Clear();
+                        //Debug.Log(currObject);
+                        Vector3 newLocation = new Vector3(viewpointJumpLeftBottom, viewPos.y, mainCamera.nearClipPlane);
+                        newLocation = mainCamera.ViewportToWorldPoint(newLocation);
 
-                    currObject.transform.position = new Vector3(newLocation.x, currObject.transform.position.y, currObject.transform.position.z);
-                    //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
-                    //SetStartPositionAndSize();
-                    //lockCameraZoom(cameraLockedAfterJump);
-                    return true;
+                        currObject.transform.position = new Vector3(newLocation.x, currObject.transform.position.y, currObject.transform.position.z);
+                        //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
+                        //SetStartPositionAndSize();
+                        //lockCameraZoom(cameraLockedAfterJump);
+                        return true;
 
-
+                    }
                 }
 
 
@@ -204,16 +214,19 @@ public class CameraControl : MonoBehaviour
                 }
                 else
                 {
+                    if(cloneship != null && cloneship.GetComponentInChildren<TrailRenderer>() != null)
+                    {
+                        cloneship.GetComponentInChildren<TrailRenderer>().Clear();
+                        Vector3 newLocation = new Vector3(viewpointJumpRightTop, viewPos.y, mainCamera.nearClipPlane);
+                        newLocation = mainCamera.ViewportToWorldPoint(newLocation);
 
-                    cloneship.GetComponentInChildren<TrailRenderer>().Clear();
-                    Vector3 newLocation = new Vector3(viewpointJumpRightTop, viewPos.y, mainCamera.nearClipPlane);
-                    newLocation = mainCamera.ViewportToWorldPoint(newLocation);
-
-                    currObject.transform.position = new Vector3(newLocation.x, currObject.transform.position.y, currObject.transform.position.z);
-                    //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
-                    //SetStartPositionAndSize();
-                    //lockCameraZoom(cameraLockedAfterJump);
-                    return true;
+                        currObject.transform.position = new Vector3(newLocation.x, currObject.transform.position.y, currObject.transform.position.z);
+                        //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
+                        //SetStartPositionAndSize();
+                        //lockCameraZoom(cameraLockedAfterJump);
+                        return true;
+                    }
+                    
                 }
             }
 
@@ -230,18 +243,20 @@ public class CameraControl : MonoBehaviour
                 }
                 else
                 {
+                    if (cloneship != null && cloneship.GetComponentInChildren<TrailRenderer>() != null)
+                    {
+                        if (cloneship.GetComponentInChildren<TrailRenderer>())
+                            cloneship.GetComponentInChildren<TrailRenderer>().Clear();
 
-                    if (cloneship.GetComponentInChildren<TrailRenderer>())
-                        cloneship.GetComponentInChildren<TrailRenderer>().Clear();
+                        Vector3 newLocation = new Vector3(viewPos.x, viewpointJumpLeftBottom, mainCamera.nearClipPlane);
+                        newLocation = mainCamera.ViewportToWorldPoint(newLocation);
 
-                    Vector3 newLocation = new Vector3(viewPos.x, viewpointJumpLeftBottom, mainCamera.nearClipPlane);
-                    newLocation = mainCamera.ViewportToWorldPoint(newLocation);
-
-                    currObject.transform.position = new Vector3(currObject.transform.position.x, newLocation.y, currObject.transform.position.z);
-                    //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
-                    //SetStartPositionAndSize();                
-                    //lockCameraZoom(cameraLockedAfterJump);
-                    return true;
+                        currObject.transform.position = new Vector3(currObject.transform.position.x, newLocation.y, currObject.transform.position.z);
+                        //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
+                        //SetStartPositionAndSize();                
+                        //lockCameraZoom(cameraLockedAfterJump);
+                        return true;
+                    }
                 }
                 
             } else if (viewPos.y >= 1.0f)
@@ -256,19 +271,21 @@ public class CameraControl : MonoBehaviour
                 }
                 else
                 {
+                    if (cloneship != null && cloneship.GetComponentInChildren<TrailRenderer>() != null)
+                    {
 
+                        if (cloneship.GetComponentInChildren<TrailRenderer>())
+                            cloneship.GetComponentInChildren<TrailRenderer>().Clear();
 
-                    if (cloneship.GetComponentInChildren<TrailRenderer>())
-                        cloneship.GetComponentInChildren<TrailRenderer>().Clear();
+                        Vector3 newLocation = new Vector3(viewPos.x, viewpointJumpRightTop, mainCamera.nearClipPlane);
+                        newLocation = mainCamera.ViewportToWorldPoint(newLocation);
 
-                    Vector3 newLocation = new Vector3(viewPos.x, viewpointJumpRightTop, mainCamera.nearClipPlane);
-                    newLocation = mainCamera.ViewportToWorldPoint(newLocation);
-
-                    currObject.transform.position = new Vector3(currObject.transform.position.x, newLocation.y, currObject.transform.position.z);
-                    //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
-                    //SetStartPositionAndSize();
-                    //lockCameraZoom(cameraLockedAfterJump);
-                    return true;
+                        currObject.transform.position = new Vector3(currObject.transform.position.x, newLocation.y, currObject.transform.position.z);
+                        //Debug.Log("Old = " + viewPos.x + " New = " + newLocation.x);
+                        //SetStartPositionAndSize();
+                        //lockCameraZoom(cameraLockedAfterJump);
+                        return true;
+                    }
                 }
             }
 

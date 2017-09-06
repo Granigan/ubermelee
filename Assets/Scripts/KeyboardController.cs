@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class KeyboardController : MonoBehaviour {
 
+    MeleeManager meleeManager;
 	// Use this for initialization
 	void Start () {
-		
-	}
+        meleeManager = GameObject.FindGameObjectWithTag("MeleeManager").GetComponent<MeleeManager>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("CameraObject");
-        SceneBuilder sceneBuilder = GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>();
-
+        GlobalSettings settings = meleeManager.settings;
+        GameObject[] players = meleeManager.players;
 
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            
-
             if (players[0].gameObject.GetComponent<ShipHandling>().AIEnabled == true)
             {
                 players[0].gameObject.GetComponent<ShipHandling>().AIEnabled = false;
-                sceneBuilder.AIEnabled[1] = false;
+                settings.Player1AIEnabled = false;
+
             }
             else
             {
                 players[0].gameObject.GetComponent<ShipHandling>().AIEnabled = true;
-                sceneBuilder.AIEnabled[1] = true;
+                settings.Player1AIEnabled = true;
             }
         }
 
@@ -36,12 +36,12 @@ public class KeyboardController : MonoBehaviour {
             if (players[1].gameObject.GetComponent<ShipHandling>().AIEnabled == true)
             {
                 players[1].gameObject.GetComponent<ShipHandling>().AIEnabled = false;
-                sceneBuilder.AIEnabled[2] = false;
+                settings.Player2AIEnabled = false;
             }
             else
             {
                 players[1].gameObject.GetComponent<ShipHandling>().AIEnabled = true;
-                sceneBuilder.AIEnabled[2] = true;
+                settings.Player2AIEnabled = true;
             }
         }
 
@@ -51,12 +51,12 @@ public class KeyboardController : MonoBehaviour {
                 if (players[2].gameObject.GetComponent<ShipHandling>().AIEnabled == true)
                 {
                     players[2].gameObject.GetComponent<ShipHandling>().AIEnabled = false;
-                    sceneBuilder.AIEnabled[3] = false;
+                    settings.Player3AIEnabled = false;
                 }
                 else
                 {
                     players[2].gameObject.GetComponent<ShipHandling>().AIEnabled = true;
-                    sceneBuilder.AIEnabled[3] = true;
+                    settings.Player3AIEnabled = true;
                 }
             }
             
@@ -68,12 +68,12 @@ public class KeyboardController : MonoBehaviour {
                 if (players[3].gameObject.GetComponent<ShipHandling>().AIEnabled == true)
                 {
                     players[3].gameObject.GetComponent<ShipHandling>().AIEnabled = false;
-                    sceneBuilder.AIEnabled[4] = false;
+                    settings.Player4AIEnabled = false;
                 }
                 else
                 {
                     players[3].gameObject.GetComponent<ShipHandling>().AIEnabled = true;
-                    sceneBuilder.AIEnabled[4] = true;
+                    settings.Player4AIEnabled = true;
                 }
             }
         }

@@ -10,9 +10,9 @@ public class InputController : MonoBehaviour
     private ShipDetails shipDetails;
     //input controls
     private string turnControl;
-    private string thrustControl;
+    //private string thrustControl;
     private string primaryControl;
-    private string secondaryControl;
+    //private string secondaryControl;
     private InputDevice joystick;
 
     void Start()
@@ -27,9 +27,9 @@ public class InputController : MonoBehaviour
         shipHandling = GetComponent<ShipHandling>();
         playerNumber = (int)shipHandling.playerNumber;
         turnControl = "Horizontal" + playerNumber;
-        thrustControl = "Vertical" + playerNumber;
+        //thrustControl = "Vertical" + playerNumber;
         primaryControl = "Primary" + playerNumber;
-        secondaryControl = "Secondary" + (playerNumber);
+        //secondaryControl = "Secondary" + (playerNumber);
         joystick = null;
 
         InputDevice[] joysticks = new InputDevice[InputManager.Devices.Count];
@@ -85,9 +85,9 @@ public class InputController : MonoBehaviour
         if (joystick != null)
             speedValue = joystick.RightTrigger + (-1* joystick.LeftTrigger);
 
-        if (Input.GetAxis(thrustControl) > 0)
+        if (Input.GetAxis("Vertical" + playerNumber) > 0)
         {
-            speedValue = Input.GetAxis(thrustControl);
+            speedValue = Input.GetAxis("Vertical" + playerNumber);
         }
 
         shipHandling.MoveShip(speedValue);
@@ -98,9 +98,9 @@ public class InputController : MonoBehaviour
             specialButton = joystick.Action3;
 
 
-        if (Input.GetButton(secondaryControl) == true)
+        if (Input.GetButton("Secondary" + playerNumber) == true)
         {
-            specialButton = Input.GetButton(secondaryControl);
+            specialButton = Input.GetButton("Secondary" + playerNumber);
         }
 
         if (specialButton == true)
