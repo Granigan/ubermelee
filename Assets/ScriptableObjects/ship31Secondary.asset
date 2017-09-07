@@ -23,3 +23,4 @@ MonoBehaviour:
   HitPoints: 1
   SecondaryPrefab: {fileID: 1870047491770102, guid: 6276f70a6c2079b4287d65e130b340fe,
     type: 2}
+  AIRangeToUse: 70

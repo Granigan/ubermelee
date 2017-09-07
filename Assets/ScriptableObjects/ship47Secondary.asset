@@ -22,3 +22,4 @@ MonoBehaviour:
   FireRate: 0.3
   HitPoints: 1
   SecondaryPrefab: {fileID: 0}
+  AIRangeToUse: 70

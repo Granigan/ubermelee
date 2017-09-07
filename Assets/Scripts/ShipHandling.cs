@@ -296,6 +296,30 @@ public class ShipHandling : MonoBehaviour
         return null;
     }
 
+    public float GetClosestEnemyDistance()
+    {
+        float closestEnemyDistance = Mathf.Infinity;
+
+        int i = 1;
+        foreach (GameObject currShip in meleeManager.players)
+        {
+            if (currShip == null) continue;
+
+            float distance = (currShip.transform.position - transform.position).sqrMagnitude;
+            //Debug.Log("i=" + i + " distance = " + distance);
+            i++;
+
+            if (distance < closestEnemyDistance && distance > 0.1)
+            {
+                closestEnemyDistance = distance;
+                //Debug.Log("closestEnemyDistance = " + closestEnemyDistance);
+                //targetPlayer = currShip.gameObject.transform;
+            }
+        }
+
+        return closestEnemyDistance;
+    }
+
     Transform GetClosestEnemy()
     {
         float closestEnemyDistance = Mathf.Infinity;
@@ -506,11 +530,13 @@ public class ShipHandling : MonoBehaviour
             {
                 MoveShip(Random.Range(0.8f, 1.0f));
 
-                if (Random.Range(0.0f, 1.0f) <= (shipDetails.AIPrimaryUsagePercent / 100f))
+                
+
+                if (Random.Range(0.0f, 1.0f) <= (shipDetails.AIPrimaryUsagePercent / 100f) && GetClosestEnemyDistance() <= shipDetails.Primary.AIRangeToUse)
                 {
                     UsePrimary();
                 }
-                if (Random.Range(0.0f, 1.0f) <= (shipDetails.AISecondaryUsagePercent / 100f))
+                if (Random.Range(0.0f, 1.0f) <= (shipDetails.AISecondaryUsagePercent / 100f) && GetClosestEnemyDistance() <= shipDetails.Secondary.AIRangeToUse)
                 {
                     UseSecondary();
                 }

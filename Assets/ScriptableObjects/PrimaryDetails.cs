@@ -17,4 +17,5 @@ public class PrimaryDetails : PrimarySO {
     public float HitPoints = 1f;
     public GameObject bulletPrefab;
     public GameObject explosionPrefab;
+    public float AIRangeToUse = 100f;
 }

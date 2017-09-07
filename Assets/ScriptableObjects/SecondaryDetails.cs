@@ -16,5 +16,5 @@ public class SecondaryDetails : SecondarySO {
     public float FireRate = 1f; // How often the special can be used. 1f = Once per second.
     public float HitPoints = 1f;
     public GameObject SecondaryPrefab;
-    
+    public float AIRangeToUse = 100f;
 }
