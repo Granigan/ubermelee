@@ -136,12 +136,13 @@ public class ShipSelection : MonoBehaviour {
             int selectedShipID = 0;
             if(shipArray[currentSelectionIndex].Value == 0)
             {
-                selectedShipID = getRandomShipID();
+                selectedShipID = GetRandomShipID();
             } else
             {
                 selectedShipID = shipArray[currentSelectionIndex].Value;
             }
 
+            timerOn = false;
             CreateShip(selectedShipID);
             HideUI();
 
@@ -185,7 +186,7 @@ public class ShipSelection : MonoBehaviour {
     }
 
 
-    public int getRandomShipID()
+    public int GetRandomShipID()
     {
         return shipArray[Random.Range(1, shipArray.Length)].Value;
 
@@ -240,7 +241,7 @@ public class ShipSelection : MonoBehaviour {
 
         if(countdownSelect <= 0)
         {
-            CreateShip(getRandomShipID());
+            CreateShip(GetRandomShipID());
             HideUI();
             timerOn = false;
 

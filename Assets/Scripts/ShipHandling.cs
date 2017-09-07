@@ -158,7 +158,7 @@ public class ShipHandling : MonoBehaviour
         GameObject UICanvas = GameObject.FindGameObjectWithTag("Player" + playerNumber + "UIPanel");
         UICanvas.GetComponent<ShipSelection>().SelectionEnabled = true;
 
-        int randomShipID = UICanvas.GetComponent<ShipSelection>().getRandomShipID();
+        int randomShipID = UICanvas.GetComponent<ShipSelection>().GetRandomShipID();
         GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>().InstantiateShip(playerNumber, randomShipID, AIEnabled);
         //UICanvas.GetComponent<CanvasGroup>().alpha = 1f;
         /*
