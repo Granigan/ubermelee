@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 135319283897826988}
   - component: {fileID: 23187000352356318}
   - component: {fileID: 114040097699527708}
+  - component: {fileID: 114926066369506046}
   m_Layer: 0
   m_Name: ProximityArea
   m_TagString: Untagged
@@ -45,7 +46,6 @@ GameObject:
   - component: {fileID: 114398101681979206}
   - component: {fileID: 54112258328971468}
   - component: {fileID: 82763519637975738}
-  - component: {fileID: 114507530550983552}
   m_Layer: 0
   m_Name: SpaceMine
   m_TagString: Untagged
@@ -93,7 +93,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b32f70557979438438c677ea36c9b5a5, type: 2}
+  - {fileID: 2100000, guid: a585f28447393ea4abc12a4da8cd32f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -303,12 +303,12 @@ MonoBehaviour:
   bulletOwnerPlayerNumber: 0
   bulletHitPoints: 1
   isMine: 0
---- !u!114 &114507530550983552
+--- !u!114 &114926066369506046
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1696281707263470}
+  m_GameObject: {fileID: 1632304135303998}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 518143d2d7ecabb4ba6d203d8c46bac0, type: 3}
@@ -319,6 +319,7 @@ MonoBehaviour:
   ring: {fileID: 1238977555409780, guid: 498e3299e791e4c42a444fc7e5e6f01d, type: 2}
   player: 0
   playerNumber: 0
+  mesh: {fileID: 2100000, guid: a585f28447393ea4abc12a4da8cd32f0, type: 2}
 --- !u!135 &135319283897826988
 SphereCollider:
   m_ObjectHideFlags: 1

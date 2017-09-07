@@ -11,6 +11,7 @@ public class MineColor : MonoBehaviour
     GameObject mine;
     public int player;
     public float playerNumber;
+    public Material mesh;
     //public GameObject[] howMany;
     //public int i;
     //bool shipDestroyed;
@@ -20,11 +21,11 @@ public class MineColor : MonoBehaviour
     {
 
         ringColor = new Color[5];
-        ringColor[0] = Color.white;
-        ringColor[1] = Color.cyan;
-        ringColor[2] = Color.red;
-        ringColor[3] = Color.green;
-        ringColor[4] = Color.magenta;
+        ringColor[0] = new Color(0,0,0,0);
+        ringColor[1] = new Color32(0, 181, 255, 50);
+        ringColor[2] = new Color32(255, 88, 71, 50);
+        ringColor[3] = new Color32(101, 255, 8, 50);
+        ringColor[4] = new Color32(255, 69, 220, 50);
         rings();
     }
 
@@ -33,13 +34,16 @@ public class MineColor : MonoBehaviour
     void rings()
     {
         mine = this.gameObject;
-        playerNumber = GetComponent<BulletCollision>().bulletOwnerPlayerNumber;
+        //playerNumber = GetComponent<BulletCollision>().bulletOwnerPlayerNumber;
+        playerNumber = GetComponentInParent<BulletCollision>().bulletOwnerPlayerNumber;
         player = (int)playerNumber;
         GameObject childObject = Instantiate(ring) as GameObject;
         childObject.transform.parent = mine.transform;
         childObject.transform.localPosition = Vector3.zero;
         childObject.GetComponent<Renderer>().material.color = ringColor[player];
 
+        mesh = GetComponent<MeshRenderer>().material;
+        mesh.color = ringColor[player];
     }
 }
 
