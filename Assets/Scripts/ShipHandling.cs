@@ -497,6 +497,9 @@ public class ShipHandling : MonoBehaviour
             return;
         }
 
+        // Move the ship all the time regardless of AI decision
+        MoveShip(Random.Range(0.3f, 0.9f));
+
         float AIExecTime = Random.Range(0.01f, 1.0f);
 
         //Debug.Log("Time.time " + Time.time + " > " + AILastExecuted);
@@ -514,8 +517,6 @@ public class ShipHandling : MonoBehaviour
                 RotateShip(AITurnDirection);
 
 
-                MoveShip(Random.Range(-0.0f, 0.2f));
-
                 if (Random.Range(0.0f, 1.0f) > 0.9f)
                 {
                     UsePrimary();
@@ -528,10 +529,7 @@ public class ShipHandling : MonoBehaviour
             }
             else if (meleeManager.settings.AILevel == GlobalSettings.AILevels.ROOKIE)
             {
-                MoveShip(Random.Range(0.8f, 1.0f));
-
                 
-
                 if (Random.Range(0.0f, 1.0f) <= (shipDetails.AIPrimaryUsagePercent / 100f) && GetClosestEnemyDistance() <= shipDetails.Primary.AIRangeToUse)
                 {
                     UsePrimary();
@@ -544,10 +542,6 @@ public class ShipHandling : MonoBehaviour
 
             AILastExecuted = Time.time;
         }
-
-        
-
-        //MoveShip(Random.Range(-0.0f, 0.2f));
 
     }
 }

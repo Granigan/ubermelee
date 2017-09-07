@@ -125,13 +125,7 @@ public class UpdatePlayerStats : MonoBehaviour {
 
             if(currPlayer.GetComponent<ShipHandling>().playerNumber != winnerPlayerNumber)
             {
-                // DESTROY!!!
-                for (int j = 0; j < currPlayer.transform.childCount; j++)
-                {
-                    //currPlayer.transform.GetChild(j).gameObject.SetActive(false);
-                    Destroy(currPlayer.transform.GetChild(j).gameObject);
-                }
-                currPlayer.GetComponent<ShipHandling>().shipIsDead = true;
+                Destroy(currPlayer);
             }
         }
     }
