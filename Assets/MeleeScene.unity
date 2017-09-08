@@ -624,7 +624,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -350, y: -215.70001}
+  m_AnchoredPosition: {x: -349.99997, y: -215.7}
   m_SizeDelta: {x: -696.5, y: -431.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &816042244
@@ -853,7 +853,7 @@ Prefab:
         type: 2}
       propertyPath: Planet
       value: 
-      objectReference: {fileID: 1442135968714916, guid: 9297db079f51bca44a398e9ae3b63500,
+      objectReference: {fileID: 1406043004359848, guid: 560cff7708918054c8e3f5f463a46f49,
         type: 2}
     - target: {fileID: 114266325083238266, guid: 66fd2920119760f4f8738a42625d015f,
         type: 2}
@@ -897,6 +897,33 @@ Prefab:
         type: 2}
       propertyPath: orthographic size
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 23304847979713294, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 48466d95440d5224cb1820179ff7be6c, type: 2}
+    - target: {fileID: 64635252695596228, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64635252695596228, guid: 66fd2920119760f4f8738a42625d015f,
+        type: 2}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379317212810204, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978094787119110, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4403442706768300, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114378541777694938, guid: 66fd2920119760f4f8738a42625d015f, type: 2}
@@ -968,7 +995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -348.30005, y: 216.1}
+  m_AnchoredPosition: {x: -348.30002, y: 216.1}
   m_SizeDelta: {x: -696.5, y: -432.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1050682145
@@ -1261,7 +1288,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 350, y: -215.67987}
+  m_AnchoredPosition: {x: 350, y: -215.67986}
   m_SizeDelta: {x: -700, y: -431.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1149564486
