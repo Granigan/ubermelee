@@ -269,6 +269,7 @@ public class ShipHandling : MonoBehaviour
 
         if (Time.time > shipDetails.Secondary.FireRate + lastSecondaryUsed)
         {
+            //List<GameObject> createdBullets = new List<GameObject>();
             shipPrimaryActions.Invoke("Ship" + shipID + "Primary", 0);
             lastSecondaryUsed = Time.time;
         }

@@ -9,9 +9,13 @@ public class ShipSecondaryActions : MonoBehaviour
     float Ship47SpeedReduction = 100f;
     float Ship47RotationSpeed = 0f;
     float Ship47InitialRotationSpeed = 25.3f;
+
+    private List<GameObject> createdBullets;
+
     // Use this for initialization
     void Start()
     {
+        createdBullets = new List<GameObject>();
         Ship47RotationSpeed = Ship47InitialRotationSpeed;
     }
 
@@ -70,9 +74,12 @@ public class ShipSecondaryActions : MonoBehaviour
 
                 bulletCol.setDamage(shipDetails.Secondary.Damage);
 
+                createdBullets.Add(bullet);
+
                 // Destroy the bullet after X seconds
                 Destroy(bullet, shipDetails.Secondary.TimeToLive);
 
+                CheckForMaxInstances();
             }
 
 
@@ -164,24 +171,19 @@ public class ShipSecondaryActions : MonoBehaviour
             bullet.gameObject.tag = "Bullet";
             bullet.GetComponent<BulletCollision>().isMine = true;
             bullet.transform.SetPositionAndRotation(currBulletSpawnPoint.position, Quaternion.identity);
-            // Add velocity to the bullet
-            //bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.Secondary.Speed;
-
+            
             BulletCollision bulletCol = bullet.GetComponentInChildren<BulletCollision>();
 
             bulletCol.setDamage(shipDetails.Secondary.Damage);
+            createdBullets.Add(bullet);
 
             Destroy(bullet, shipDetails.Secondary.TimeToLive);
-            
+
+            CheckForMaxInstances();
         }
 
-
         shipHandling.currentBattery = shipHandling.currentBattery - shipDetails.Secondary.BatteryCharge;
-
-
-
         shipHandling.lastSecondaryUsed = Time.time;
-
     }
 
 
@@ -230,22 +232,34 @@ public class ShipSecondaryActions : MonoBehaviour
                 BulletCollision bulletCol = bullet.GetComponentInChildren<BulletCollision>();
 
                 bulletCol.setDamage(shipDetails.Secondary.Damage);
-
+                createdBullets.Add(bullet);
                 // Destroy the bullet after X seconds
                 Destroy(bullet, shipDetails.Secondary.TimeToLive);
-
+                CheckForMaxInstances();
             }
-
-
+            
             shipHandling.currentBattery = shipHandling.currentBattery - shipDetails.Secondary.BatteryCharge;
-
-
-
+            
             shipHandling.lastSecondaryUsed = Time.time;
         }
-
-
-
+        
     }
 
+
+
+    private void CheckForMaxInstances()
+    {
+        ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
+        ShipDetails shipDetails = shipHandling.shipDetails;
+        //Debug.Log("createdBullets.Count = " + createdBullets.Count + " shipDetails.Secondary.MaxInstances = " + shipDetails.Secondary.MaxInstances);
+        if (createdBullets.Count > shipDetails.Secondary.MaxInstances)
+        {
+            for (int i = (createdBullets.Count - shipDetails.Secondary.MaxInstances); i > 0; i--)
+            {
+                GameObject oldestBullet = createdBullets[0];
+                Destroy(oldestBullet);
+                createdBullets.RemoveAt(0);
+            }
+        }
+    }
 }

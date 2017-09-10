@@ -18,4 +18,5 @@ public class PrimaryDetails : PrimarySO {
     public GameObject bulletPrefab;
     public GameObject explosionPrefab;
     public float AIRangeToUse = 100f;
+    public int MaxInstances = 20;
 }
