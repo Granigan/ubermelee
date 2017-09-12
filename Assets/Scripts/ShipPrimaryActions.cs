@@ -6,10 +6,12 @@ using UnityEngine;
 public class ShipPrimaryActions : MonoBehaviour
 {
     private List<Transform> bulletSpawnPoints;
+    private List<GameObject> createdBullets;
 
     // Use this for initialization
     void Start()
     {
+        createdBullets = new List<GameObject>();
         bulletSpawnPoints = new List<Transform>();
         int i = 0;
         //bulletSpawnPoints = getChi getChildGameObject(transform.gameObject, "BulletSpawnPoint").transform;
@@ -41,30 +43,30 @@ public class ShipPrimaryActions : MonoBehaviour
 
     public void Ship31Primary()
     {
-        genericPrimaryShoot();
+        GenericPrimaryShoot();
 
     }
 
     public void Ship47Primary()
     {
-        genericPrimaryShoot();
+        GenericPrimaryShoot();
     }
 
     public void Ship63Primary()
     {
-        genericPrimaryShoot();
+        GenericPrimaryShoot();
 
     }
 
     public void Ship64Primary()
     {
-        genericPrimaryShoot();
-
+        GenericPrimaryShoot();
     }
 
 
-    private void genericPrimaryShoot()
+    private void GenericPrimaryShoot()
     {
+        
         ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
         ShipDetails shipDetails = shipHandling.shipDetails;
         float usedFireRate = shipDetails.Primary.FireRate;
@@ -100,8 +102,12 @@ public class ShipPrimaryActions : MonoBehaviour
                                                                                                   //ScriptB other = (ScriptB)go.GetComponent(typeof(ScriptB));
                     bulletCol.setDamage(shipDetails.Primary.Damage);
 
+                    createdBullets.Add(bullet);
+
                     // Destroy the bullet after X seconds
                     Destroy(bullet, shipDetails.Primary.TimeToLive);
+
+                    CheckForMaxInstances();
 
                 }
 
@@ -110,6 +116,23 @@ public class ShipPrimaryActions : MonoBehaviour
             }
 
 
+        }
+
+        
+    }
+
+    private void CheckForMaxInstances()
+    {
+        ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
+        ShipDetails shipDetails = shipHandling.shipDetails;
+        if(createdBullets.Count > shipDetails.Primary.MaxInstances)
+        {
+            for(int i = (createdBullets.Count - shipDetails.Primary.MaxInstances); i > 0; i--) 
+            {
+                GameObject oldestBullet = createdBullets[0];
+                Destroy(oldestBullet);
+                createdBullets.RemoveAt(0);
+            }
         }
     }
 

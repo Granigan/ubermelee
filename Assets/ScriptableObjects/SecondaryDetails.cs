@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Secondary/Secondary Details")]
-public class SecondaryDetails : SecondarySO {
+public class SecondaryDetails : SecondarySO
+{
 
     public float Damage = 0f;
     public float Scale = 1f;
@@ -18,4 +19,6 @@ public class SecondaryDetails : SecondarySO {
     public GameObject SecondaryPrefab;
     public float AIRangeToUse = 100f;
     public AudioClip SecondarySound;
-   }
+    public int MaxInstances = 20;
+}
+

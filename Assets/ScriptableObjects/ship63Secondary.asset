@@ -24,3 +24,4 @@ MonoBehaviour:
   SecondaryPrefab: {fileID: 1696281707263470, guid: 3ced24eca3187a147b45c91057fcdb2f,
     type: 2}
   AIRangeToUse: 500
+  MaxInstances: 8
