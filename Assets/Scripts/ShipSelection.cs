@@ -37,6 +37,7 @@ public class ShipSelection : MonoBehaviour {
         textField.text = "";
 
         shipList.Add(new KeyValuePair<string, int>("RANDOM", 0));
+        shipList.Add(new KeyValuePair<string, int>("Toad", 17));
         shipList.Add(new KeyValuePair<string, int>("Daredevil", 31));
         shipList.Add(new KeyValuePair<string, int>("Gunship", 47));
         shipList.Add(new KeyValuePair<string, int>("The Mouse", 63));
