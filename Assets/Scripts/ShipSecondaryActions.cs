@@ -11,17 +11,28 @@ public class ShipSecondaryActions : MonoBehaviour
     float Ship47InitialRotationSpeed = 25.3f;
     // Audio SFX
     private AudioSource source47;
+    float ShipXXLaserLength = 12f;
+    float ShipXXLaserDuration = 0.05f;
+    float ShipXXLaserDurationLeft = 0f;
+    bool ShipXXLaserActive = false;
     private List<GameObject> createdBullets;
     
     // Use this for initialization
     void Start()
     {
+        LineRenderer laserBeamRenderer = this.GetComponentInChildren<LineRenderer>();
+        if(laserBeamRenderer != null)
+        {
+            laserBeamRenderer.SetPosition(0, new Vector3(0f, 0f, 0f));
+        }
+
         createdBullets = new List<GameObject>();
         Ship47RotationSpeed = Ship47InitialRotationSpeed;
 
         // Audio SFX
-        source47 = GetComponent<AudioSource>();
-        Debug.Log("what " + source47);
+        //source47 = GetComponentInParent<AudioSource>();
+        source47 = gameObject.AddComponent<AudioSource>();
+        //Debug.Log("what " + source47);
         
         // Audio SFX
     }
@@ -32,7 +43,17 @@ public class ShipSecondaryActions : MonoBehaviour
         if(Ship47SecondaryActive == true)
         {
             RotateShip47();
-            
+        }
+
+        if (ShipXXLaserActive == true)
+        {
+            ShipXXLaserDurationLeft = ShipXXLaserDurationLeft - Time.deltaTime;
+            if(ShipXXLaserDurationLeft <= 0)
+            {
+                // Destroy laser
+                this.GetComponentInChildren<LineRenderer>().enabled = false;
+                ShipXXLaserActive = false;
+            }
         }
 
     }
@@ -145,9 +166,12 @@ public class ShipSecondaryActions : MonoBehaviour
 
                 bulletCol.setDamage(shipDetails.Secondary.Damage);
 
+                createdBullets.Add(bullet);
+
                 // Destroy the bullet after X seconds
                 Destroy(bullet, shipDetails.Secondary.TimeToLive);
 
+                CheckForMaxInstances();
             }
 
 
@@ -167,14 +191,19 @@ public class ShipSecondaryActions : MonoBehaviour
     {
         ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
         ShipDetails shipDetails = shipHandling.shipDetails;
-        AudioClip Woosh = shipDetails.Secondary.SecondarySound;
-        source47.PlayOneShot(Woosh);
+        
 
 
         if (shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge && Ship47SecondaryActive == false)
         {
             Ship47SecondaryActive = true;
             shipHandling.currentBattery -= shipDetails.Secondary.BatteryCharge;
+
+            AudioClip Woosh = shipDetails.Secondary.SecondarySound;
+            //Debug.Log("Woosh is " + Woosh.ToString());
+            //Debug.Log("source47 is " + source47.ToString());
+
+            source47.PlayOneShot(Woosh);
         } 
 
     }
@@ -332,4 +361,79 @@ public class ShipSecondaryActions : MonoBehaviour
             }
         }
     }
+
+    //ShipXX Laser temporarily here
+    public void ShipXXSecondary()
+    {
+        if (ShipXXLaserActive == true)
+        {
+            return;
+        }
+
+        ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
+        ShipDetails shipDetails = shipHandling.shipDetails;
+        LineRenderer laserBeamRenderer = this.GetComponentInChildren<LineRenderer>();
+
+        List<Transform> bulletSpecialSpawnPoints = new List<Transform>();
+        int i = 0;
+        foreach (Transform child in transform)
+        {
+            if (child.CompareTag("BulletSpawn") && child.name.Contains("BulletSpawnPointPrimary"))
+            {
+                bulletSpecialSpawnPoints.Add(child.transform);
+                i++;
+            }
+        }
+
+        List<Transform> usedSpawnPoints = new List<Transform>();
+
+        usedSpawnPoints = bulletSpecialSpawnPoints;
+
+        foreach (Transform currBulletSpawnPoint in usedSpawnPoints)
+        {
+            RaycastHit hit;
+            laserBeamRenderer.enabled = true;
+            laserBeamRenderer.SetPosition(0, currBulletSpawnPoint.position);
+            Vector3 direction = currBulletSpawnPoint.transform.forward;
+
+            Vector3 endPoint = currBulletSpawnPoint.transform.position + currBulletSpawnPoint.transform.forward * ShipXXLaserLength;
+
+            Vector3 fwd = currBulletSpawnPoint.transform.TransformDirection(Vector3.forward);
+
+
+            if (Physics.Raycast(currBulletSpawnPoint.transform.position, fwd, out hit, ShipXXLaserLength))
+            {
+                //print("There is something in front of the object! " + hit.distance);
+                endPoint = hit.point;
+
+                GameObject instance = Resources.Load("Prefabs/ShrapnelExplosionMedium") as GameObject;
+
+                GameObject explosion = Instantiate(instance, hit.point, Quaternion.identity);
+                Destroy(explosion, 3.0f);
+
+                ShipHandling hitShipHandling = hit.collider.gameObject.GetComponentInParent<ShipHandling>();
+                // Do damage 
+
+                if (hitShipHandling != null)
+                    hitShipHandling.DoDamage(shipDetails.Secondary.Damage);
+            }
+
+
+            //if (Physics.Raycast(currBulletSpawnPoint.transform.position, direction, ShipXXLaserLength))
+            //    endPoint = hit.point;
+
+            laserBeamRenderer.SetPosition(1, endPoint);
+
+            //Debug.Log("Firing a laser..." + currBulletSpawnPoint.position.ToString() + " " + endPoint.ToString());
+
+            //endPoint.Set(currBulletSpawnPoint.position.x + ShipXXLaserLength, currBulletSpawnPoint.position.y, currBulletSpawnPoint.position.z);
+            //laserBeamRenderer.SetPosition(1, endPoint);
+            ShipXXLaserActive = true;
+
+            ShipXXLaserDurationLeft = ShipXXLaserDuration;
+        }
+
+
+    }
+
 }

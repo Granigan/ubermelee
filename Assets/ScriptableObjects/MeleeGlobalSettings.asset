@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: MeleeGlobalSettings
   m_EditorClassIdentifier: 
   DebugMode: 0
-  Player1AIEnabled: 0
+  Player1AIEnabled: 1
   Player2AIEnabled: 1
   Player3AIEnabled: 1
   Player4AIEnabled: 1
