@@ -37,7 +37,7 @@ public class ShipPrimaryActions : MonoBehaviour
 
     public void Ship17Primary()
     {
-        genericPrimaryShoot();
+        GenericPrimaryShoot();
 
     }
 
