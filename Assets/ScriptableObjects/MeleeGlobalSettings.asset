@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DebugMode: 0
   Player1AIEnabled: 0
-  Player2AIEnabled: 0
-  Player3AIEnabled: 0
-  Player4AIEnabled: 0
+  Player2AIEnabled: 1
+  Player3AIEnabled: 1
+  Player4AIEnabled: 1
   AILevel: 1
-  GameOverScore: 5
+  GameOverScore: 10

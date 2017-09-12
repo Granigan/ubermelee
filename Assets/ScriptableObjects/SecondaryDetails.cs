@@ -17,4 +17,5 @@ public class SecondaryDetails : SecondarySO {
     public float HitPoints = 1f;
     public GameObject SecondaryPrefab;
     public float AIRangeToUse = 100f;
-}
+    public AudioClip SecondarySound;
+   }

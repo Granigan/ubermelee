@@ -9,10 +9,20 @@ public class ShipSecondaryActions : MonoBehaviour
     float Ship47SpeedReduction = 100f;
     float Ship47RotationSpeed = 0f;
     float Ship47InitialRotationSpeed = 25.3f;
+
+    // Audio SFX
+    private AudioSource source47;
+    
     // Use this for initialization
     void Start()
     {
         Ship47RotationSpeed = Ship47InitialRotationSpeed;
+
+        // Audio SFX
+        source47 = GetComponent<AudioSource>();
+        Debug.Log("what " + source47);
+        
+        // Audio SFX
     }
 
     // Update is called once per frame
@@ -21,12 +31,73 @@ public class ShipSecondaryActions : MonoBehaviour
         if(Ship47SecondaryActive == true)
         {
             RotateShip47();
+            
         }
 
     }
-
     //Ship31 Secondary
     public void Ship31Secondary()
+    {
+        List<Transform> bulletSpecialSpawnPoints = new List<Transform>();
+        int i = 0;
+        foreach (Transform child in transform)
+        {
+            if (child.CompareTag("BulletSpawn") && child.name.Contains("BulletSpawnPointSecondary"))
+            {
+                bulletSpecialSpawnPoints.Add(child.transform);
+                i++;
+            }
+        }
+
+        ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
+        ShipDetails shipDetails = shipHandling.shipDetails;
+
+
+        if (shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge)
+        {
+            List<Transform> usedSpawnPoints = new List<Transform>();
+
+            usedSpawnPoints = bulletSpecialSpawnPoints;
+
+
+
+            foreach (Transform currBulletSpawnPoint in usedSpawnPoints)
+            {
+                GameObject bullet = (GameObject)Instantiate(
+                shipDetails.Secondary.SecondaryPrefab,
+                currBulletSpawnPoint.position,
+                currBulletSpawnPoint.rotation);
+                bullet.GetComponent<BulletCollision>().bulletOwnerPlayerNumber = shipHandling.playerNumber;
+                Transform transform = bullet.GetComponentInChildren<Transform>();
+                transform.localScale = new Vector3(shipDetails.Secondary.Scale, shipDetails.Secondary.Scale, shipDetails.Secondary.Scale);
+                bullet.GetComponent<BulletCollision>().bulletHitPoints = shipDetails.Secondary.HitPoints;
+                bullet.gameObject.tag = "Bullet";
+
+                // Add velocity to the bullet
+                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * shipDetails.Secondary.Speed;
+
+                BulletCollision bulletCol = bullet.GetComponentInChildren<BulletCollision>();
+
+                bulletCol.setDamage(shipDetails.Secondary.Damage);
+
+                // Destroy the bullet after X seconds
+                Destroy(bullet, shipDetails.Secondary.TimeToLive);
+
+            }
+
+
+            shipHandling.currentBattery = shipHandling.currentBattery - shipDetails.Secondary.BatteryCharge;
+
+
+
+            shipHandling.lastSecondaryUsed = Time.time;
+        }
+
+
+
+    }
+    //Ship17 Secondary
+    public void Ship17Secondary()
     {
         List<Transform> bulletSpecialSpawnPoints = new List<Transform>();
         int i = 0;
@@ -92,7 +163,9 @@ public class ShipSecondaryActions : MonoBehaviour
     {
         ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
         ShipDetails shipDetails = shipHandling.shipDetails;
-        
+        AudioClip Woosh = shipDetails.Secondary.SecondarySound;
+        source47.PlayOneShot(Woosh);
+
 
         if (shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge && Ship47SecondaryActive == false)
         {
@@ -104,7 +177,7 @@ public class ShipSecondaryActions : MonoBehaviour
 
     void RotateShip47()
     {
-
+        
         //Debug.Log(Ship47RotationSpeed);
         if (Ship47RotationSpeed > 0)
         {

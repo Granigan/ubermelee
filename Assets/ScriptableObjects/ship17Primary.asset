@@ -9,20 +9,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8f2ded8c0fcb0c45ac3335939e88c9b, type: 3}
-  m_Name: ship64Primary
+  m_Name: ship17Primary
   m_EditorClassIdentifier: 
-  Damage: 2
-  Scale: 0.2
-  Speed: 14
-  TimeToLive: 1.2
-  Mass: 0.05
+  Damage: 0.5
+  Scale: 0.3
+  Speed: 15
+  TimeToLive: 0.5
+  Mass: 0.02
   Drag: 0
   AngularDrag: 0
-  BatteryCharge: 4
-  FireRate: 0.8
+  BatteryCharge: 2
+  FireRate: 0.2
   HitPoints: 1
-  bulletPrefab: {fileID: 1150720100792812, guid: 53ade6253760894408a8711ffe14dbbd,
+  bulletPrefab: {fileID: 1870047491770102, guid: 6276f70a6c2079b4287d65e130b340fe,
     type: 2}
   explosionPrefab: {fileID: 1701049221895126, guid: bf6c7abd5fb392a4c9d85ab72825d049,
     type: 2}
-  AIRangeToUse: 400
+  AIRangeToUse: 100
