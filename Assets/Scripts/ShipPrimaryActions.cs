@@ -8,9 +8,21 @@ public class ShipPrimaryActions : MonoBehaviour
     private List<Transform> bulletSpawnPoints;
     private List<GameObject> createdBullets;
 
+    float ShipXXLaserLength = 12f;
+    float ShipXXLaserMinLength = 4f;
+    float ShipXXLaserDuration = 0.05f;
+    float ShipXXLaserDurationLeft = 0f;
+    bool ShipXXLaserActive = false;
+
     // Use this for initialization
     void Start()
     {
+        LineRenderer laserBeamRenderer = this.GetComponentInChildren<LineRenderer>();
+        if (laserBeamRenderer != null)
+        {
+            laserBeamRenderer.SetPosition(0, new Vector3(0f, 0f, 0f));
+        }
+
         createdBullets = new List<GameObject>();
         bulletSpawnPoints = new List<Transform>();
         int i = 0;
@@ -33,13 +45,18 @@ public class ShipPrimaryActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ShipXXLaserActive == true)
+        {
+            ShipXXLaserDurationLeft = ShipXXLaserDurationLeft - Time.deltaTime;
+            if (ShipXXLaserDurationLeft <= 0)
+            {
+                // Destroy laser
+                this.GetComponentInChildren<LineRenderer>().enabled = false;
+                ShipXXLaserActive = false;
+            }
+        }
     }
 
-    public void Ship17Primary()
-    {
-        GenericPrimaryShoot();
-
-    }
 
     public void Ship31Primary()
     {
@@ -135,5 +152,107 @@ public class ShipPrimaryActions : MonoBehaviour
             }
         }
     }
+
+
+
+
+
+    public void Ship17Primary()
+    {
+        if (ShipXXLaserActive == true)
+        {
+            return;
+        }
+
+        ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
+        ShipDetails shipDetails = shipHandling.shipDetails;
+        LineRenderer laserBeamRenderer = this.GetComponentInChildren<LineRenderer>();
+        float usedFireRate = shipDetails.Primary.FireRate;
+
+        if (Time.time > usedFireRate + shipHandling.lastShot)
+        {
+            if (shipHandling.currentBattery >= shipDetails.Primary.BatteryCharge)
+            {
+
+                List<Transform> bulletSpecialSpawnPoints = new List<Transform>();
+                int i = 0;
+                foreach (Transform child in transform)
+                {
+                    if (child.CompareTag("BulletSpawn") && child.name.Contains("BulletSpawnPointPrimary1"))
+                    {
+                        bulletSpecialSpawnPoints.Add(child.transform);
+                        i++;
+                    }
+                }
+
+                List<Transform> usedSpawnPoints = new List<Transform>();
+
+                usedSpawnPoints = bulletSpecialSpawnPoints;
+
+                foreach (Transform currBulletSpawnPoint in usedSpawnPoints)
+                {
+                    RaycastHit hit;
+                    laserBeamRenderer.enabled = true;
+                    laserBeamRenderer.SetPosition(0, currBulletSpawnPoint.position);
+                    Vector3 direction = currBulletSpawnPoint.transform.forward;
+
+                    // Reduce laser length according to ship speed
+                    Rigidbody rb = GetComponent<Rigidbody>();
+                    Vector3 vel = rb.velocity;
+
+                    float finalLaserLength = ShipXXLaserLength - vel.magnitude;
+                    //Debug.Log("finalLaserLength = " + finalLaserLength);
+
+                    if(finalLaserLength < ShipXXLaserMinLength)
+                    {
+                        finalLaserLength = ShipXXLaserMinLength;
+                    }
+
+                    Vector3 endPoint = currBulletSpawnPoint.transform.position + currBulletSpawnPoint.transform.forward * finalLaserLength;
+
+                    Vector3 fwd = currBulletSpawnPoint.transform.TransformDirection(Vector3.forward);
+
+
+                    if (Physics.Raycast(currBulletSpawnPoint.transform.position, fwd, out hit, finalLaserLength))
+                    {
+                        //print("There is something in front of the object! " + hit.distance);
+                        endPoint = hit.point;
+
+                        GameObject instance = Resources.Load("Prefabs/ShrapnelExplosionMedium") as GameObject;
+
+                        GameObject explosion = Instantiate(instance, hit.point, Quaternion.identity);
+                        Destroy(explosion, 3.0f);
+
+                        ShipHandling hitShipHandling = hit.collider.gameObject.GetComponentInParent<ShipHandling>();
+                        // Do damage 
+
+                        if (hitShipHandling != null)
+                            hitShipHandling.DoDamage(shipDetails.Primary.Damage);
+                    }
+
+
+                    //if (Physics.Raycast(currBulletSpawnPoint.transform.position, direction, ShipXXLaserLength))
+                    //    endPoint = hit.point;
+
+                    laserBeamRenderer.SetPosition(1, endPoint);
+
+                    //Debug.Log("Firing a laser..." + currBulletSpawnPoint.position.ToString() + " " + endPoint.ToString());
+
+                    //endPoint.Set(currBulletSpawnPoint.position.x + ShipXXLaserLength, currBulletSpawnPoint.position.y, currBulletSpawnPoint.position.z);
+                    //laserBeamRenderer.SetPosition(1, endPoint);
+                    ShipXXLaserActive = true;
+
+                    ShipXXLaserDurationLeft = ShipXXLaserDuration;
+                }
+
+
+                shipHandling.currentBattery = shipHandling.currentBattery - shipDetails.Primary.BatteryCharge;
+                shipHandling.lastShot = Time.time;
+
+            }
+        }
+    }
+
+
 
 }

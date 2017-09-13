@@ -112,9 +112,6 @@ public class ShipSecondaryActions : MonoBehaviour
 
 
             shipHandling.currentBattery = shipHandling.currentBattery - shipDetails.Secondary.BatteryCharge;
-
-
-
             shipHandling.lastSecondaryUsed = Time.time;
         }
 
@@ -124,6 +121,22 @@ public class ShipSecondaryActions : MonoBehaviour
     //Ship17 Secondary
     public void Ship17Secondary()
     {
+        // Give speed boost to ship
+        ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
+        ShipDetails shipDetails = shipHandling.shipDetails;
+        Rigidbody rb = GetComponent<Rigidbody>();
+
+        if (shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge)
+        {
+
+            rb.AddForce((transform.right * 1000));
+
+            shipHandling.currentBattery = shipHandling.currentBattery - shipDetails.Secondary.BatteryCharge;
+            shipHandling.lastSecondaryUsed = Time.time;
+
+        }
+
+        /*
         List<Transform> bulletSpecialSpawnPoints = new List<Transform>();
         int i = 0;
         foreach (Transform child in transform)
@@ -182,11 +195,11 @@ public class ShipSecondaryActions : MonoBehaviour
             shipHandling.lastSecondaryUsed = Time.time;
         }
 
-
+    */
 
     }
 
-   
+
     public void Ship47Secondary()
     {
         ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
@@ -378,7 +391,7 @@ public class ShipSecondaryActions : MonoBehaviour
         int i = 0;
         foreach (Transform child in transform)
         {
-            if (child.CompareTag("BulletSpawn") && child.name.Contains("BulletSpawnPointPrimary"))
+            if (child.CompareTag("BulletSpawn") && child.name.Contains("BulletSpawnPointPrimary1"))
             {
                 bulletSpecialSpawnPoints.Add(child.transform);
                 i++;
