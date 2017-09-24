@@ -11,17 +11,17 @@ public class ShipSecondaryActions : MonoBehaviour
     float Ship47InitialRotationSpeed = 25.3f;
     // Audio SFX
     private AudioSource source47;
-    float ShipXXLaserLength = 12f;
-    float ShipXXLaserDuration = 0.05f;
-    float ShipXXLaserDurationLeft = 0f;
-    bool ShipXXLaserActive = false;
+    //float Ship17LaserLength = 12f;
+    //float Ship17LaserDuration = 0.05f;
+    float Ship17LaserDurationLeft = 0f;
+    bool Ship17LaserActive = false;
     private List<GameObject> createdBullets;
-    
+
     // Use this for initialization
     void Start()
     {
         LineRenderer laserBeamRenderer = this.GetComponentInChildren<LineRenderer>();
-        if(laserBeamRenderer != null)
+        if (laserBeamRenderer != null)
         {
             laserBeamRenderer.SetPosition(0, new Vector3(0f, 0f, 0f));
         }
@@ -33,26 +33,26 @@ public class ShipSecondaryActions : MonoBehaviour
         //source47 = GetComponentInParent<AudioSource>();
         source47 = gameObject.AddComponent<AudioSource>();
         //Debug.Log("what " + source47);
-        
+
         // Audio SFX
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Ship47SecondaryActive == true)
+        if (Ship47SecondaryActive == true)
         {
             RotateShip47();
         }
 
-        if (ShipXXLaserActive == true)
+        if (Ship17LaserActive == true)
         {
-            ShipXXLaserDurationLeft = ShipXXLaserDurationLeft - Time.deltaTime;
-            if(ShipXXLaserDurationLeft <= 0)
+            Ship17LaserDurationLeft = Ship17LaserDurationLeft - Time.deltaTime;
+            if (Ship17LaserDurationLeft <= 0)
             {
                 // Destroy laser
                 this.GetComponentInChildren<LineRenderer>().enabled = false;
-                ShipXXLaserActive = false;
+                Ship17LaserActive = false;
             }
         }
 
@@ -204,7 +204,7 @@ public class ShipSecondaryActions : MonoBehaviour
     {
         ShipHandling shipHandling = this.GetComponentInParent<ShipHandling>();
         ShipDetails shipDetails = shipHandling.shipDetails;
-        
+
 
 
         if (shipHandling.currentBattery >= shipDetails.Secondary.BatteryCharge && Ship47SecondaryActive == false)
@@ -217,17 +217,17 @@ public class ShipSecondaryActions : MonoBehaviour
             //Debug.Log("source47 is " + source47.ToString());
 
             source47.PlayOneShot(Woosh);
-        } 
+        }
 
     }
 
     void RotateShip47()
     {
-        
+
         //Debug.Log(Ship47RotationSpeed);
         if (Ship47RotationSpeed > 0)
         {
-            Ship47RotationSpeed -= Ship47SpeedReduction * Time.deltaTime; 
+            Ship47RotationSpeed -= Ship47SpeedReduction * Time.deltaTime;
             this.GetComponentInParent<ShipHandling>().RotateShip(Ship47RotationSpeed);
         }
         else
@@ -271,7 +271,7 @@ public class ShipSecondaryActions : MonoBehaviour
 
         foreach (Transform currBulletSpawnPoint in bulletSpecialSpawnPoints)
         {
-            
+
             GameObject bullet = (GameObject)Instantiate(
             shipDetails.Secondary.SecondaryPrefab,
             currBulletSpawnPoint.position,
@@ -283,7 +283,7 @@ public class ShipSecondaryActions : MonoBehaviour
             bullet.gameObject.tag = "Bullet";
             bullet.GetComponent<BulletCollision>().isMine = true;
             bullet.transform.SetPositionAndRotation(currBulletSpawnPoint.position, Quaternion.identity);
-            
+
             BulletCollision bulletCol = bullet.GetComponentInChildren<BulletCollision>();
 
             bulletCol.setDamage(shipDetails.Secondary.Damage);
@@ -349,12 +349,12 @@ public class ShipSecondaryActions : MonoBehaviour
                 Destroy(bullet, shipDetails.Secondary.TimeToLive);
                 CheckForMaxInstances();
             }
-            
+
             shipHandling.currentBattery = shipHandling.currentBattery - shipDetails.Secondary.BatteryCharge;
-            
+
             shipHandling.lastSecondaryUsed = Time.time;
         }
-        
+
     }
 
 
@@ -375,10 +375,12 @@ public class ShipSecondaryActions : MonoBehaviour
         }
     }
 
-    //ShipXX Laser temporarily here
-    public void ShipXXSecondary()
+    //Ship17 Laser temporarily here
+    /*
+
+    public void Ship17Secondary()
     {
-        if (ShipXXLaserActive == true)
+        if (Ship17LaserActive == true)
         {
             return;
         }
@@ -409,12 +411,12 @@ public class ShipSecondaryActions : MonoBehaviour
             laserBeamRenderer.SetPosition(0, currBulletSpawnPoint.position);
             Vector3 direction = currBulletSpawnPoint.transform.forward;
 
-            Vector3 endPoint = currBulletSpawnPoint.transform.position + currBulletSpawnPoint.transform.forward * ShipXXLaserLength;
+            Vector3 endPoint = currBulletSpawnPoint.transform.position + currBulletSpawnPoint.transform.forward * Ship17LaserLength;
 
             Vector3 fwd = currBulletSpawnPoint.transform.TransformDirection(Vector3.forward);
 
 
-            if (Physics.Raycast(currBulletSpawnPoint.transform.position, fwd, out hit, ShipXXLaserLength))
+            if (Physics.Raycast(currBulletSpawnPoint.transform.position, fwd, out hit, Ship17LaserLength))
             {
                 //print("There is something in front of the object! " + hit.distance);
                 endPoint = hit.point;
@@ -432,21 +434,22 @@ public class ShipSecondaryActions : MonoBehaviour
             }
 
 
-            //if (Physics.Raycast(currBulletSpawnPoint.transform.position, direction, ShipXXLaserLength))
+            //if (Physics.Raycast(currBulletSpawnPoint.transform.position, direction, Ship17LaserLength))
             //    endPoint = hit.point;
 
             laserBeamRenderer.SetPosition(1, endPoint);
 
             //Debug.Log("Firing a laser..." + currBulletSpawnPoint.position.ToString() + " " + endPoint.ToString());
 
-            //endPoint.Set(currBulletSpawnPoint.position.x + ShipXXLaserLength, currBulletSpawnPoint.position.y, currBulletSpawnPoint.position.z);
+            //endPoint.Set(currBulletSpawnPoint.position.x + Ship17LaserLength, currBulletSpawnPoint.position.y, currBulletSpawnPoint.position.z);
             //laserBeamRenderer.SetPosition(1, endPoint);
-            ShipXXLaserActive = true;
+            Ship17LaserActive = true;
 
-            ShipXXLaserDurationLeft = ShipXXLaserDuration;
+            Ship17LaserDurationLeft = Ship17LaserDuration;
         }
 
 
     }
+    */
 
 }

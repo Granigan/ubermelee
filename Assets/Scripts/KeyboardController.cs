@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyboardController : MonoBehaviour {
+public class KeyboardController : MonoBehaviour
+{
 
     MeleeManager meleeManager;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         meleeManager = GameObject.FindGameObjectWithTag("MeleeManager").GetComponent<MeleeManager>();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         GlobalSettings settings = meleeManager.settings;
         GameObject[] players = meleeManager.players;
 
@@ -47,7 +50,8 @@ public class KeyboardController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            if (players.Length > 2) {
+            if (players.Length > 2)
+            {
                 if (players[2].gameObject.GetComponent<ShipHandling>().AIEnabled == true)
                 {
                     players[2].gameObject.GetComponent<ShipHandling>().AIEnabled = false;
@@ -59,12 +63,13 @@ public class KeyboardController : MonoBehaviour {
                     settings.Player3AIEnabled = true;
                 }
             }
-            
+
         }
 
         if (Input.GetKeyDown(KeyCode.F4))
         {
-            if (players.Length > 3) {
+            if (players.Length > 3)
+            {
                 if (players[3].gameObject.GetComponent<ShipHandling>().AIEnabled == true)
                 {
                     players[3].gameObject.GetComponent<ShipHandling>().AIEnabled = false;

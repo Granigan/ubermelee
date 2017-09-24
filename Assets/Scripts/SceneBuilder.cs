@@ -15,7 +15,7 @@ public class SceneBuilder : MonoBehaviour
 
     public GameObject[] ShipTypes;
     public bool[] AIEnabled = new bool[5];
-    
+
     void Awake()
     {
         meleeManager = GameObject.FindGameObjectWithTag("MeleeManager").GetComponent<MeleeManager>();
@@ -39,14 +39,14 @@ public class SceneBuilder : MonoBehaviour
         int playerNumber = 1;
         foreach (GameObject currPlayer in Players)
         {
-            GameObject clone = Instantiate (currPlayer);
+            GameObject clone = Instantiate(currPlayer);
             //PlayerInstances.Add(Instantiate(currPlayer));
             //currPlayer.GetComponent<ShipHandling>().playerNumber = playerNumber;
             clone.GetComponent<ShipHandling>().playerNumber = playerNumber;
             clone.GetComponent<ShipHandling>().AIEnabled = meleeManager.GetAIEnabled(playerNumber);
             InitNewShip(clone);
             playerNumber++;
-            
+
 
         }
     }
@@ -80,16 +80,16 @@ public class SceneBuilder : MonoBehaviour
         BuildShips();
         HidePlayerUIs();
     }
-    
-    
+
+
     public GameObject InstantiateShip(float playerNumber, int shipID, bool AIEnabled = false)
     {
         //Debug.Log("Prefabs/ship" + shipID);
         GameObject clone;
         //GameObject ship = Instantiate(Resources.Load<GameObject>("ship" + shipID));
-        foreach (GameObject currShipType in ShipTypes )
+        foreach (GameObject currShipType in ShipTypes)
         {
-            if(currShipType.GetComponent<ShipHandling>().shipID == shipID)
+            if (currShipType.GetComponent<ShipHandling>().shipID == shipID)
             {
                 clone = Instantiate(currShipType);
                 //PlayerInstances.Add(Instantiate(currPlayer));
@@ -103,7 +103,7 @@ public class SceneBuilder : MonoBehaviour
 
 
                 //this.GetComponentInChildren<Transform>().position = respawnPoint;
-                if(AIEnabled == true)
+                if (AIEnabled == true)
                 {
                     clone.GetComponent<ShipHandling>().AIEnabled = true;
                 }
@@ -115,9 +115,9 @@ public class SceneBuilder : MonoBehaviour
         }
 
         return null;
-     
+
     }
-    
+
 
     private void InitNewShip(GameObject ship)
     {
@@ -125,11 +125,11 @@ public class SceneBuilder : MonoBehaviour
         ship.transform.Rotate(Vector3.forward, Random.Range(-180, 180));
 
         //ship.transform.position = new Vector3(Random.Range(-StartPos, StartPos), Random.Range(-StartPos, StartPos), -3);
-        
+
         Camera mainCamera = GameObject.FindGameObjectWithTag("Camera").GetComponentInChildren<Camera>();
         Vector3 randomPoint = new Vector3(Random.Range(randomMin, randomMax), Random.Range(randomMin, randomMax), -3f);
         ship.transform.position = mainCamera.ViewportToWorldPoint(randomPoint);
-      
+
 
         //Debug.Log("ship.transform.position = " + ship.transform.position);
 
@@ -144,7 +144,7 @@ public class SceneBuilder : MonoBehaviour
 
             randomPoint = new Vector3(Random.Range(randomMin, randomMax), Random.Range(randomMin, randomMax), -3f);
             ship.transform.position = mainCamera.ViewportToWorldPoint(randomPoint);
-            
+
             hitColliders = Physics.OverlapSphere(ship.transform.position, 2);
             //Debug.Log("shipcolliders2" + hitColliders.Length);
         }
@@ -154,7 +154,7 @@ public class SceneBuilder : MonoBehaviour
 
     private void HidePlayerUIs()
     {
-        for(int playerNumber = 1; playerNumber <= 4; playerNumber++)
+        for (int playerNumber = 1; playerNumber <= 4; playerNumber++)
         {
             GameObject UICanvas = GameObject.FindGameObjectWithTag("Player" + playerNumber + "UIPanel");
             UICanvas.GetComponent<CanvasGroup>().alpha = 0f;

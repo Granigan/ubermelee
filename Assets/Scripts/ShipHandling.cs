@@ -530,7 +530,7 @@ public class ShipHandling : MonoBehaviour
             }
             else if (meleeManager.settings.AILevel == GlobalSettings.AILevels.ROOKIE)
             {
-                
+
                 if (Random.Range(0.0f, 1.0f) <= (shipDetails.AIPrimaryUsagePercent / 100f) && GetClosestEnemyDistance() <= shipDetails.Primary.AIRangeToUse)
                 {
                     UsePrimary();

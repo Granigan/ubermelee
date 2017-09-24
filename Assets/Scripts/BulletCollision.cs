@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletCollision : MonoBehaviour {
+public class BulletCollision : MonoBehaviour
+{
 
     public float timeToLive = 3.0f;
     public float damage = 2.0f;
@@ -13,14 +14,16 @@ public class BulletCollision : MonoBehaviour {
     public bool isMine = false;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         //Destroy(this.gameObject, timeToLive);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     void OnCollisionEnter(Collision col)
     {
@@ -32,7 +35,9 @@ public class BulletCollision : MonoBehaviour {
         {
             // Do nothing, just push it on collision.
 
-        } else {
+        }
+        else
+        {
 
             if (col.gameObject.tag == "CameraObject")
             {
@@ -77,8 +82,8 @@ public class BulletCollision : MonoBehaviour {
                 // Check for casualties
                 if (bulletHitPoints <= 0)
                 {
-                    if(isMine)
-                         explosion = Instantiate(explosionPrefabBig, transform.position, Quaternion.identity);
+                    if (isMine)
+                        explosion = Instantiate(explosionPrefabBig, transform.position, Quaternion.identity);
                     else
                         explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
@@ -98,7 +103,8 @@ public class BulletCollision : MonoBehaviour {
 
 
 
-            } else
+            }
+            else
             {
                 // On any other object, just destroy the bullet
                 GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
@@ -108,11 +114,11 @@ public class BulletCollision : MonoBehaviour {
 
         }
 
-       
+
     }
 
 
-    public void setDamage( float newDamage)
+    public void setDamage(float newDamage)
     {
         damage = newDamage;
     }

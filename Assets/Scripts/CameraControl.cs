@@ -6,8 +6,8 @@ public class CameraControl : MonoBehaviour
     public float dampTime = 0.2f;                 // Approximate time for the camera to refocus.
     public float screenEdgeBuffer = 4f;           // Space between the top/bottom most target and the screen edge.
     public float minSize = 6.5f;                  // The smallest orthographic size the camera can be.
-                                                    //[HideInInspector] public Transform[] m_Targets; // All the targets the camera needs to encompass.
-    //public GameObject[] targets; // All the targets the camera needs to encompass.
+                                                  //[HideInInspector] public Transform[] m_Targets; // All the targets the camera needs to encompass.
+                                                  //public GameObject[] targets; // All the targets the camera needs to encompass.
 
     public float maxZoomLevel = 16f;
 
@@ -33,6 +33,8 @@ public class CameraControl : MonoBehaviour
 
     private void Update()
     {
+
+
         meleeManager = GameObject.FindGameObjectWithTag("MeleeManager").GetComponent<MeleeManager>();
         //targets = meleeManager.players;
 
@@ -41,10 +43,10 @@ public class CameraControl : MonoBehaviour
         // Change the size of the camera based.
         Zoom();
 
-            
+
         CheckPlayAreaBoundaries();
 
-        
+
 
 
 
@@ -98,7 +100,7 @@ public class CameraControl : MonoBehaviour
         float requiredSize = FindRequiredSize();
 
 
-        if(requiredSize > maxZoomLevel )
+        if (requiredSize > maxZoomLevel)
         {
             requiredSize = maxZoomLevel;
         }
@@ -167,7 +169,7 @@ public class CameraControl : MonoBehaviour
         foreach (GameObject currObject in meleeManager.players)
         {
             if (currObject == null) continue;
-            
+
             Vector3 viewPos = mainCamera.WorldToViewportPoint(currObject.GetComponentInChildren<Transform>().position);
 
             //Debug.Log("viewPos = " + viewPos);
@@ -182,7 +184,8 @@ public class CameraControl : MonoBehaviour
                     newLocation = mainCamera.ViewportToWorldPoint(newLocation);
                     currObject.transform.position = new Vector3(newLocation.x, currObject.transform.position.y, currObject.transform.position.z);
                     //return true;
-                } else
+                }
+                else
                 {
                     if (cloneship != null && cloneship.GetComponentInChildren<TrailRenderer>() != null)
                     {
@@ -214,7 +217,7 @@ public class CameraControl : MonoBehaviour
                 }
                 else
                 {
-                    if(cloneship != null && cloneship.GetComponentInChildren<TrailRenderer>() != null)
+                    if (cloneship != null && cloneship.GetComponentInChildren<TrailRenderer>() != null)
                     {
                         cloneship.GetComponentInChildren<TrailRenderer>().Clear();
                         Vector3 newLocation = new Vector3(viewpointJumpRightTop, viewPos.y, mainCamera.nearClipPlane);
@@ -226,7 +229,7 @@ public class CameraControl : MonoBehaviour
                         //lockCameraZoom(cameraLockedAfterJump);
                         return true;
                     }
-                    
+
                 }
             }
 
@@ -258,8 +261,9 @@ public class CameraControl : MonoBehaviour
                         return true;
                     }
                 }
-                
-            } else if (viewPos.y >= 1.0f)
+
+            }
+            else if (viewPos.y >= 1.0f)
             {
                 GameObject cloneship = currObject;
                 if (closedBorders)
@@ -301,5 +305,5 @@ public class CameraControl : MonoBehaviour
     }
 
 
-   
+
 }

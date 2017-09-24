@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class MeleeManager : MonoBehaviour {
+public class MeleeManager : MonoBehaviour
+{
 
     public GlobalSettings settings;
     public GameObject[] players;
@@ -11,14 +12,18 @@ public class MeleeManager : MonoBehaviour {
     //public float GameOverScore = 10;
 
     // Use this for initialization
-    void Start () {
-		
+    void Start()
+    {
 
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Time.timeScale = settings.GameSpeed;
+
         players = GameObject.FindGameObjectsWithTag("CameraObject");
         sceneBuilder = GameObject.FindGameObjectWithTag("Camera").GetComponent<SceneBuilder>();
 
@@ -30,9 +35,9 @@ public class MeleeManager : MonoBehaviour {
         players = GameObject.FindGameObjectsWithTag("CameraObject");
 
     }
-        public bool GetAIEnabled(int playerNumber)
+    public bool GetAIEnabled(int playerNumber)
     {
-        if(playerNumber == 1)
+        if (playerNumber == 1)
             return settings.Player1AIEnabled;
         if (playerNumber == 2)
             return settings.Player2AIEnabled;

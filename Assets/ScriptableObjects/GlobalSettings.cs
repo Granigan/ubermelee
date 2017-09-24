@@ -26,4 +26,6 @@ public class GlobalSettings : SettingsSO
 
     public int GameOverScore;
 
+    public float GameSpeed;
+
 }

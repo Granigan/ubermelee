@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using InControl;
 
-public class ShipSelection : MonoBehaviour {
+public class ShipSelection : MonoBehaviour
+{
 
     public int playerNumber = 1;
     private string turnControl;
@@ -30,7 +31,8 @@ public class ShipSelection : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         GameObject textGO = GameObject.Find("Player" + playerNumber + "UIPanel");
         textField = textGO.GetComponentInChildren<UnityEngine.UI.Text>();
 
@@ -45,9 +47,10 @@ public class ShipSelection : MonoBehaviour {
         shipArray = shipList.ToArray();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         AssignJoysticks();
 
         if (timerOn)
@@ -59,7 +62,7 @@ public class ShipSelection : MonoBehaviour {
             return;
         }
 
-        if(joystick != null)
+        if (joystick != null)
         {
             if (joystick.LeftStickX > 0.5 || joystick.DPadRight > 0)
             {
@@ -69,10 +72,10 @@ public class ShipSelection : MonoBehaviour {
                     currentSelectionIndex++;
                     StartInputTimeout();
                 }
-            } 
+            }
         }
 
-        if (Input.GetAxisRaw(turnControl) == 1 )
+        if (Input.GetAxisRaw(turnControl) == 1)
         {
             if (axisInUse == false)
             {
@@ -81,9 +84,9 @@ public class ShipSelection : MonoBehaviour {
                 StartInputTimeout();
             }
 
-        } 
+        }
 
-        if(joystick != null)
+        if (joystick != null)
         {
             if (joystick.LeftStickX < -0.5 || joystick.DPadLeft > 0)
             {
@@ -107,14 +110,14 @@ public class ShipSelection : MonoBehaviour {
             }
         }
 
-        if(currentSelectionIndex < 0)
+        if (currentSelectionIndex < 0)
         {
             currentSelectionIndex = 0;
         }
 
-        if (currentSelectionIndex >= (shipArray.Length-1))
+        if (currentSelectionIndex >= (shipArray.Length - 1))
         {
-            currentSelectionIndex = (shipArray.Length-1);
+            currentSelectionIndex = (shipArray.Length - 1);
         }
 
         // Set the text here
@@ -123,9 +126,9 @@ public class ShipSelection : MonoBehaviour {
 
         bool joystickButtonPressed = false;
 
-        if(joystick != null)
+        if (joystick != null)
         {
-            if(joystick.Action1 == true)
+            if (joystick.Action1 == true)
             {
                 joystickButtonPressed = true;
             }
@@ -135,10 +138,11 @@ public class ShipSelection : MonoBehaviour {
         if ((Input.GetButton(primaryControl) == true || joystickButtonPressed == true) && SelectionEnabled == true)
         {
             int selectedShipID = 0;
-            if(shipArray[currentSelectionIndex].Value == 0)
+            if (shipArray[currentSelectionIndex].Value == 0)
             {
                 selectedShipID = GetRandomShipID();
-            } else
+            }
+            else
             {
                 selectedShipID = shipArray[currentSelectionIndex].Value;
             }
@@ -149,7 +153,7 @@ public class ShipSelection : MonoBehaviour {
 
         }
 
-        
+
 
 
 
@@ -179,7 +183,7 @@ public class ShipSelection : MonoBehaviour {
     private void UpdateInputTimeout()
     {
         timeSinceLastInput -= Time.deltaTime;
-        if(timeSinceLastInput <= 0f)
+        if (timeSinceLastInput <= 0f)
         {
             axisInUse = false;
             timeSinceLastInput = 0f;
@@ -192,7 +196,7 @@ public class ShipSelection : MonoBehaviour {
         return shipArray[Random.Range(1, shipArray.Length)].Value;
 
     }
-    
+
     private void AssignJoysticks()
     {
         turnControl = "Horizontal" + playerNumber;
@@ -240,7 +244,7 @@ public class ShipSelection : MonoBehaviour {
     {
         countdownSelect -= Time.deltaTime;
 
-        if(countdownSelect <= 0)
+        if (countdownSelect <= 0)
         {
             CreateShip(GetRandomShipID());
             HideUI();
